@@ -4,12 +4,15 @@ import Navigation from "./Navigation"
 import StudentList from "./StudentList"
 import AddStudentButton from "./AddStudentButton"
 
-function Dashboard(props) {
+function Dashboard({onStudent, assessments, students}) {
     return (
         <div>
             <Navigation />
-            <StudentList />
-            <AddStudentButton />
+            <div className="students">
+                <StudentList assessments={assessments} students={students}/>
+            </div>
+            
+            <AddStudentButton onStudent={onStudent} />
         </div>
     );
 }
