@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 export default function BasicTable({ onStudent, assessments, students}) {
   return (
     <TableContainer component={Paper}>
+    
       <Table sx={{ maxWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>

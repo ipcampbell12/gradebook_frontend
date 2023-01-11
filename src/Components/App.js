@@ -18,6 +18,8 @@ function App() {
       {id: 2, subject: "Math", name:"Module 3"},
       {id: 3, subject: "Math", name:"Module 4"}
   ])
+
+  const [teacherState,setTeacherState]=useState({fname:"Melinda",lname:"Devonshire"})
   
   
   const addStudent = (student) =>{ 
@@ -46,7 +48,14 @@ function App() {
 
   return (
     <div className="App">
-      <Dashboard onSubject={addSubject} onStudent={addStudent} onAssessment ={addAssessment} assessments = {assessmentListState} students = {studentListState}/>
+      <Dashboard 
+        onSubject={addSubject} 
+        onStudent={addStudent} 
+        onAssessment ={addAssessment} 
+        assessments = {assessmentListState} 
+        students = {studentListState}
+        teacher = {teacherState}
+      />
       
     </div>
   );
