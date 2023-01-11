@@ -4,5 +4,19 @@
     text-align: center;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
+    .students {
+
+        width: 25%
+    }
+
+    .charts {
+        width: 30%
+    }
+
+    .scores {
+
+        width: 25%
+    }
 }

@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function BasicTable({ onStudent, assessments, students}) {
+export default function BasicTable({ onStudent, assessments, scores}) {
   return (
     <TableContainer component={Paper}>
 
@@ -16,15 +16,15 @@ export default function BasicTable({ onStudent, assessments, students}) {
           <TableRow>
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
-              <TableCell>Grade</TableCell>
+              <TableCell>Score</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {students.map((student) => (
+        {scores.map((score) => (
             <TableRow>
-              <TableCell align="center">{student.fname}</TableCell>
-              <TableCell align="center">{student.lname}</TableCell>
-              <TableCell align="center">{student.grade}</TableCell>
+              <TableCell align="center">{score.fname}</TableCell>
+              <TableCell align="center">{score.lname}</TableCell>
+              <TableCell align="center">{score.score}</TableCell>
             </TableRow>
           ))}
 
