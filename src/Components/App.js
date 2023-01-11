@@ -67,7 +67,8 @@ function App() {
       <div className="App">
         <Navigation />
         <Routes>
-          <Route path="/student" element={<Student />} />
+          <Route path="/student" element={<Student students={studentListState}
+            teacher={teacherState} />} />
           <Route path="/score" exact element={<Score />} />
           <Route path="/assessment" exact element={<Assessment />} />
         </Routes>
