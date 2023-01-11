@@ -1,5 +1,10 @@
 import Dashboard from "./Dashboard"
 import React, { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from "./Navigation"
+import Assessment from "./Pages/Assessment";
+import Student from "./Pages/Student";
+import Score from "./Pages/Score";
 
 
 function App() {
@@ -58,18 +63,26 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Dashboard
-        onSubject={addSubject}
-        onStudent={addStudent}
-        onAssessment={addAssessment}
-        assessments={assessmentListState}
-        students={studentListState}
-        teacher={teacherState}
-        scores={scoresState}
-      />
+    <Router>
+      <div className="App">
+        <Navigation />
+        <Routes>
+          <Route path="/student" element={<Student />} />
+          <Route path="/score" exact element={<Score />} />
+          <Route path="/assessment" exact element={<Assessment />} />
+        </Routes>
+        <Dashboard
+          onSubject={addSubject}
+          onStudent={addStudent}
+          onAssessment={addAssessment}
+          assessments={assessmentListState}
+          students={studentListState}
+          teacher={teacherState}
+          scores={scoresState}
+        />
 
-    </div>
+      </div>
+    </Router>
   );
 }
 

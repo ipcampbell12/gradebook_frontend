@@ -1,6 +1,6 @@
 // import React, { useRef, useState } from "react"
 import React from 'react';
-import Navigation from "./Navigation"
+
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
 import OverallChart from "./OverallChart"
@@ -12,7 +12,7 @@ import { Typography } from "@mui/material"
 function Dashboard({ students, teacher, scores }) {
     return (
         <div className="dashboard">
-            <Navigation />
+
             <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Class'}</Typography>
             <div className="container">
 
