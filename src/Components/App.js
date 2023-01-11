@@ -67,20 +67,25 @@ function App() {
       <div className="App">
         <Navigation />
         <Routes>
+          <Route path="/" element={
+            <Dashboard
+              onSubject={addSubject}
+              onStudent={addStudent}
+              onAssessment={addAssessment}
+              assessments={assessmentListState}
+              students={studentListState}
+              teacher={teacherState}
+              scores={scoresState}
+            />
+          } />
           <Route path="/student" element={<Student students={studentListState}
             teacher={teacherState} />} />
-          <Route path="/score" exact element={<Score />} />
-          <Route path="/assessment" exact element={<Assessment />} />
+          <Route path="/score" exact element={<Score students={studentListState}
+            teacher={teacherState} />} />
+          <Route path="/assessment" exact element={<Assessment students={studentListState}
+            teacher={teacherState} />} />
         </Routes>
-        <Dashboard
-          onSubject={addSubject}
-          onStudent={addStudent}
-          onAssessment={addAssessment}
-          assessments={assessmentListState}
-          students={studentListState}
-          teacher={teacherState}
-          scores={scoresState}
-        />
+
 
       </div>
     </Router>

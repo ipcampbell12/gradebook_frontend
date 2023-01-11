@@ -14,7 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SchoolIcon from '@mui/icons-material/School';
 
-const pages = ['Edit Students', 'Add Scores', 'Add Assessments'];
+
+const pages = ['Home', 'Edit Students', 'Add Scores', 'Add Assessments'];
+const links = ['/', '/student', '/score', '/assessment'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -115,15 +117,33 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+
+
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              href={links[0]}>
+              {pages[0]}
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              href={links[1]}>
+              {pages[1]}
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              href={links[2]}>
+              {pages[2]}
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              href={links[3]}>
+              {pages[3]}
+            </Button>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

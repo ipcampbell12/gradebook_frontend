@@ -1,3 +1,11 @@
+.nav-links {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
 .container {
     height: 100vh;
     position: relative;
