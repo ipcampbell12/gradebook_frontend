@@ -14,8 +14,9 @@ function App() {
     { id: 1, fname: "Vern", lname: "Kassandra", grade: 2 },
     { id: 2, fname: "Sally", lname: "Belinda", grade: 1 },
     { id: 3, fname: "Yellin", lname: "Sampuhca", grade: 3 },
-    { id: 2, fname: "Pradeep", lname: "Ibrahim", grade: 2 },
-    { id: 3, fname: "Himanshua", lname: "Jadhav", grade: 3 },
+    { id: 4, fname: "Pradeep", lname: "Ibrahim", grade: 2 },
+    { id: 5, fname: "Himanshua", lname: "Jadhav", grade: 3 },
+    { id: 6, fname: "Lamech", lname: "Verdun", grade: 2 },
   ])
 
   const [scoresState, setScoresState] = useState([

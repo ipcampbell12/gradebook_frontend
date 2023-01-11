@@ -53,3 +53,24 @@
         width: 25%;
     }
 }
+
+.student-chart {
+    height: 100vh;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .students {
+
+        width: 50%;
+    }
+
+    .form {
+
+        width: 50%;
+    }
+
+
+}
