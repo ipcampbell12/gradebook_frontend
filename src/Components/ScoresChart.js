@@ -42,7 +42,7 @@ function ScoresChart({ scores }) {
     const possibleList = Object.keys(scoreCount(scores))
     const countsList = Object.values(scoreCount(scores))
 
-    console.log(scoreCount(possibleList))
+    //console.log(scoreCount(possibleList))
     const [chartData, setChartData] = useState({
         datasets: [],
     })

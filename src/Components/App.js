@@ -1,22 +1,28 @@
 import Dashboard from "./Dashboard"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from "./Navigation"
 import Assessment from "./Pages/Assessment";
 import Student from "./Pages/Student";
 import Score from "./Pages/Score";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
 
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const fetchData = async () => {
+    const results = await fetch('http://127.0.0.1:5001/student')
+    const items = await results.json()
+    setStudentListState(items)
+    //console.log(items)
+  }
+
   const [studentListState, setStudentListState] = useState([
-    { id: 0, fname: "Jose", lname: "La Rue", grade: 3 },
-    { id: 1, fname: "Vern", lname: "Kassandra", grade: 2 },
-    { id: 2, fname: "Sally", lname: "Belinda", grade: 1 },
-    { id: 3, fname: "Yellin", lname: "Sampuhca", grade: 3 },
-    { id: 4, fname: "Pradeep", lname: "Ibrahim", grade: 2 },
-    { id: 5, fname: "Himanshua", lname: "Jadhav", grade: 3 },
-    { id: 6, fname: "Lamech", lname: "Verdun", grade: 2 },
+
   ])
 
   const [scoresState, setScoresState] = useState([
@@ -63,6 +69,7 @@ function App() {
 
   }
 
+  //console.log(studentListState)
   return (
     <Router>
       <div className="App">
