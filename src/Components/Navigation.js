@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SchoolIcon from '@mui/icons-material/School';
 
-const pages = ['Dashboard', 'Students', 'Scores'];
+const pages = ['Edit Students', 'Add Scores', 'Add Subjects', 'Add Assessments'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {

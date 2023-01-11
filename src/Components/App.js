@@ -19,7 +19,7 @@ function App() {
     { id: 2, fname: "Sally", lname: "Belinda", score: 3 },
     { id: 3, fname: "Yellin", lname: "Sampuhca", score: 2 },
     { id: 2, fname: "Pradeep", lname: "Ibrahim", score: 3 },
-    { id: 3, fname: "Himanshua", lname: "Jadhav", score: 0 },
+    { id: 3, fname: "Himanshua", lname: "Jadhav", score: 1 },
   ])
 
   const [subjectListState, setSubjectListState] = useState([])

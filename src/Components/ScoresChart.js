@@ -25,11 +25,11 @@ ChartJS.register(
 
 
 
-function OverallChart({ grades }) {
+function ScoresChart({ scores }) {
 
     const scoreCount = (scores) => {
 
-        const gradeList = scores.map(x => x.grade)
+        const gradeList = scores.map(x => x.score)
         const occurrences = gradeList.reduce(function (obj, item) {
             obj[item] = (obj[item] || 0) + 1;
             return obj;
@@ -39,8 +39,8 @@ function OverallChart({ grades }) {
     }
 
     // Doesn't work for 0
-    const possibleList = Object.keys(scoreCount(grades))
-    const countsList = Object.values(scoreCount(grades))
+    const possibleList = Object.keys(scoreCount(scores))
+    const countsList = Object.values(scoreCount(scores))
 
     console.log(scoreCount(possibleList))
     const [chartData, setChartData] = useState({
@@ -58,9 +58,9 @@ function OverallChart({ grades }) {
                 data: countsList,
                 borderColor: "rgb(53,162,235)",
                 backgroundColor: [
-                    'rgba(255, 99, 132,0.8)',
-                    'rgba(54, 162, 235,0.8)',
-                    'rgba(255, 205, 86,0.8)',
+                    'rgba(255, 0, 0,0.8)',
+                    'rgba(255, 255, 0,0.8)',
+                    'rgba(128, 255, 0,0.8)',
                     'rgba(6, 176, 15, 0.8)',
                 ]
             }],
@@ -77,7 +77,7 @@ function OverallChart({ grades }) {
                 },
                 title: {
                     display: true,
-                    text: "Grades"
+                    text: "Scores"
                 },
                 datalabels: {
                     display: true,
@@ -93,14 +93,14 @@ function OverallChart({ grades }) {
 
         });
 
-    }, [grades])
+    }, [scores])
 
 
     return (
-        <div className="grades-chart">
+        <div className="scores-chart">
             <Pie options={chartOptions} data={chartData} className='pie' />
         </div>
     );
 }
 
-export default OverallChart;
+export default ScoresChart;

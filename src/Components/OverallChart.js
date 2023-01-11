@@ -58,9 +58,9 @@ function OverallChart({ grades }) {
                 data: countsList,
                 borderColor: "rgb(53,162,235)",
                 backgroundColor: [
-                    'rgba(255, 99, 132,0.8)',
-                    'rgba(54, 162, 235,0.8)',
-                    'rgba(255, 205, 86,0.8)',
+                    'rgba(255, 0, 0,0.8)',
+                    'rgba(255, 255, 0,0.8)',
+                    'rgba(128, 255, 0,0.8)',
                     'rgba(6, 176, 15, 0.8)',
                 ]
             }],

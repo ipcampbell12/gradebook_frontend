@@ -8,15 +8,40 @@
 
     .students {
 
-        width: 25%
+        width: 25%;
     }
 
     .charts {
-        width: 30%
+        width: 45%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        .menus {
+            height: 30%;
+        }
+
+        .tables {
+            display: flex;
+            flex-direction: row;
+            height: 70%;
+
+            .grades-chart {
+                width: 50%;
+            }
+
+            .scores-chart {
+                width: 50%;
+            }
+
+        }
+
+
+
     }
 
     .scores {
 
-        width: 25%
+        width: 25%;
     }
 }
