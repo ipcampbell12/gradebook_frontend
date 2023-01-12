@@ -84,15 +84,8 @@ function App() {
           } />
           <Route path="/student" element={<Student students={studentListState}
             teacher={teacherState} onAdd={addStudent} />} />
-          <Route path="/score" exact element={<Score students={studentListState}
+          <Route path="/grade" exact element={<Score students={studentListState}
             teacher={teacherState} />} />
-          <Route path="/assessment" exact element={
-            <Assessment
-              assessments={assessmentListState}
-              teacher={teacherState}
-              onAdd={addAssessment}
-            />}
-          />
         </Routes>
 
 
