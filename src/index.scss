@@ -86,11 +86,12 @@
 
 .student-page2 {
 
-    height: 100vh;
+
     position: relative;
     text-align: center;
     display: flex;
     flex-direction: column;
+
 
 
     .container {
@@ -101,9 +102,14 @@
         padding: 0;
 
 
+
         .student-chart {
             width: 35%;
             height: 75%;
+        }
+
+        .menu {
+            width: 35%;
         }
 
         .assessments {
@@ -111,10 +117,12 @@
 
             .assessment-chart {
                 height: 40%;
+                margin-bottom: 5%;
             }
 
             .form {
-                height: 50%;
+                margin-top: 5%;
+                height: 40%;
             }
         }
 

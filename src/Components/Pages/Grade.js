@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Typography } from "@mui/material"
 import { DataGrid } from '@mui/x-data-grid';
+import AddAssessment from './AddAssessment';
 
 
 const columns1 = [
@@ -16,7 +17,8 @@ const columns2 = [
 
 function Grade({ teacher, students, assessments, onAssessment }) {
 
-    const [moduleState, setModuleState] = useState([])
+    const [moduleState, setModuleState] = useState('')
+
 
 
     return (
@@ -24,13 +26,16 @@ function Grade({ teacher, students, assessments, onAssessment }) {
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
                 <div className="student-chart" >
-                    <Typography varaint="h5" align="center"> Student Scores </Typography>
+                    <Typography varaint="h5" align="center"> Scores for {moduleState} </Typography>
                     <DataGrid
                         rows={students}
                         columns={columns1}
                         pageSize={8}
                         rowsPerPageOptions={[8]}
                     />
+                </div>
+                <div className="menu">
+
                 </div>
 
                 <div className="assessments">
@@ -42,9 +47,11 @@ function Grade({ teacher, students, assessments, onAssessment }) {
                             columns={columns2}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
+                            checkboxSelection
                         />
                     </div>
                     <div className="form">
+                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} />
 
                     </div>
 
