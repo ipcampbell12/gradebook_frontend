@@ -3,8 +3,8 @@ import React from 'react';
 
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
-import OverallChart from "./OverallChart"
-import ScoresChart from "./ScoresChart"
+import OverallChart from "./Visualizations/OverallChart"
+import ScoresChart from "./Visualizations/ScoresChart"
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
