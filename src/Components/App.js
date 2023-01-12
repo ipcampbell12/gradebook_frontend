@@ -11,13 +11,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   useEffect(() => {
-    fetchData()
+    fetchData('student', setStudentListState)
   }, []);
 
-  const fetchData = async () => {
-    const results = await fetch('http://127.0.0.1:5001/student')
+  useEffect(() => {
+    fetchData('assessment', setAssessmentListState)
+  }, []);
+
+  const fetchData = async (endpoint, setState) => {
+    const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
     const items = await results.json()
-    setStudentListState(items)
+    setState(items)
     //console.log(items)
   }
 
@@ -82,8 +86,13 @@ function App() {
             teacher={teacherState} onAdd={addStudent} />} />
           <Route path="/score" exact element={<Score students={studentListState}
             teacher={teacherState} />} />
-          <Route path="/assessment" exact element={<Assessment students={studentListState}
-            teacher={teacherState} />} />
+          <Route path="/assessment" exact element={
+            <Assessment
+              assessments={assessmentListState}
+              teacher={teacherState}
+              onAdd={addAssessment}
+            />}
+          />
         </Routes>
 
 

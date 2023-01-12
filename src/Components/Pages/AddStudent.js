@@ -22,6 +22,7 @@ export default function AddStudent({ onAdd }) {
 
         setFirstName('')
         setLastName('')
+        setTeacherId('')
     }
 
 

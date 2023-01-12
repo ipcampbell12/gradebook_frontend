@@ -25,8 +25,7 @@ function Dashboard({ students, teacher, scores }) {
 
                     </div>
                     <div className="tables">
-                        <OverallChart grades={students} />
-                        <ScoresChart scores={scores} />
+
                     </div>
 
                 </div>
@@ -43,3 +42,6 @@ function Dashboard({ students, teacher, scores }) {
 }
 
 export default Dashboard;
+
+// <OverallChart grades={students} />
+// <ScoresChart scores={scores} />
