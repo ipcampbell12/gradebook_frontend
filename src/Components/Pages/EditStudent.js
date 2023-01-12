@@ -13,15 +13,15 @@ function Student({ teacher, students, onAdd }) {
 
 
     return (
-        <div className="student-page">
+        <div className="student-page1">
             <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Students'}</Typography>
-            <div className="student-chart" style={{ height: 800, width: '100%' }}>
+            <div className="student-chart" style={{ height: 600, width: '100%' }}>
                 <div className="students">
                     <DataGrid
                         rows={students}
                         columns={columns}
-                        pageSize={12}
-                        rowsPerPageOptions={[12]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
                         checkboxSelection
                     />
                 </div>

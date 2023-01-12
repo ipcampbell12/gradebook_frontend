@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import APIServce from '../APIService';
 
-export default function AddStudent({ onAdd }) {
+export default function AddAssessment({ onAdd }) {
 
     //New Student Form
     const [fname, setFirstName] = useState('')
@@ -14,7 +14,7 @@ export default function AddStudent({ onAdd }) {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        APIServce.addStudent({ fname, lname, teacher_id })
+        APIServce.AddAssessment({ fname, lname, teacher_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
 

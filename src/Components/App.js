@@ -2,7 +2,7 @@ import Dashboard from "./Dashboard"
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from "./Navigation"
-import HomeStudent from "./Pages/HomeStudent";
+import EditStudent from "./Pages/EditStudent";
 import Grade from "./Pages/Grade";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,7 +22,7 @@ function App() {
     const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
     const items = await results.json()
     setState(items)
-    //console.log(items)
+    console.log(items)
   }
 
   const [studentListState, setStudentListState] = useState([
@@ -34,9 +34,7 @@ function App() {
   ])
 
   const [subjectListState, setSubjectListState] = useState([])
-  const [assessmentListState, setAssessmentListState] = useState([
-
-  ])
+  const [assessmentListState, setAssessmentListState] = useState([])
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -75,19 +73,19 @@ function App() {
             <Dashboard
               onSubject={addSubject}
               onStudent={addStudent}
-              onAssessment={addAssessment}
               assessments={assessmentListState}
               students={studentListState}
               teacher={teacherState}
               scores={scoresState}
             />
           } />
-          <Route path="/student" element={<HomeStudent students={studentListState}
+          <Route path="/student" element={<EditStudent students={studentListState}
             teacher={teacherState} onAdd={addStudent} />} />
           <Route path="/grade" exact element={<Grade
             students={studentListState}
             teacher={teacherState}
             assessments={assessmentListState}
+            onAssessment={addAssessment}
             scores={scoresState} />} />
         </Routes>
 

@@ -1,16 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography } from "@mui/material"
-import GradeStudent from "./GradeStudent"
+import { DataGrid } from '@mui/x-data-grid';
 
 
+const columns1 = [
+    { field: 'fname', headerName: 'First Name', width: 170 },
+    { field: 'lname', headerName: 'Last Name', width: 130 },
+    { field: 'score', headerName: 'Score', width: 130 },
+];
 
-function Grade({ teacher, students }) {
+const columns2 = [
+    { field: 'name', headerName: 'Assessment', width: 170 },
+    { field: 'date', headerName: 'Date', width: 170 },
+];
+
+function Grade({ teacher, students, assessments, onAssessment }) {
+
+    const [moduleState, setModuleState] = useState([])
+
+
     return (
-        <div>
-            <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
-            <GradeStudent />
-        </div>
+        <div className="student-page2">
+            <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
+            <div className="container">
+                <div className="student-chart" >
+                    <Typography varaint="h5" align="center"> Student Scores </Typography>
+                    <DataGrid
+                        rows={students}
+                        columns={columns1}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
+                    />
+                </div>
+
+                <div className="assessments">
+                    <Typography varaint="h5" align="center"> Assessment List </Typography>
+                    <div className="assessment-chart" >
+
+                        <DataGrid
+                            rows={assessments}
+                            columns={columns2}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+                        />
+                    </div>
+                    <div className="form">
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+        </div >
+
     );
+
 }
 
 export default Grade;

@@ -54,28 +54,69 @@
     }
 }
 
-.student-chart {
+.student-page1 {
+
+    .student-chart {
+        height: 100vh;
+        position: relative;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .students {
+
+            width: 30%;
+        }
+
+        .form {
+            text-align: center;
+            width: 50%;
+            padding: 1%;
+
+            form {
+                text-align: center;
+            }
+        }
+
+    }
+
+
+}
+
+.student-page2 {
+
     height: 100vh;
     position: relative;
     text-align: center;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
 
-    .students {
 
-        width: 50%;
-    }
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 0;
+        padding: 0;
 
-    .form {
-        text-align: center;
-        width: 50%;
-        padding: 1%;
 
-        form {
-            text-align: center;
+        .student-chart {
+            width: 35%;
+            height: 75%;
         }
+
+        .assessments {
+            width: 35%;
+
+            .assessment-chart {
+                height: 40%;
+            }
+
+            .form {
+                height: 50%;
+            }
+        }
+
     }
-
-
 }
