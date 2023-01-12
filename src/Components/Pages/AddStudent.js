@@ -2,20 +2,23 @@ import * as React from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import APIServce from '../APIService';
 
 export default function AddStudent({ onAdd }) {
 
     //New Student Form
     const [fname, setFirstName] = useState('')
     const [lname, setLastName] = useState('')
+    const [teacher_id, setTeacherId] = useState(0)
 
     const onSubmit = (e) => {
         e.preventDefault()
-        // if (!firstName || !lastName) {
-        //     return "Add all fields"
-        // }
 
-        onAdd({ fname, lname })
+        APIServce.addStudent({ fname, lname, teacher_id })
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+
+        onAdd({ fname, lname, teacher_id })
 
         setFirstName('')
         setLastName('')
@@ -39,6 +42,13 @@ export default function AddStudent({ onAdd }) {
                 }} />
             </Form.Group>
 
+            <Form.Group className="mb-3">
+                <Form.Label>Teacher Id</Form.Label>
+                <Form.Control type="number" placeholder="Teacher Id" value={teacher_id} onChange={(e) => {
+                    setTeacherId(e.target.value)
+                }} />
+            </Form.Group>
+
             <Button variant="primary" type="submit">
                 Add Student
             </Button>
@@ -51,10 +61,3 @@ export default function AddStudent({ onAdd }) {
 
 
 
-// <input id="outlined-basic" placeholder="First Name" className="Form-control" value={fname} onChange={(e) => {
-//                 setFirstName(e.target.value)
-//             }} />
-//             <input id="outlined-basic-2" placeholder="Last Name" className="Form-control" value={lname} onChange={(e) => {
-//                 setLastName(e.target.value)
-//             }} />
-//             <input type="submit" value="Add Student" className="btn btn-primary"></input>

@@ -26,20 +26,12 @@ function App() {
   ])
 
   const [scoresState, setScoresState] = useState([
-    { id: 0, fname: "Jose", lname: "La Rue", score: 2 },
-    { id: 1, fname: "Vern", lname: "Kassandra", score: 1 },
-    { id: 2, fname: "Sally", lname: "Belinda", score: 3 },
-    { id: 3, fname: "Yellin", lname: "Sampuhca", score: 2 },
-    { id: 2, fname: "Pradeep", lname: "Ibrahim", score: 3 },
-    { id: 3, fname: "Himanshua", lname: "Jadhav", score: 1 },
+
   ])
 
   const [subjectListState, setSubjectListState] = useState([])
   const [assessmentListState, setAssessmentListState] = useState([
-    { id: 0, subject: "Math", name: "Module 1" },
-    { id: 1, subject: "Math", name: "Module 2" },
-    { id: 2, subject: "Math", name: "Module 3" },
-    { id: 3, subject: "Math", name: "Module 4" }
+
   ])
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
