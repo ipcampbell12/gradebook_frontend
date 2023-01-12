@@ -2,10 +2,10 @@ import Dashboard from "./Dashboard"
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from "./Navigation"
-import Assessment from "./Pages/Assessment";
-import Student from "./Pages/Student";
-import Score from "./Pages/Score";
+import HomeStudent from "./Pages/HomeStudent";
+import Grade from "./Pages/Grade";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
@@ -82,10 +82,13 @@ function App() {
               scores={scoresState}
             />
           } />
-          <Route path="/student" element={<Student students={studentListState}
+          <Route path="/student" element={<HomeStudent students={studentListState}
             teacher={teacherState} onAdd={addStudent} />} />
-          <Route path="/grade" exact element={<Score students={studentListState}
-            teacher={teacherState} />} />
+          <Route path="/grade" exact element={<Grade
+            students={studentListState}
+            teacher={teacherState}
+            assessments={assessmentListState}
+            scores={scoresState} />} />
         </Routes>
 
 
