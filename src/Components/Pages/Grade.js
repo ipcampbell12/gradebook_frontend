@@ -34,14 +34,14 @@ function Grade({ teacher, students, assessments, onAssessment }) {
         //sends click event to App.js
         const nameToSet = assessments.find(x => x.id === itemId);
         console.log(nameToSet.name)
-        setModuleState(nameToSet.name)
+        setModuleState(nameToSet)
     }
 
     return (
         <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
-                <AddScores students={students} />
+                <AddScores students={students} module={moduleState} teacher={teacher} />
                 <div className="menu">
 
                 </div>
@@ -74,7 +74,7 @@ function Grade({ teacher, students, assessments, onAssessment }) {
                     </div>
 
                     <div className="form">
-                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} />
+                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} />
 
                     </div>
 

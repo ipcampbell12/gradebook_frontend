@@ -19,6 +19,7 @@ function App() {
     fetchData('assessment', setAssessmentListState)
   }, []);
 
+
   //API Calls
   const fetchData = async (endpoint, setState) => {
     const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
@@ -54,6 +55,10 @@ function App() {
     const newSubject = { id, ...subject }
 
     setSubjectListState([...subjectListState, newSubject])
+
+  }
+
+  const bulkAddScores = (assessment_id, teacher_id, students) => {
 
   }
 
