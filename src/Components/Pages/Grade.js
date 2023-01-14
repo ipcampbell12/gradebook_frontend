@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { Typography } from "@mui/material"
-import { DataGrid } from '@mui/x-data-grid';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import AddAssessment from './AddAssessment';
+import AddScores from './AddScores'
 
 
-const columns1 = [
-    { field: 'fname', headerName: 'First Name', width: 170 },
-    { field: 'lname', headerName: 'Last Name', width: 130 },
-    { field: 'score', headerName: 'Score', width: 130 },
-];
 
-const columns2 = [
-    { field: 'name', headerName: 'Assessment', width: 170 },
-    { field: 'date', headerName: 'Date', width: 170 },
-];
+import Button from 'react-bootstrap/Button';
+
+
+
+
+//1. Click on module, then set module state to that module's name 
+
 
 function Grade({ teacher, students, assessments, onAssessment }) {
 
@@ -21,19 +26,22 @@ function Grade({ teacher, students, assessments, onAssessment }) {
 
 
 
+
+    const onClick = (e) => {
+        const itemSplit = e.target.id.split('-')
+        const itemId = Number(itemSplit[1])
+
+        //sends click event to App.js
+        const nameToSet = assessments.find(x => x.id === itemId);
+        console.log(nameToSet.name)
+        setModuleState(nameToSet.name)
+    }
+
     return (
-        <div className="student-page2">
+        <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
-                <div className="student-chart" >
-                    <Typography varaint="h5" align="center"> Scores for {moduleState} </Typography>
-                    <DataGrid
-                        rows={students}
-                        columns={columns1}
-                        pageSize={8}
-                        rowsPerPageOptions={[8]}
-                    />
-                </div>
+                <AddScores students={students} />
                 <div className="menu">
 
                 </div>
@@ -41,15 +49,30 @@ function Grade({ teacher, students, assessments, onAssessment }) {
                 <div className="assessments">
                     <Typography varaint="h5" align="center"> Assessment List </Typography>
                     <div className="assessment-chart" >
+                        <TableContainer component={Paper}>
 
-                        <DataGrid
-                            rows={assessments}
-                            columns={columns2}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            checkboxSelection
-                        />
+                            <Table sx={{ maxWidth: 300 }} size="small" aria-label="simple table" align="center">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Name</TableCell>
+
+
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {assessments.map((assessment, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell align="center">{assessment.name}</TableCell>
+                                            <TableCell align="center"><Button variant="primary" id={`assessment-${assessment.id}`} onClick={onClick}> Select </Button></TableCell>
+                                        </TableRow>
+                                    ))}
+
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+
                     </div>
+
                     <div className="form">
                         <AddAssessment onAdd={onAssessment} onModule={setModuleState} />
 
@@ -72,3 +95,6 @@ function Grade({ teacher, students, assessments, onAssessment }) {
 }
 
 export default Grade;
+
+
+

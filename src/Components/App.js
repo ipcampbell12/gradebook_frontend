@@ -14,15 +14,17 @@ function App() {
     fetchData('student', setStudentListState)
   }, []);
 
+  //Run API call inside useEffect hook = mimics componentDidMount (class components)
   useEffect(() => {
     fetchData('assessment', setAssessmentListState)
   }, []);
 
+  //API Calls
   const fetchData = async (endpoint, setState) => {
     const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
     const items = await results.json()
     setState(items)
-    console.log(items)
+    //console.log(items)
   }
 
   const [studentListState, setStudentListState] = useState([
@@ -63,7 +65,7 @@ function App() {
 
   }
 
-  //console.log(studentListState)
+  console.log(studentListState)
   return (
     <Router>
       <div className="App">
