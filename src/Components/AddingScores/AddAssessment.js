@@ -12,17 +12,20 @@ export default function AddAssessment({ onAdd, onModule }) {
     //const [date, setDate] = useState('')
     const [subject_id, setSubjectId] = useState('')
 
+    const [scored, setScored] = useState(false)
+
 
     const onSubmit = (e) => {
         e.preventDefault()
 
+        setScored(false)
         //send data to API
-        APIServce.addAssessment({ name, subject_id })
+        APIServce.addAssessment({ name, subject_id, scored })
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
         //send data to UI
-        onAdd({ name, subject_id })
+        onAdd({ name, subject_id, scored })
         onModule(name)
 
 

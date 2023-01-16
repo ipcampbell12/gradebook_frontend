@@ -16,7 +16,7 @@ function App() {
 
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
   useEffect(() => {
-    fetchData('assessment', setAssessmentListState)
+    fetchData('assessment', setUnscoredAssessments)
   }, []);
 
 
@@ -37,7 +37,10 @@ function App() {
   ])
 
   const [subjectListState, setSubjectListState] = useState([])
-  const [assessmentListState, setAssessmentListState] = useState([])
+
+  const [unScoredAssessments, setUnscoredAssessments] = useState([])
+
+  const [scoredAssessments, setScoredAssessments] = useState([])
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -58,19 +61,16 @@ function App() {
 
   }
 
-  const bulkAddScores = (assessment_id, teacher_id, students) => {
 
-  }
 
   const addAssessment = (assessment) => {
-    const id = assessmentListState.length + 1
+    const id = (unScoredAssessments.length + scoredAssessments.length) + 1
     const newAssessment = { id, ...assessment }
 
-    setAssessmentListState([...assessmentListState, newAssessment])
-
+    setUnscoredAssessments([...unScoredAssessments, newAssessment])
   }
 
-  // console.log(studentListState)
+  //console.log(unScoredAssessments)
   return (
     <Router>
       <div className="App">
@@ -80,7 +80,7 @@ function App() {
             <Dashboard
               onSubject={addSubject}
               onStudent={addStudent}
-              assessments={assessmentListState}
+              assessments={scoredAssessments}
               students={studentListState}
               teacher={teacherState}
               scores={scoresState}
@@ -91,7 +91,8 @@ function App() {
           <Route path="/grade" exact element={<Grade
             students={studentListState}
             teacher={teacherState}
-            assessments={assessmentListState}
+            uAssessments={unScoredAssessments}
+            sAssessments={scoredAssessments}
             onAssessment={addAssessment}
             scores={scoresState} />} />
         </Routes>

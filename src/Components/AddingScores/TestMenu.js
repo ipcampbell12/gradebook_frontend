@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 
-function TestMenu({ assessments }) {
+function TestMenu({ uAssessments, sAssessments }) {
     return (
         <div>
             <Typography variant="h6" align="center"> Unscored Assessments </Typography>
@@ -17,7 +17,7 @@ function TestMenu({ assessments }) {
                         label="Age"
                     >
                         {
-                            assessments.map(assessment => {
+                            uAssessments.map(assessment => {
 
                                 return <MenuItem id={`assessment-${assessment.id}`} value={assessment.name}>{assessment.name}</MenuItem>
 
@@ -39,7 +39,7 @@ function TestMenu({ assessments }) {
                         label="Age"
                     >
                         {
-                            assessments.map(assessment => {
+                            sAssessments.map(assessment => {
 
                                 return <MenuItem id={`assessment-${assessment.id}`} value={assessment.name}>{assessment.name}</MenuItem>
 
