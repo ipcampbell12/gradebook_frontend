@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import APIServce from '../APIService';
+import APIServce from '../../APIService';
 
 
 export default function AddAssessment({ onAdd, onModule }) {

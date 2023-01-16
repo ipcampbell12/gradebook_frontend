@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import APIServce from '../APIService';
+import APIServce from '../../APIService';
 
 
 function AddScores({ students, module, onAdd, teacher }) {

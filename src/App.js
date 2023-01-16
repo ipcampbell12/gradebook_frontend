@@ -1,9 +1,9 @@
-import Dashboard from "./Dashboard"
+import Dashboard from "./Components/Dashboard/Dashboard"
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from "./Navigation"
-import EditStudent from "./Pages/EditStudent";
-import Grade from "./Pages/Grade";
+import Navigation from "./Components/Dashboard/Navigation"
+import EditStudent from "./Components/AddingStudents/EditStudent";
+import Grade from "./Components/AddingScores/Grade";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
