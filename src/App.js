@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
+  //API GET FUNCTIONALITY
   useEffect(() => {
     fetchData('student', setStudentListState)
   }, []);
@@ -28,13 +29,12 @@ function App() {
     //console.log(items)
   }
 
-  const [studentListState, setStudentListState] = useState([
+  //-----------------------------------------------------------------------------------------------------------------------
 
-  ])
+  //TOP LEVEL STATES
+  const [studentListState, setStudentListState] = useState([])
 
-  const [scoresState, setScoresState] = useState([
-
-  ])
+  const [scoresState, setScoresState] = useState([])
 
   const [subjectListState, setSubjectListState] = useState([])
 
@@ -45,6 +45,9 @@ function App() {
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
 
+  //-----------------------------------------------------------------------------------------------------------------------
+
+  //ADD DATA FUNCTIONALITY
   const addStudent = (student) => {
     const id = studentListState.length + 1
     const newStudent = { id, ...student }
@@ -61,14 +64,22 @@ function App() {
 
   }
 
-
-
   const addAssessment = (assessment) => {
     const id = (unScoredAssessments.length + scoredAssessments.length) + 1
     const newAssessment = { id, ...assessment }
 
     setUnscoredAssessments([...unScoredAssessments, newAssessment])
   }
+
+
+  const addScores = (scores) => {
+
+    setScoresState(...scoresState, scores)
+  }
+
+
+  //-----------------------------------------------------------------------------------------------------------------------
+
 
   //console.log(unScoredAssessments)
   return (
@@ -94,7 +105,9 @@ function App() {
             uAssessments={unScoredAssessments}
             sAssessments={scoredAssessments}
             onAssessment={addAssessment}
-            scores={scoresState} />} />
+            scores={scoresState}
+            onAdd={addScores}
+          />} />
         </Routes>
 
 

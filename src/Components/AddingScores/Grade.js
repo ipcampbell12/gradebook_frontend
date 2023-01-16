@@ -21,7 +21,7 @@ import TestMenu from './TestMenu'
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, uAssessments, sAssessments, onAssessment }) {
+function Grade({ teacher, students, uAssessments, sAssessments, onAssessment, onAdd }) {
 
     const [moduleState, setModuleState] = useState('')
 
@@ -42,7 +42,7 @@ function Grade({ teacher, students, uAssessments, sAssessments, onAssessment }) 
         <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
-                <AddScores students={students} module={moduleState} teacher={teacher} />
+                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} />
                 <div className="menu">
 
                 </div>
@@ -50,7 +50,7 @@ function Grade({ teacher, students, uAssessments, sAssessments, onAssessment }) 
                 <div className="assessments">
                     <Typography varaint="h5" align="center"> Assessment List </Typography>
                     <div className="assessment-chart" >
-                        <TestMenu uAssessments={uAssessments} sAssessments={sAssessments} />
+                        <TestMenu uAssessments={uAssessments} sAssessments={sAssessments} onModule={setModuleState} />
 
                     </div>
 
