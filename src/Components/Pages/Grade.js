@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddAssessment from './AddAssessment';
 import AddScores from './AddScores'
+import TestMenu from './TestMenu'
 
 
 
@@ -49,27 +50,7 @@ function Grade({ teacher, students, assessments, onAssessment }) {
                 <div className="assessments">
                     <Typography varaint="h5" align="center"> Assessment List </Typography>
                     <div className="assessment-chart" >
-                        <TableContainer component={Paper}>
-
-                            <Table sx={{ maxWidth: 300 }} size="small" aria-label="simple table" align="center">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Name</TableCell>
-
-
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {assessments.map((assessment, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell align="center">{assessment.name}</TableCell>
-                                            <TableCell align="center"><Button variant="primary" id={`assessment-${assessment.id}`} onClick={onClick}> Select </Button></TableCell>
-                                        </TableRow>
-                                    ))}
-
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                        <TestMenu assessments={assessments} />
 
                     </div>
 

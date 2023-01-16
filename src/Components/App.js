@@ -70,7 +70,7 @@ function App() {
 
   }
 
-  console.log(studentListState)
+  // console.log(studentListState)
   return (
     <Router>
       <div className="App">
