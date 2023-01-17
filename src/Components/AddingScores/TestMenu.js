@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 
-function TestMenu({ uAssessments, sAssessments, onModule }) {
+function TestMenu({ assessments, onModule }) {
 
 
 
@@ -18,7 +18,7 @@ function TestMenu({ uAssessments, sAssessments, onModule }) {
 
     return (
         <div>
-            <Typography variant="h6" align="center"> Unscored Assessments </Typography>
+            <Typography variant="h6" align="center"> Scored Assessments </Typography>
             <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
                     <Select
@@ -26,12 +26,12 @@ function TestMenu({ uAssessments, sAssessments, onModule }) {
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
-                        value={uAssessments.name}
+                        value={assessments.name}
                     >
                         {
-                            uAssessments.map(assessment => {
+                            assessments.map(assessment => {
 
-                                return <MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>
+                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
 
 
                             })
@@ -49,11 +49,13 @@ function TestMenu({ uAssessments, sAssessments, onModule }) {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Age"
+                        onChange={onClick}
+                        value={assessments.name}
                     >
                         {
-                            sAssessments.map(assessment => {
+                            assessments.map(assessment => {
 
-                                return <MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment.name}>{assessment.name}</MenuItem>
+                                return assessment.scored === false && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
 
 
                             })

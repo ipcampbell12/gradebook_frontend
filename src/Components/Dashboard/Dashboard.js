@@ -1,15 +1,18 @@
 // import React, { useRef, useState } from "react"
-import React from 'react';
-
+import React, { useState } from 'react';
+import DTestMenu from './DTestMenu';
 import StudentList from "../Visualizations/StudentList"
 import ScoresByTest from "./ScoresByTest"
-import OverallChart from "../Visualizations/OverallChart"
-import ScoresChart from "../Visualizations/ScoresChart"
+// import OverallChart from "../Visualizations/OverallChart"
+// import ScoresChart from "../Visualizations/ScoresChart"
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, scores }) {
+function Dashboard({ students, teacher, studentsAssessments, assessments }) {
+
+    const [moduleState, setModuleState] = useState('')
+
     return (
         <div className="dashboard">
 
@@ -22,7 +25,7 @@ function Dashboard({ students, teacher, scores }) {
                 </div>
                 <div className="charts">
                     <div className="menus">
-
+                        <DTestMenu assessments={assessments} onModule={setModuleState} />
                     </div>
                     <div className="tables">
 
@@ -31,7 +34,8 @@ function Dashboard({ students, teacher, scores }) {
                 </div>
                 <div className="scores">
                     <Typography variant="h6" align="center"> Scores By Assessment</Typography>
-                    <ScoresByTest students={students} scores={scores} />
+                    <ScoresByTest studentsAssessments={studentsAssessments} module={moduleState} />
+
                 </div>
 
 

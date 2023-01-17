@@ -10,14 +10,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
+  const [isInitialRender, setIsInitialRender] = useState(true);
   //API GET FUNCTIONALITY
+  //Run API call inside useEffect hook = mimics componentDidMount (class components)
+
   useEffect(() => {
     fetchData('student', setStudentListState)
   }, []);
 
-  //Run API call inside useEffect hook = mimics componentDidMount (class components)
   useEffect(() => {
-    fetchData('assessment', setUnscoredAssessments)
+    fetchData('assessment', setAssessments)
+  }, []);
+
+  useEffect(() => {
+    fetchTeacher('teacher', setTeacherState)
+  }, []);
+
+  useEffect(() => {
+    setIsInitialRender(false)
+    fetchData('student_assessment', setStudentsAssessments)
+  }, [isInitialRender]);
+
+  useEffect(() => {
+    fetchData('subject', setSubjectListState)
   }, []);
 
 
@@ -29,18 +44,30 @@ function App() {
     //console.log(items)
   }
 
+  const fetchTeacher = async (endpoint, setState) => {
+    const results = await fetch(`http://127.0.0.1:5001/${endpoint}/1`)
+    const items = await results.json()
+    setState(items)
+    //console.log(items)
+  }
+
+
+
+
+
   //-----------------------------------------------------------------------------------------------------------------------
 
   //TOP LEVEL STATES
   const [studentListState, setStudentListState] = useState([])
 
-  const [scoresState, setScoresState] = useState([])
+  const [studentsAssessments, setStudentsAssessments] = useState([])
 
   const [subjectListState, setSubjectListState] = useState([])
 
-  const [unScoredAssessments, setUnscoredAssessments] = useState([])
+  const [assessments, setAssessments] = useState([])
 
-  const [scoredAssessments, setScoredAssessments] = useState([])
+  // eslint-disable-next-line
+
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -65,16 +92,16 @@ function App() {
   }
 
   const addAssessment = (assessment) => {
-    const id = (unScoredAssessments.length + scoredAssessments.length) + 1
+    const id = (assessments.length) + 1
     const newAssessment = { id, ...assessment }
 
-    setUnscoredAssessments([...unScoredAssessments, newAssessment])
+    setAssessments([...assessments, newAssessment])
   }
 
 
-  const addScores = (scores) => {
+  const addStudentsAssessments = (studentAssessment) => {
 
-    setScoresState(...scoresState, scores)
+    setStudentsAssessments(...studentsAssessments, studentAssessment)
   }
 
 
@@ -91,22 +118,24 @@ function App() {
             <Dashboard
               onSubject={addSubject}
               onStudent={addStudent}
-              assessments={scoredAssessments}
+              assessments={assessments}
               students={studentListState}
               teacher={teacherState}
-              scores={scoresState}
+              studentsAssessments={studentsAssessments}
+
             />
           } />
           <Route path="/student" element={<EditStudent students={studentListState}
-            teacher={teacherState} onAdd={addStudent} />} />
+            teacher={teacherState} onAdd={addStudent}
+          />} />
           <Route path="/grade" exact element={<Grade
             students={studentListState}
             teacher={teacherState}
-            uAssessments={unScoredAssessments}
-            sAssessments={scoredAssessments}
+            assessments={assessments}
             onAssessment={addAssessment}
-            scores={scoresState}
-            onAdd={addScores}
+            studentsAssessments={studentsAssessments}
+            onAdd={addStudentsAssessments}
+            subjects={subjectListState}
           />} />
         </Routes>
 

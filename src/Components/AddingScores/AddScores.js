@@ -12,39 +12,38 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-function AddScores({ students, module, onAdd, teacher }) {
+function AddScores({ module, onAdd, teacher, studentsAssessments }) {
 
     //New Student Form
-    const [teacherId, setTeacherId] = useState('')
-    const [assessmentId, setAssessmentID] = useState('')
-    const [studentIds, setStudents] = useState([])
+    //const [studentIds, setStudentIds] = useState([])
     const [scores, setScores] = useState([])
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        setAssessmentID(module.id)
-        setTeacherId(teacher.id)
-        setStudents(students.map(student => student.id))
+        const teacherId = teacher.id
+        const assessmentId = module.id
 
-        APIServce.addClassScores({ studentIds, scores }, teacherId, assessmentId)
+
+
+
+        APIServce.addClassScores(teacherId, assessmentId, { scores })
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        onAdd({ students, module, teacher, scores })
+        //onAdd({ students, scores })
 
-        console.log(studentIds, scores)
+        //  setScores([])
 
     }
 
-    console.log(module.name)
+    console.log(scores)
 
-
-
+    //NEED TO HAVE VALUE ATTRIBUTE FOR INPUT TO WORK
 
     return (
         <div className="student-chart" >
-            <Typography variant="h5" align="center" id={`assessment-${module.id}`}> Scores for {module.name} </Typography>
+            <Typography variant="h5" align="center" id={module.id}> Scores for {module.name} </Typography>
             <TableContainer component={Paper}>
                 <Form action="" onSubmit={onSubmit} className="form">
                     <Table sx={{ maxWidth: 300 }} size="small" aria-label="simple table" align="center">
@@ -58,18 +57,25 @@ function AddScores({ students, module, onAdd, teacher }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {students.map((student, index) => (
-                                <TableRow key={index}>
-                                    <TableCell align="center">{student.fname}</TableCell>
-                                    <TableCell align="center" >{student.lname}</TableCell>
-                                    <TableCell align="center">
-                                        <Form.Group className="mb-1" >
-                                            <Form.Control type="number" placeholder="0" id={`student-${student.id}`} name="grade" value={student.grade}
-                                                onChange={(e) => setScores([...e.target.value, scores])} />
-                                        </Form.Group>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                            {studentsAssessments.map((studentsAssessment) => {
+                                return studentsAssessment.assessment.id === module.id ?
+
+                                    (<TableRow key={studentsAssessment.id}>
+                                        <TableCell align="center">{studentsAssessment.student.fname}</TableCell>
+                                        <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
+                                        <TableCell align="center">
+                                            <Form.Group className="mb-1" >
+                                                <Form.Control type="number" placeholder="0" id={studentsAssessment.student.id} name="score" value={studentsAssessment.score} />
+                                            </Form.Group>
+                                        </TableCell>
+                                    </TableRow>)
+                                    : ''
+
+
+                            }
+
+
+                            )}
 
                         </TableBody>
                     </Table>

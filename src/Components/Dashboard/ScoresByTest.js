@@ -6,30 +6,41 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Typography } from "@mui/material"
 
-export default function BasicTable({ onStudent, assessments, scores}) {
+
+export default function BasicTable({ studentsAssessments, module }) {
+
+  // console.log(studentsAssessments)
   return (
-    <TableContainer component={Paper}>
+    <div>
+      <Typography variant="h5" align="center" id={module.id}> Scores for {module.name} </Typography>
+      <TableContainer component={Paper}>
 
-      <Table sx={{ maxWidth: 300 }} aria-label="simple table" align="center">
-        <TableHead>
-          <TableRow>
+        <Table sx={{ maxWidth: 300 }} aria-label="simple table" align="center">
+          <TableHead>
+            <TableRow>
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
               <TableCell>Score</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {scores.map((score) => (
-            <TableRow>
-              <TableCell align="center">{score.fname}</TableCell>
-              <TableCell align="center">{score.lname}</TableCell>
-              <TableCell align="center">{score.score}</TableCell>
             </TableRow>
-          ))}
+          </TableHead>
+          <TableBody>
+            {studentsAssessments.map((studentAssessment) => {
 
-        </TableBody>
-      </Table>
-    </TableContainer>
+              return studentAssessment.assessment.id === module.id ?
+                (<TableRow key={studentAssessment.id}>
+                  <TableCell align="center">{studentAssessment.student.fname}</TableCell>
+                  <TableCell align="center">{studentAssessment.student.lname}</TableCell>
+                  <TableCell align="center">{studentAssessment.score}</TableCell>
+                </TableRow>)
+
+                : ''
+            })}
+
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }

@@ -26,7 +26,7 @@ function Student({ teacher, students, onAdd }) {
                     />
                 </div>
                 <div className="form">
-                    <AddStudent onAdd={onAdd} />
+                    <AddStudent onAdd={onAdd} teacher={teacher} />
                 </div>
 
 

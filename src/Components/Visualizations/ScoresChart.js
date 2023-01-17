@@ -25,12 +25,15 @@ ChartJS.register(
 
 
 
-function ScoresChart({ scores }) {
+function ScoresChart({ scores, module }) {
+
+
 
     const scoreCount = (scores) => {
 
-        const gradeList = scores.map(x => x.score)
-        const occurrences = gradeList.reduce(function (obj, item) {
+        const gradeList = scores.filter(score => score.assessment.id === module.id)
+        const filteredList = gradeList.map(x => x.score)
+        const occurrences = filteredList.reduce(function (obj, item) {
             obj[item] = (obj[item] || 0) + 1;
             return obj;
         }, {});
@@ -38,9 +41,11 @@ function ScoresChart({ scores }) {
         return occurrences
     }
 
-    // Doesn't work for 0
+
     const possibleList = Object.keys(scoreCount(scores))
     const countsList = Object.values(scoreCount(scores))
+
+    console.log(countsList)
 
     //console.log(scoreCount(possibleList))
     const [chartData, setChartData] = useState({

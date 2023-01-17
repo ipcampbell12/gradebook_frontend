@@ -21,7 +21,7 @@ import TestMenu from './TestMenu'
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, uAssessments, sAssessments, onAssessment, onAdd }) {
+function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects }) {
 
     const [moduleState, setModuleState] = useState('')
 
@@ -42,7 +42,7 @@ function Grade({ teacher, students, uAssessments, sAssessments, onAssessment, on
         <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
-                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} />
+                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} />
                 <div className="menu">
 
                 </div>
@@ -50,12 +50,12 @@ function Grade({ teacher, students, uAssessments, sAssessments, onAssessment, on
                 <div className="assessments">
                     <Typography varaint="h5" align="center"> Assessment List </Typography>
                     <div className="assessment-chart" >
-                        <TestMenu uAssessments={uAssessments} sAssessments={sAssessments} onModule={setModuleState} />
+                        <TestMenu assessments={assessments} onModule={setModuleState} />
 
                     </div>
 
                     <div className="form">
-                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} />
+                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} subjects={subjects} />
 
                     </div>
 

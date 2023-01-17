@@ -4,15 +4,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
-export default function AddStudent({ onAdd }) {
+export default function AddStudent({ onAdd, teacher }) {
 
     //New Student Form
     const [fname, setFirstName] = useState('')
     const [lname, setLastName] = useState('')
-    const [teacher_id, setTeacherId] = useState(0)
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+        const teacher_id = teacher.id
 
         APIServce.addStudent({ fname, lname, teacher_id })
             .then(response => console.log(response))
@@ -22,7 +23,7 @@ export default function AddStudent({ onAdd }) {
 
         setFirstName('')
         setLastName('')
-        setTeacherId('')
+
     }
 
 
@@ -40,13 +41,6 @@ export default function AddStudent({ onAdd }) {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control type="text" placeholder="Last Name" value={lname} onChange={(e) => {
                     setLastName(e.target.value)
-                }} />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-                <Form.Label>Teacher Id</Form.Label>
-                <Form.Control type="number" placeholder="Teacher Id" value={teacher_id} onChange={(e) => {
-                    setTeacherId(e.target.value)
                 }} />
             </Form.Group>
 

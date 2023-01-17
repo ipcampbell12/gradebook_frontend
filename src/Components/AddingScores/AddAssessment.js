@@ -5,11 +5,9 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-export default function AddAssessment({ onAdd, onModule }) {
+export default function AddAssessment({ onAdd, onModule, subjects }) {
 
-    //Add default values to form inputs???
-
-
+    //Add default values
     //New assessment Form
     const [name, setName] = useState('')
     //const [date, setDate] = useState('')
@@ -20,6 +18,10 @@ export default function AddAssessment({ onAdd, onModule }) {
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+
+        const subject = subjects.find(subject => subject.id === 1)
+        const subject_id = subject.id
 
         setScored(false)
         //send data to API
@@ -50,12 +52,7 @@ export default function AddAssessment({ onAdd, onModule }) {
 
 
 
-            <Form.Group className="mb-3">
-                <Form.Label>Subject Id</Form.Label>
-                <Form.Control type="number" placeholder="Subject Id" value={subject_id} onChange={(e) => {
-                    setSubjectId(e.target.value)
-                }} />
-            </Form.Group>
+
 
 
 
