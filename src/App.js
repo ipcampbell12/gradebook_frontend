@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-  const [isInitialRender, setIsInitialRender] = useState(true);
   //API GET FUNCTIONALITY
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
 
@@ -23,16 +22,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchTeacher('teacher', setTeacherState)
+    fetchTeacher('teacher', setTeacherState, 1)
   }, []);
 
   useEffect(() => {
-    setIsInitialRender(false)
     fetchData('student_assessment', setStudentsAssessments)
-  }, [isInitialRender]);
+  }, []);
 
   useEffect(() => {
     fetchData('subject', setSubjectListState)
+  }, []);
+
+  useEffect(() => {
+    fetchGrades('grade', setGrades, 1)
   }, []);
 
 
@@ -44,8 +46,15 @@ function App() {
     //console.log(items)
   }
 
-  const fetchTeacher = async (endpoint, setState) => {
-    const results = await fetch(`http://127.0.0.1:5001/${endpoint}/1`)
+  const fetchTeacher = async (endpoint, setState, id) => {
+    const results = await fetch(`http://127.0.0.1:5001/${endpoint}/${id}`)
+    const items = await results.json()
+    setState(items)
+    //console.log(items)
+  }
+
+  const fetchGrades = async (endpoint, setState, id) => {
+    const results = await fetch(`http://127.0.0.1:5001/teacherstudents/${id}/${endpoint}`)
     const items = await results.json()
     setState(items)
     //console.log(items)
@@ -66,8 +75,7 @@ function App() {
 
   const [assessments, setAssessments] = useState([])
 
-  // eslint-disable-next-line
-
+  const [grades, setGrades] = useState([])
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -122,6 +130,7 @@ function App() {
               students={studentListState}
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
+              grades={grades}
 
             />
           } />

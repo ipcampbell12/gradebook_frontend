@@ -11,7 +11,7 @@ import { Typography } from "@mui/material"
 
 export default function BasicTable({ studentsAssessments, module }) {
 
-  // console.log(studentsAssessments)
+
   return (
     <div>
       <Typography variant="h5" align="center" id={module.id}> Scores for {module.name} </Typography>

@@ -7,24 +7,24 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function BasicTable({ onStudent, assessments, students}) {
+export default function BasicTable({ onStudent, assessments, students, grades }) {
   return (
     <TableContainer component={Paper}>
 
       <Table sx={{ maxWidth: 300 }} aria-label="simple table" align="center">
         <TableHead>
           <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Grade</TableCell>
+            <TableCell>First Name</TableCell>
+            <TableCell>Last Name</TableCell>
+            <TableCell>Grade</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {students.map((student) => (
+          {grades.map((grade) => (
             <TableRow>
-              <TableCell align="center">{student.fname}</TableCell>
-              <TableCell align="center">{student.lname}</TableCell>
-              <TableCell align="center">{student.grade}</TableCell>
+              <TableCell align="center">{grade.fname}</TableCell>
+              <TableCell align="center">{grade.lname}</TableCell>
+              <TableCell align="center">{grade.avg}</TableCell>
             </TableRow>
           ))}
 
