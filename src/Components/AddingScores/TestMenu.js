@@ -15,6 +15,7 @@ function TestMenu({ assessments, onModule }) {
 
     }
 
+    //Make sure you ahve some kind of correcte default value in the value attribute for the select tag
 
     return (
         <div>
@@ -26,12 +27,12 @@ function TestMenu({ assessments, onModule }) {
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
-                        value={assessments.name}
+                        value={"Choose an assessment"}
                     >
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
+                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}</MenuItem>)
 
 
                             })
@@ -50,12 +51,12 @@ function TestMenu({ assessments, onModule }) {
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
-                        value={assessments.name}
+                        value={"Choose an assessment"}
                     >
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === false && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
+                                return assessment.scored === false && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}</MenuItem>)
 
 
                             })
@@ -66,7 +67,7 @@ function TestMenu({ assessments, onModule }) {
                     </Select>
                 </FormControl>
             </Box>
-        </div>
+        </div >
     );
 }
 

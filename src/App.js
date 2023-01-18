@@ -37,6 +37,10 @@ function App() {
     fetchGrades('grade', setGrades, 1)
   }, []);
 
+  useEffect(() => {
+    fetchGrades('averagegrade', setAverageGrade, 1)
+  }, []);
+
 
   //API Calls
   const fetchData = async (endpoint, setState) => {
@@ -76,6 +80,8 @@ function App() {
   const [assessments, setAssessments] = useState([])
 
   const [grades, setGrades] = useState([])
+
+  const [averageGrade, setAverageGrade] = useState('')
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -131,6 +137,7 @@ function App() {
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
               grades={grades}
+              averageGrade={averageGrade}
 
             />
           } />

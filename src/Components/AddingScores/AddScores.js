@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-function AddScores({ module, onAdd, teacher, studentsAssessments }) {
+function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
@@ -21,23 +21,20 @@ function AddScores({ module, onAdd, teacher, studentsAssessments }) {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        console.log(scores)
+
         const teacherId = teacher.id
         const assessmentId = module.id
-
-
-
 
         APIServce.addClassScores(teacherId, assessmentId, { scores })
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        //onAdd({ students, scores })
-
-        //  setScores([])
+        setScores([])
 
     }
 
-    console.log(scores)
+
 
     //NEED TO HAVE VALUE ATTRIBUTE FOR INPUT TO WORK
 
@@ -46,7 +43,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments }) {
             <Typography variant="h5" align="center" id={module.id}> Scores for {module.name} </Typography>
             <TableContainer component={Paper}>
                 <Form action="" onSubmit={onSubmit} className="form">
-                    <Table sx={{ maxWidth: 300 }} size="small" aria-label="simple table" align="center">
+                    <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
                         <TableHead>
                             <TableRow>
                                 <TableCell>First Name</TableCell>
@@ -57,31 +54,63 @@ function AddScores({ module, onAdd, teacher, studentsAssessments }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {studentsAssessments.map((studentsAssessment) => {
-                                return studentsAssessment.assessment.id === module.id ?
+                            {module.scored === true ? (studentsAssessments.map((studentsAssessment) => {
+                                return studentsAssessment.assessment.id === module.id &&
 
                                     (<TableRow key={studentsAssessment.id}>
                                         <TableCell align="center">{studentsAssessment.student.fname}</TableCell>
                                         <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
                                         <TableCell align="center">
                                             <Form.Group className="mb-1" >
-                                                <Form.Control type="number" placeholder="0" id={studentsAssessment.student.id} name="score" value={studentsAssessment.score} />
+                                                <Form.Control type="number" placeholder="0" id={studentsAssessment.student.id} name="score" value={studentsAssessment.score} onChange={(e) =>
+                                                    setScores(e.target.value)
+                                                } />
                                             </Form.Group>
                                         </TableCell>
+                                        <TableCell>
+                                            <Button variant="primary" type="submit">
+                                                Edit
+                                            </Button>
+                                        </TableCell>
+
+
                                     </TableRow>)
-                                    : ''
+                            }
+
+
+                            )) :
+                                (students.map((student) => {
+                                    return <TableRow key={student.id}>
+                                        <TableCell align="center">{student.fname}</TableCell>
+                                        <TableCell align="center" >{student.lname}</TableCell>
+                                        <TableCell align="center">
+                                            <Form.Group className="mb-1" >
+                                                <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) =>
+                                                    setScores([{ "score": +e.target.value }, ...scores])
+                                                } />
+                                            </Form.Group>
+                                        </TableCell>
+                                    </TableRow>
+                                }
+
+
+                                ))
 
 
                             }
 
-
-                            )}
-
                         </TableBody>
                     </Table>
-                    <Button variant="primary" type="submit" onClick={onSubmit}>
-                        Add All Scores
-                    </Button>
+
+                    {
+                        module.scored === false ? (
+                            <Button variant="primary" type="submit" onClick={onSubmit}>
+                                Add All Scores
+                            </Button>
+                        ) : ''
+
+                    }
+
                 </Form>
             </TableContainer>
 
