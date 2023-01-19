@@ -42,6 +42,8 @@ function App() {
   }, []);
 
 
+
+
   //API Calls
   const fetchData = async (endpoint, setState) => {
     const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
@@ -61,7 +63,6 @@ function App() {
     const results = await fetch(`http://127.0.0.1:5001/teacherstudents/${id}/${endpoint}`)
     const items = await results.json()
     setState(items)
-    //console.log(items)
   }
 
 
@@ -122,7 +123,7 @@ function App() {
   //-----------------------------------------------------------------------------------------------------------------------
 
 
-  //console.log(unScoredAssessments)
+  console.log(averageGrade)
   return (
     <Router>
       <div className="App">
@@ -138,6 +139,7 @@ function App() {
               studentsAssessments={studentsAssessments}
               grades={grades}
               averageGrade={averageGrade}
+
 
             />
           } />
