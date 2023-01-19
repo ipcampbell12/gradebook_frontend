@@ -26,11 +26,11 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
         const teacherId = teacher.id
         const assessmentId = module.id
 
-        APIServce.addClassScores(teacherId, assessmentId, { scores })
+        APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        setScores([])
+        setScores(scores.map(score => score = 0))
 
     }
 
@@ -86,7 +86,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
                                         <TableCell align="center">
                                             <Form.Group className="mb-1" >
                                                 <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) =>
-                                                    setScores([{ "score": +e.target.value }, ...scores])
+                                                    setScores([...scores, { "score": +e.target.value }])
                                                 } />
                                             </Form.Group>
                                         </TableCell>
