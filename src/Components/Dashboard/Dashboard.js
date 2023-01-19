@@ -1,18 +1,18 @@
 // import React, { useRef, useState } from "react"
-import React, { useState } from 'react';
+import React from 'react';
 import DTestMenu from './DTestMenu';
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
 import AverageGrade from './AverageGrade';
 // import OverallChart from "../Visualizations/OverallChart"
-// import ScoresChart from "../Visualizations/ScoresChart"
+//import ScoresChart from "../Visualizations/ScoresChart"
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, studentsAssessments, assessments, grades, averageGrade }) {
+function Dashboard({ students, teacher, studentsAssessments, assessments, grades, averageGrade, onModule, moduleState, averageModuleScore }) {
 
-    const [moduleState, setModuleState] = useState('')
+
 
     return (
         <div className="dashboard">
@@ -26,10 +26,10 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, grades
                 </div>
                 <div className="charts">
                     <div className="menus">
-                        <DTestMenu assessments={assessments} onModule={setModuleState} />
+                        <DTestMenu assessments={assessments} onModule={onModule} />
                     </div>
                     <div className="averages">
-                        <AverageGrade averageGrade={averageGrade} />
+                        <AverageGrade averageGrade={averageGrade} averageModuleScore={averageModuleScore} />
                     </div>
                     <div className="tables">
 

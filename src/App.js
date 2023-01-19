@@ -13,6 +13,8 @@ function App() {
   //API GET FUNCTIONALITY
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
 
+  const [moduleState, setModuleState] = useState('')
+
   useEffect(() => {
     fetchData('student', setStudentListState)
   }, []);
@@ -40,6 +42,10 @@ function App() {
   useEffect(() => {
     fetchGrades('averagegrade', setAverageGrade, 1)
   }, []);
+
+  useEffect(() => {
+    fetchTeacher('scoresbytest', setAverageModuleScore, moduleState.id)
+  }, [moduleState.id]);
 
 
 
@@ -84,7 +90,10 @@ function App() {
 
   const [averageGrade, setAverageGrade] = useState('')
 
+  const [averageModuleScore, setAverageModuleScore] = useState('')
+
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
+
 
 
   //-----------------------------------------------------------------------------------------------------------------------
@@ -123,7 +132,7 @@ function App() {
   //-----------------------------------------------------------------------------------------------------------------------
 
 
-  console.log(averageGrade)
+  //console.log(averageGrade)
   return (
     <Router>
       <div className="App">
@@ -139,6 +148,9 @@ function App() {
               studentsAssessments={studentsAssessments}
               grades={grades}
               averageGrade={averageGrade}
+              onModule={setModuleState}
+              moduleState={moduleState}
+              averageModuleScore={averageModuleScore}
 
 
             />
