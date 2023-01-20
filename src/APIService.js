@@ -33,4 +33,17 @@ export default class APIServce {
         })
             .then(resp => resp.json())
     }
+
+    static deleteAssessment(teacherId, assessmentId) {
+        return fetch(`http://127.0.0.1:5001/assessment/${assessmentId}/teacher/${teacherId}`, {
+            'method': 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(resp => resp.json())
+    }
 }
+
+
+///assessment/<string:assessment_id>

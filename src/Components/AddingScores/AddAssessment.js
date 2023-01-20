@@ -50,17 +50,9 @@ export default function AddAssessment({ onAdd, onModule, subjects }) {
                 }} />
             </Form.Group>
 
-
-
-
-
-
-
             <Button variant="primary" type="submit">
                 Add Assessment
             </Button>
-
-
 
         </Form>
     );

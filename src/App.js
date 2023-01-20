@@ -16,7 +16,7 @@ function App() {
   const [moduleState, setModuleState] = useState('')
 
   useEffect(() => {
-    fetchData('student', setStudentListState)
+    fetchTeacher('teacherstudents', setStudentListState, 1)
   }, []);
 
   useEffect(() => {
@@ -75,6 +75,7 @@ function App() {
 
 
 
+
   //-----------------------------------------------------------------------------------------------------------------------
 
   //TOP LEVEL STATES
@@ -128,6 +129,9 @@ function App() {
     setStudentsAssessments(...studentsAssessments, studentAssessment)
   }
 
+  const deleteAssessment = (id) => {
+    setAssessments(assessments.filter((item) => item.id !== id))
+  }
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +170,7 @@ function App() {
             studentsAssessments={studentsAssessments}
             onAdd={addStudentsAssessments}
             subjects={subjectListState}
+            onDelete={deleteAssessment}
           />} />
         </Routes>
 

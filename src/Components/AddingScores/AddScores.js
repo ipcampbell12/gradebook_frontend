@@ -12,11 +12,12 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
+function AddScores({ module, onAdd, teacher, studentsAssessments, students, onModule }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
     const [scores, setScores] = useState([])
+
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -30,10 +31,11 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        setScores(scores.map(score => score = 0))
+        onModule('')
 
     }
 
+    console.log(scores)
 
 
     //NEED TO HAVE VALUE ATTRIBUTE FOR INPUT TO WORK
@@ -85,9 +87,9 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students }) {
                                         <TableCell align="center" >{student.lname}</TableCell>
                                         <TableCell align="center">
                                             <Form.Group className="mb-1" >
-                                                <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) =>
-                                                    setScores([...scores, { "score": +e.target.value }])
-                                                } />
+                                                <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
+                                                    setScores([...scores, { "score": +e.target.value }]);
+                                                }} />
                                             </Form.Group>
                                         </TableCell>
                                     </TableRow>

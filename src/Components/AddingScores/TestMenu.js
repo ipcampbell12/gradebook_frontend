@@ -4,8 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
+import Button from 'react-bootstrap/Button';
 
-function TestMenu({ assessments, onModule }) {
+function TestMenu({ assessments, onModule, testDelete }) {
 
 
 
@@ -32,7 +33,9 @@ function TestMenu({ assessments, onModule }) {
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}</MenuItem>)
+                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}
+                                    <Button onClick={() => testDelete(assessment.id)}> Delete </Button>
+                                </MenuItem>)
 
 
                             })

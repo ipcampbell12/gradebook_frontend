@@ -10,6 +10,7 @@ import { Typography } from "@mui/material"
 import AddAssessment from './AddAssessment';
 import AddScores from './AddScores'
 import TestMenu from './TestMenu'
+import APIServce from '../../APIService';
 
 
 
@@ -21,11 +22,22 @@ import TestMenu from './TestMenu'
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects }) {
+function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete }) {
 
     const [moduleState, setModuleState] = useState('')
 
+    const deleteAssessment = (assessment_id) => {
 
+        const teacher_id = teacher.id
+
+        APIServce.deleteAssessment(teacher_id, assessment_id)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+
+
+        onDelete({ assessment_id })
+
+    }
 
 
     // const onClick = (e) => {
@@ -42,7 +54,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
         <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
             <div className="container">
-                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} />
+                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} onModule={setModuleState} />
                 <div className="menu">
 
                 </div>
@@ -50,7 +62,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                 <div className="assessments">
                     <Typography varaint="h5" align="center"> Assessment List </Typography>
                     <div className="assessment-chart" >
-                        <TestMenu assessments={assessments} onModule={setModuleState} />
+                        <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} />
 
                     </div>
 
