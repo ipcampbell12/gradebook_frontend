@@ -130,6 +130,7 @@ function App() {
   }
 
   const deleteAssessment = (id) => {
+    console.log(id)
     setAssessments(assessments.filter((item) => item.id !== id))
   }
 

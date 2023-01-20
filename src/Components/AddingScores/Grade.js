@@ -37,6 +37,8 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
         onDelete({ assessment_id })
 
+        setModuleState('')
+
     }
 
 
