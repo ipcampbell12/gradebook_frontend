@@ -35,6 +35,8 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
 
     }
 
+
+
     console.log(scores)
 
 

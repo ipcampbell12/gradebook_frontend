@@ -33,8 +33,11 @@ function TestMenu({ assessments, onModule, testDelete }) {
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}
-                                    <Button onClick={() => testDelete(assessment.id)}> Delete </Button>
+                                return assessment.scored === true && (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
+                                    {assessment.name}
+                                    <Button className="btn-primary menu-1" onClick={(e) => onModule(e.target.value)}> Score </Button>
+                                    <Button className="btn-danger menu-2" onClick={() => testDelete(assessment.id)}> Delete </Button>
+
                                 </MenuItem>)
 
 

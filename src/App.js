@@ -13,7 +13,7 @@ function App() {
   //API GET FUNCTIONALITY
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
 
-  const [moduleState, setModuleState] = useState('')
+
 
   useEffect(() => {
     fetchTeacher('teacherstudents', setStudentListState, 1)
@@ -43,12 +43,14 @@ function App() {
     fetchGrades('averagegrade', setAverageGrade, 1)
   }, []);
 
+  const [moduleState, setModuleState] = useState('')
+
   useEffect(() => {
     fetchTeacher('scoresbytest', setAverageModuleScore, moduleState.id)
   }, [moduleState.id]);
 
 
-
+  console.log(`Module state is ${moduleState.name}`)
 
   //API Calls
   const fetchData = async (endpoint, setState) => {
@@ -82,6 +84,7 @@ function App() {
   const [studentListState, setStudentListState] = useState([])
 
   const [studentsAssessments, setStudentsAssessments] = useState([])
+  console.log(`SA state in App.js is ${studentsAssessments.map(x => x.score)}`)
 
   const [subjectListState, setSubjectListState] = useState([])
 

@@ -28,22 +28,23 @@ ChartJS.register(
 function ScoresChart({ studentsAssessments, module }) {
 
 
-
+    console.log(module.id)
     const scoreCount = (studentsAssessments) => {
 
-        const gradeList = studentsAssessments.filter(score => score.assessment.id === module.id)
+        const gradeList = studentsAssessments.filter(sa => sa.assessment.id === module.id)
         const filteredList = gradeList.map(x => x.score)
         const occurrences = filteredList.reduce(function (obj, item) {
             obj[item] = (obj[item] || 0) + 1;
             return obj;
         }, {});
 
+
         return occurrences
     }
 
 
-    const possibleList = Object.keys(scoreCount(studentsAssessments))
-    const countsList = Object.values(scoreCount(studentsAssessments))
+    const possibleList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const countsList = studentsAssessments.map(studentAssessment => studentAssessment.score)
 
     console.log(countsList)
 
@@ -98,7 +99,7 @@ function ScoresChart({ studentsAssessments, module }) {
 
         });
 
-    }, [module.id])
+    }, [])
 
 
     return (

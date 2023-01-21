@@ -5,7 +5,7 @@ import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
 import AverageGrade from './AverageGrade';
 // import OverallChart from "../Visualizations/OverallChart"
-//import ScoresChart from "../Visualizations/ScoresChart"
+import ScoresChart from "../Visualizations/ScoresChart"
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
@@ -13,7 +13,7 @@ import { Typography } from "@mui/material"
 function Dashboard({ students, teacher, studentsAssessments, assessments, grades, averageGrade, onModule, moduleState, averageModuleScore }) {
 
 
-
+    console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
         <div className="dashboard">
 
