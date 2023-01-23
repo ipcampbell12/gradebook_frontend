@@ -5,6 +5,7 @@ import Navigation from "./Components/Dashboard/Navigation"
 import EditStudent from "./Components/AddingStudents/EditStudent";
 import Grade from "./Components/AddingScores/Grade";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NetworkCalls from "./networkCalls";
 
 
 
@@ -13,83 +14,13 @@ function App() {
   //API GET FUNCTIONALITY
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
 
-  const [averageGrade, setAverageGrade] = useState();
 
-
-
-  useEffect(() => {
-    fetchTeacher('teacherstudents', setStudentListState, 1)
-  }, []);
-
-  useEffect(() => {
-    fetchData('assessment', setAssessments)
-  }, []);
-
-  useEffect(() => {
-    fetchTeacher('teacher', setTeacherState, 1)
-  }, []);
-
-  useEffect(() => {
-    fetchData('student_assessment', setStudentsAssessments)
-  }, []);
-
-  useEffect(() => {
-    fetchData('subject', setSubjectListState)
-  }, []);
-
-  useEffect(() => {
-    fetchGrades('grade', setGrades, 1)
-  }, []);
-
-  useEffect(() => {
-    fetchGrades('averagegrade', setAverageGrade, 1);
-    console.log('useffect called ---');
-  }, []);
-
-  //move to dashboard
-  const [moduleState, setModuleState] = useState('')
-
-  useEffect(() => {
-    fetchTeacher('scoresbytest', setAverageModuleScore, moduleState.id)
-  }, [moduleState.id]);
-
-
-  console.log(`Module state is ${moduleState.name}`)
-
-  //API Calls
-  const fetchData = async (endpoint, setState) => {
-    const results = await fetch(`http://127.0.0.1:5001/${endpoint}`)
-    const items = await results.json()
-    setState(items)
-    //console.log(items)
-  }
-
-  const fetchTeacher = async (endpoint, setState, id) => {
-    const results = await fetch(`http://127.0.0.1:5001/${endpoint}/${id}`)
-    const items = await results.json()
-    setState(items)
-    //console.log(items)
-  }
-
-  const fetchGrades = async (endpoint, setState, id) => {
-    const results = await fetch(`http://127.0.0.1:5001/teacherstudents/${id}/${endpoint}`)
-    const items = await results.json()
-    console.log('fetch grade items are', items);
-    setState(items)
-  }
-
-
-
-
-
-
-  //-----------------------------------------------------------------------------------------------------------------------
 
   //TOP LEVEL STATES
   const [studentListState, setStudentListState] = useState([])
 
   const [studentsAssessments, setStudentsAssessments] = useState([])
-  console.log(`SA state in App.js is ${studentsAssessments.map(x => x.score)}`)
+  //console.log(`SA state in App.js is ${studentsAssessments.map(x => x.score)}`)
 
   const [subjectListState, setSubjectListState] = useState([])
 
@@ -97,9 +28,39 @@ function App() {
 
   const [grades, setGrades] = useState([])
 
-  const [averageModuleScore, setAverageModuleScore] = useState('')
+
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
+
+  //-----------------------------------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    NetworkCalls.fetchTeacher('teacherstudents', setStudentListState, 1)
+  }, []);
+
+  useEffect(() => {
+    NetworkCalls.fetchData('assessment', setAssessments)
+  }, []);
+
+  useEffect(() => {
+    NetworkCalls.fetchTeacher('teacher', setTeacherState, 1)
+  }, []);
+
+  useEffect(() => {
+    NetworkCalls.fetchData('student_assessment', setStudentsAssessments)
+  }, []);
+
+  useEffect(() => {
+    NetworkCalls.fetchData('subject', setSubjectListState)
+  }, []);
+
+  useEffect(() => {
+    NetworkCalls.fetchGrades('grade', setGrades, 1)
+  }, []);
+
+  //move to dashboard
+  const [moduleState, setModuleState] = useState('')
+
 
 
 
@@ -158,10 +119,9 @@ function App() {
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
               grades={grades}
-              averageGrade={averageGrade}
               onModule={setModuleState}
               moduleState={moduleState}
-              averageModuleScore={averageModuleScore}
+
 
 
             />

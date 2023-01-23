@@ -10,7 +10,7 @@ import ScoresChart from "../Visualizations/ScoresChart"
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, studentsAssessments, assessments, grades, averageGrade, onModule, moduleState, averageModuleScore }) {
+function Dashboard({ students, teacher, studentsAssessments, assessments, grades, onModule, moduleState }) {
     // dummy code, organize later
     //const [averageGrade, setAverageGrade] = useState();
     // const [students, setStudents] = useState();
@@ -35,7 +35,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, grades
                         <DTestMenu assessments={assessments} onModule={onModule} />
                     </div>
                     <div className="averages">
-                        <AverageGrade averageGrade={averageGrade} averageModuleScore={averageModuleScore} />
+                        <AverageGrade />
                     </div>
                     <div className="tables">
 
@@ -60,3 +60,5 @@ export default Dashboard;
 
 // <OverallChart grades={students} />
 // <ScoresChart scores={scores} />
+
+//<AverageGrade averageGrade={averageGrade} averageModuleScore={averageModuleScore} />
