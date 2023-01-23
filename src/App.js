@@ -58,7 +58,7 @@ function App() {
 
 
   //move to dashboard
-  const [moduleState, setModuleState] = useState('')
+
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -115,8 +115,6 @@ function App() {
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
               grades={grades}
-              onModule={setModuleState}
-              moduleState={moduleState}
 
 
 
