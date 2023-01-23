@@ -19,9 +19,7 @@ export default class NetworkCalls {
     }
 
     static fetchAssessments() {
-        return fetch("http://127.0.0.1:5001/assessment", {
-            'method': 'GET'
-        }).then(resp => resp.json());
+        return fetch("http://127.0.0.1:5001/assessment").then(resp => resp.json());
 
     }
 

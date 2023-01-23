@@ -18,6 +18,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
 
     const [moduleState, setModuleState] = useState('')
     const [grades, setGrades] = useState([])
+    console.log(moduleState)
 
     useEffect(() => {
         NetworkCalls.fetchGrades(1).then(data => setGrades(data))
