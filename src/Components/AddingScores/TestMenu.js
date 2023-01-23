@@ -20,7 +20,7 @@ function TestMenu({ assessments, onModule, testDelete }) {
 
     return (
         <div>
-            <Typography variant="h6" align="center"> Scored Assessments </Typography>
+            <Typography variant="h6" align="center"> Assessments </Typography>
             <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
                     <Select
@@ -49,32 +49,11 @@ function TestMenu({ assessments, onModule, testDelete }) {
                     </Select>
                 </FormControl>
             </Box>
-            <Typography variant="h6" align="center"> Unscored Assessments </Typography>
-            <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Age"
-                        onChange={onClick}
-                        value={"Choose an assessment"}
-                    >
-                        {
-                            assessments.map(assessment => {
 
-                                return assessment.scored === false && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={(e) => onModule(e.target.value)}>{assessment.name}</MenuItem>)
-
-
-                            })
-
-                        }
-
-
-                    </Select>
-                </FormControl>
-            </Box>
-        </div >
+        </div>
     );
 }
 
 export default TestMenu;
+
+

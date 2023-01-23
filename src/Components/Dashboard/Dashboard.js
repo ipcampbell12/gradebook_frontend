@@ -4,7 +4,7 @@ import DTestMenu from './DTestMenu';
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
 import AverageGrade from './AverageGrade';
-// import OverallChart from "../Visualizations/OverallChart"
+import OverallChart from "../Visualizations/OverallChart"
 import ScoresChart from "../Visualizations/ScoresChart"
 import NetworkCalls from '../../networkCalls';
 
@@ -43,6 +43,9 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
                         <AverageGrade moduleState={moduleState} />
                     </div>
                     <div className="tables">
+                        <OverallChart grades={grades} />
+
+
 
 
                     </div>
@@ -63,9 +66,4 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
 
 export default Dashboard;
 
-// <OverallChart grades={students} />
-// <ScoresChart scores={scores} />
-
-//<AverageGrade averageGrade={averageGrade} averageModuleScore={averageModuleScore} />
-
-//<AverageGrade moduleState={moduleState} />
+//<ScoresChart studentsAssessments={studentsAssessments} module={moduleState} />

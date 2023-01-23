@@ -17,12 +17,12 @@ function AverageGrade({ moduleState }) {
     }, [moduleState.id]);
 
     console.log('average garde is', averageGrade);
-    //console.log(averageModuleScore[0]["average"])
+
     return (
         <div className="averages">
 
             <div>
-                <span> Average Module Score for {moduleState.name}:{averageModuleScore[0]["average"]} </span>
+                <span> Average Module Score for {moduleState.name}:{averageModuleScore.average} </span>
             </div>
             <div>
                 <span> Average Grade:{averageGrade.average} </span>
