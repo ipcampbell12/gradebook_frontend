@@ -7,23 +7,23 @@ function AverageGrade({ moduleState }) {
     const [averageModuleScore, setAverageModuleScore] = useState('')
 
     useEffect(() => {
-        NetworkCalls.fetchGrades('averagegrade', setAverageGrade, 1);
+        NetworkCalls.fetchAverageGrade(1).then(data => setAverageGrade(data));
     }, []);
 
     useEffect(() => {
-        NetworkCalls.fetchTeacher('scoresbytest', setAverageModuleScore, moduleState.id)
+        NetworkCalls.fetchAverageModuleScore(moduleState.id).then(data => setAverageModuleScore(data))
     }, [moduleState.id]);
 
-    // console.log('average garde is', averageGrade);
+    console.log('average garde is', averageGrade);
     //console.log(averageModuleScore[0]["average"])
     return (
         <div className="averages">
 
             <div>
-                <span> Average Module Score for {moduleState}:{ } </span>
+                <span> Average Module Score for {moduleState}:{averageModuleScore[0]["average"]} </span>
             </div>
             <div>
-                <span> Average Grade:{ } </span>
+                <span> Average Grade:{averageGrade[0]["average"]} </span>
             </div>
 
         </div>

@@ -34,5 +34,13 @@ export default class NetworkCalls {
         return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/grade`).then(resp => resp.json());
 
     }
+    static fetchAverageGrade(id) {
+        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/averagegrade`).then(resp => resp.json());
+
+    }
+    static fetchAverageModuleScore(id) {
+        return fetch(`http://127.0.0.1:5001/scoresbytest/${id}`).then(resp => resp.json());
+
+    }
 
 }

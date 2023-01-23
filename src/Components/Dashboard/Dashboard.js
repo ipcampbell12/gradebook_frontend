@@ -23,7 +23,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
         NetworkCalls.fetchGrades(1).then(data => setGrades(data))
     }, []);
 
-    console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
+    //console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
         <div className="dashboard">
 
@@ -39,7 +39,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
                         <DTestMenu assessments={assessments} onModule={setModuleState} />
                     </div>
                     <div className="averages">
-
+                        <AverageGrade moduleState={moduleState} />
                     </div>
                     <div className="tables">
 
@@ -66,3 +66,5 @@ export default Dashboard;
 // <ScoresChart scores={scores} />
 
 //<AverageGrade averageGrade={averageGrade} averageModuleScore={averageModuleScore} />
+
+//<AverageGrade moduleState={moduleState} />
