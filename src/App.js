@@ -13,6 +13,8 @@ function App() {
   //API GET FUNCTIONALITY
   //Run API call inside useEffect hook = mimics componentDidMount (class components)
 
+  const [averageGrade, setAverageGrade] = useState();
+
 
 
   useEffect(() => {
@@ -40,9 +42,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchGrades('averagegrade', setAverageGrade, 1)
+    fetchGrades('averagegrade', setAverageGrade, 1);
+    console.log('useffect called ---');
   }, []);
 
+  //move to dashboard
   const [moduleState, setModuleState] = useState('')
 
   useEffect(() => {
@@ -70,6 +74,7 @@ function App() {
   const fetchGrades = async (endpoint, setState, id) => {
     const results = await fetch(`http://127.0.0.1:5001/teacherstudents/${id}/${endpoint}`)
     const items = await results.json()
+    console.log('fetch grade items are', items);
     setState(items)
   }
 
@@ -91,8 +96,6 @@ function App() {
   const [assessments, setAssessments] = useState([])
 
   const [grades, setGrades] = useState([])
-
-  const [averageGrade, setAverageGrade] = useState('')
 
   const [averageModuleScore, setAverageModuleScore] = useState('')
 

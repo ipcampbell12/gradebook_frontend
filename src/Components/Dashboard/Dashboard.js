@@ -1,5 +1,5 @@
 // import React, { useRef, useState } from "react"
-import React from 'react';
+import React, { useEffect } from 'react';
 import DTestMenu from './DTestMenu';
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
@@ -11,7 +11,13 @@ import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
 function Dashboard({ students, teacher, studentsAssessments, assessments, grades, averageGrade, onModule, moduleState, averageModuleScore }) {
+    // dummy code, organize later
+    //const [averageGrade, setAverageGrade] = useState();
+    // const [students, setStudents] = useState();
 
+    useEffect(() => {
+
+    }, []);
 
     console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
