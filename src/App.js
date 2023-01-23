@@ -25,7 +25,7 @@ function App() {
 
   const [assessments, setAssessments] = useState([])
 
-  const [grades, setGrades] = useState([])
+
 
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
@@ -52,9 +52,7 @@ function App() {
   }, []);
 
   //grades
-  useEffect(() => {
-    NetworkCalls.fetchGrades(1).then(data => setGrades(data))
-  }, []);
+
 
 
   //move to dashboard
@@ -114,7 +112,7 @@ function App() {
               students={studentListState}
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
-              grades={grades}
+
 
 
 

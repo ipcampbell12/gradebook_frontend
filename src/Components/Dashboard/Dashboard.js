@@ -1,21 +1,27 @@
 // import React, { useRef, useState } from "react"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DTestMenu from './DTestMenu';
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
 import AverageGrade from './AverageGrade';
 // import OverallChart from "../Visualizations/OverallChart"
 import ScoresChart from "../Visualizations/ScoresChart"
+import NetworkCalls from '../../networkCalls';
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, studentsAssessments, assessments, grades }) {
+function Dashboard({ students, teacher, studentsAssessments, assessments }) {
     // dummy code, organize later
     //const [averageGrade, setAverageGrade] = useState();
     // const [students, setStudents] = useState();
 
     const [moduleState, setModuleState] = useState('')
+    const [grades, setGrades] = useState([])
+
+    useEffect(() => {
+        NetworkCalls.fetchGrades(1).then(data => setGrades(data))
+    }, []);
 
     console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
