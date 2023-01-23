@@ -45,39 +45,17 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
     return (
         <div className="student-page2" >
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
-            <div className="container">
 
-
-                <div className="assessments">
-
-                    <div className="form">
-                        <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} subjects={subjects} />
-
-                    </div>
-
-                    <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} onModule={setModuleState} />
-                    <div className="menu">
-
-                    </div>
-
-                    <div className="assessment-chart" >
-                        <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} />
-
-                    </div>
-
-
-
-                </div>
-
-
+            <div className="menu" >
+                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} />
 
             </div>
 
+            <div className="assessment-chart">
+                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} onModule={setModuleState} />
+            </div>
 
-
-
-
-        </div >
+        </div>
 
     );
 
@@ -87,3 +65,7 @@ export default Grade;
 
 
 
+// <div className="form">
+//     <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} subjects={subjects} />
+
+// </div>
