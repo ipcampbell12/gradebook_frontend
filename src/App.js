@@ -20,7 +20,6 @@ function App() {
   const [studentListState, setStudentListState] = useState([])
 
   const [studentsAssessments, setStudentsAssessments] = useState([])
-  //console.log(`SA state in App.js is ${studentsAssessments.map(x => x.score)}`)
 
   const [subjectListState, setSubjectListState] = useState([])
 
@@ -28,41 +27,38 @@ function App() {
 
   const [grades, setGrades] = useState([])
 
-
-
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
   //-----------------------------------------------------------------------------------------------------------------------
 
+  //teacher
   useEffect(() => {
-    NetworkCalls.fetchTeacher('teacherstudents', setStudentListState, 1)
+    NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
   }, []);
 
+  //students
   useEffect(() => {
-    NetworkCalls.fetchData('assessment', setAssessments)
+    NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
   }, []);
 
+  //assessments
   useEffect(() => {
-    NetworkCalls.fetchTeacher('teacher', setTeacherState, 1)
+    NetworkCalls.fetchAssessments.then(data => setAssessments(data))
   }, []);
 
+  //studentsAssessments
   useEffect(() => {
-    NetworkCalls.fetchData('student_assessment', setStudentsAssessments)
+    NetworkCalls.fetchStudentsAssessments.then(data => setStudentsAssessments(data))
   }, []);
 
+  //grades
   useEffect(() => {
-    NetworkCalls.fetchData('subject', setSubjectListState)
+    NetworkCalls.fetchGrades.then(data => setGrades(data))
   }, []);
 
-  useEffect(() => {
-    NetworkCalls.fetchGrades('grade', setGrades, 1)
-  }, []);
 
   //move to dashboard
   const [moduleState, setModuleState] = useState('')
-
-
-
 
   //-----------------------------------------------------------------------------------------------------------------------
 

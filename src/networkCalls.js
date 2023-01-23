@@ -7,25 +7,29 @@
 export default class NetworkCalls {
 
 
-    static async fetchData(endpoint) {
-        return fetch(`http://127.0.0.1:5001/${endpoint}`).then(resp => resp.json());
-        // const items = await results.json()
-        // setState(items)
-        //console.log(items)
+    static async fetchAssessments() {
+        return fetch(`http://127.0.0.1:5001/assessment`).then(resp => resp.json());
+
     }
 
-    static async fetchTeacher(endpoint, id) {
-        return fetch(`http://127.0.0.1:5001/${endpoint}/${id}`).then(resp => resp.json());
-        // const items = await results.json()
-        // setState(items)
-        //console.log(items)
+    static async fetchStudentsAssessments() {
+        return fetch(`http://127.0.0.1:5001/student_assessment`).then(resp => resp.json());
+
     }
 
-    static async fetchGrades(endpoint, id) {
-        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/${endpoint}`).then(resp => resp.json());
-        // const items = await results.json()
-        //console.log('fetch grade items are', items);
-        // setState(items)
+    static async fetchTeacher(id) {
+        return fetch(`http://127.0.0.1:5001/teacher/${id}`).then(resp => resp.json());
+
+    }
+
+    static async fetchTeachersStudents(id) {
+        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}`).then(resp => resp.json());
+
+    }
+
+    static async fetchGrades(id) {
+        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/grades`).then(resp => resp.json());
+
     }
 
 }
