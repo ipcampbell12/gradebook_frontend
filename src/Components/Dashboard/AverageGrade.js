@@ -14,16 +14,16 @@ function AverageGrade({ moduleState }) {
         NetworkCalls.fetchTeacher('scoresbytest', setAverageModuleScore, moduleState.id)
     }, [moduleState.id]);
 
-    console.log('average garde is', averageGrade);
+    // console.log('average garde is', averageGrade);
     //console.log(averageModuleScore[0]["average"])
     return (
         <div className="averages">
 
             <div>
-                <span> Average Module Score for {moduleState}:{averageModuleScore[0]["average"]} </span>
+                <span> Average Module Score for {moduleState}:{ } </span>
             </div>
             <div>
-                <span> Average Grade:{averageGrade[0]["average"]} </span>
+                <span> Average Grade:{ } </span>
             </div>
 
         </div>

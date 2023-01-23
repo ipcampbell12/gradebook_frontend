@@ -36,7 +36,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, grades
                         <DTestMenu assessments={assessments} onModule={onModule} />
                     </div>
                     <div className="averages">
-                        <AverageGrade />
+
                     </div>
                     <div className="tables">
 

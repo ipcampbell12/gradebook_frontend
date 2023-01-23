@@ -6,29 +6,32 @@
 //This file shouldn't know about the state
 export default class NetworkCalls {
 
-
-    static async fetchAssessments() {
-        return fetch(`http://127.0.0.1:5001/assessment`).then(resp => resp.json());
-
-    }
-
-    static async fetchStudentsAssessments() {
-        return fetch(`http://127.0.0.1:5001/student_assessment`).then(resp => resp.json());
-
-    }
-
-    static async fetchTeacher(id) {
+    //working
+    static fetchTeacher(id) {
         return fetch(`http://127.0.0.1:5001/teacher/${id}`).then(resp => resp.json());
 
     }
 
-    static async fetchTeachersStudents(id) {
+    //working
+    static fetchTeachersStudents(id) {
         return fetch(`http://127.0.0.1:5001/teacherstudents/${id}`).then(resp => resp.json());
 
     }
 
-    static async fetchGrades(id) {
-        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/grades`).then(resp => resp.json());
+    static fetchAssessments() {
+        return fetch("http://127.0.0.1:5001/assessment", {
+            'method': 'GET'
+        }).then(resp => resp.json());
+
+    }
+
+    static fetchStudentsAssessments() {
+        return fetch(`http://127.0.0.1:5001/student_assessment`).then(resp => resp.json());
+
+    }
+
+    static fetchGrades(id) {
+        return fetch(`http://127.0.0.1:5001/teacherstudents/${id}/grade`).then(resp => resp.json());
 
     }
 

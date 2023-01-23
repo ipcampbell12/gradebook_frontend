@@ -41,19 +41,19 @@ function App() {
     NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
   }, []);
 
-  //assessments
+  // assessments
   useEffect(() => {
-    NetworkCalls.fetchAssessments.then(data => setAssessments(data))
+    NetworkCalls.fetchAssessments().then(data => setAssessments(data))
   }, []);
 
   //studentsAssessments
   useEffect(() => {
-    NetworkCalls.fetchStudentsAssessments.then(data => setStudentsAssessments(data))
+    NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
   }, []);
 
   //grades
   useEffect(() => {
-    NetworkCalls.fetchGrades.then(data => setGrades(data))
+    NetworkCalls.fetchGrades(1).then(data => setGrades(data))
   }, []);
 
 
