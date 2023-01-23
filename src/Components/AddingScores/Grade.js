@@ -11,6 +11,7 @@ import AddAssessment from './AddAssessment';
 import AddScores from './AddScores'
 import TestMenu from './TestMenu'
 import APIServce from '../../APIService';
+import ScoredChart from './ScoredChart';
 
 
 
@@ -52,7 +53,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
             </div>
 
             <div className="assessment-chart">
-                <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} onModule={setModuleState} />
+                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} />
             </div>
 
         </div>
@@ -69,3 +70,5 @@ export default Grade;
 //     <AddAssessment onAdd={onAssessment} onModule={setModuleState} module={moduleState} subjects={subjects} />
 
 // </div>
+
+// <AddScores students={students} module={moduleState} teacher={teacher} onAdd={onAdd} studentsAssessments={studentsAssessments} onModule={setModuleState} />

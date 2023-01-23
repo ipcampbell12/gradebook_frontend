@@ -44,7 +44,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
 
     return (
         <div className="student-chart" >
-            <Typography variant="h5" align="center" id={module.id}> Scores for {module.name} </Typography>
+
             <TableContainer component={Paper}>
                 <Form action="" onSubmit={onSubmit} className="form">
                     <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
@@ -58,47 +58,23 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {module.scored === true ? (studentsAssessments.map((studentsAssessment) => {
-                                return studentsAssessment.assessment.id === module.id &&
 
-                                    (<TableRow key={studentsAssessment.id}>
-                                        <TableCell align="center">{studentsAssessment.student.fname}</TableCell>
-                                        <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
-                                        <TableCell align="center">
-                                            <Form.Group className="mb-1" >
-                                                <Form.Control type="number" placeholder="0" id={studentsAssessment.student.id} name="score" value={studentsAssessment.score} onChange={(e) =>
-                                                    setScores(e.target.value)
-                                                } />
-                                            </Form.Group>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button variant="primary" type="submit">
-                                                Edit
-                                            </Button>
-                                        </TableCell>
-
-
-                                    </TableRow>)
+                            {students.map((student) => {
+                                return <TableRow key={student.id}>
+                                    <TableCell align="center">{student.fname}</TableCell>
+                                    <TableCell align="center" >{student.lname}</TableCell>
+                                    <TableCell align="center">
+                                        <Form.Group className="mb-1" >
+                                            <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
+                                                setScores([...scores, { "score": +e.target.value }]);
+                                            }} />
+                                        </Form.Group>
+                                    </TableCell>
+                                </TableRow>
                             }
 
 
-                            )) :
-                                (students.map((student) => {
-                                    return <TableRow key={student.id}>
-                                        <TableCell align="center">{student.fname}</TableCell>
-                                        <TableCell align="center" >{student.lname}</TableCell>
-                                        <TableCell align="center">
-                                            <Form.Group className="mb-1" >
-                                                <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
-                                                    setScores([...scores, { "score": +e.target.value }]);
-                                                }} />
-                                            </Form.Group>
-                                        </TableCell>
-                                    </TableRow>
-                                }
-
-
-                                ))
+                            )
 
 
                             }
