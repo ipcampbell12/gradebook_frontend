@@ -9,6 +9,8 @@ import Button from 'react-bootstrap/Button';
 function TestMenu({ assessments, onModule, testDelete }) {
 
 
+
+
     const onClick = (e) => {
         const value = e.target.value
         onModule(value)
@@ -36,6 +38,7 @@ function TestMenu({ assessments, onModule, testDelete }) {
                                     {assessment.name}
 
                                     <Button className="btn-danger menu-2" onClick={() => testDelete(assessment.id)}> Delete </Button>
+                                    <Button className="btn-primary menu-2"> View/Update </Button>
 
                                 </MenuItem>)
 

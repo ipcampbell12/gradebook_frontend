@@ -40,11 +40,8 @@ function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
 
     return (
 
-
-
-
         <TableContainer component={Paper}>
-            <Typography> Scores for {moduleState.name}</Typography>
+            <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}</Typography>
 
             <Form action="" onSubmit={onSubmit} className="form">
                 <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
@@ -75,7 +72,7 @@ function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
                     </TableBody>
                 </Table>
 
-                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); setModuleState(''); onHide(); }}>
+                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); }}>
                     Add All Scores
                 </Button>
 

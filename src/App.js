@@ -42,12 +42,12 @@ function App() {
   // assessments
   useEffect(() => {
     NetworkCalls.fetchAssessments().then(data => setAssessments(data))
-  }, [assessments]);
+  }, []);
 
   //studentsAssessments
   useEffect(() => {
     NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
-  }, [studentsAssessments]);
+  }, []);
 
   //subjects
   useEffect(() => {

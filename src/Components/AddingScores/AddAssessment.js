@@ -3,15 +3,17 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
+import Alert from 'react-bootstrap/Alert';
 
 
-export default function AddAssessment({ subjects, onAssessment }) {
+export default function AddAssessment({ subjects, onAssessment, moduleState }) {
 
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
     //console.log(name)
     const [scored, setScored] = useState(false)
+    const [show, setShow] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -29,7 +31,7 @@ export default function AddAssessment({ subjects, onAssessment }) {
 
         //send data to UI
         onAssessment({ name, subject_id, scored })
-
+        setShow(true)
 
         setName('')
 
@@ -48,6 +50,9 @@ export default function AddAssessment({ subjects, onAssessment }) {
                 <Button variant="primary" type="submit" onClick={onSubmit}>
                     Create Assessment
                 </Button>
+                {show === true && <Alert key={'success'} variant={'success'}>
+                    You just added an assessment to the database.
+                </Alert>}
             </Form>
 
         </div>
