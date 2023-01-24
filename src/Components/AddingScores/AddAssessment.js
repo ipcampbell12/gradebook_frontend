@@ -5,12 +5,12 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-export default function AddAssessment({ onShow, subjects, onAdd, onModule, }) {
+export default function AddAssessment({ subjects, onModule, onAssessment }) {
 
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
-
+    console.log(name)
     const [scored, setScored] = useState(false)
 
     const onSubmit = (e) => {
@@ -18,6 +18,7 @@ export default function AddAssessment({ onShow, subjects, onAdd, onModule, }) {
 
 
         const subject = subjects.find(subject => subject.id === 1)
+
         const subject_id = subject.id
 
         setScored(false)
@@ -27,7 +28,7 @@ export default function AddAssessment({ onShow, subjects, onAdd, onModule, }) {
             .catch(error => console.log(error))
 
         //send data to UI
-        onAdd({ name, subject_id, scored })
+        onAssessment({ name, subject_id, scored })
         onModule(name)
 
         setName('')

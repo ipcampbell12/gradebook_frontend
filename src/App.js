@@ -25,8 +25,6 @@ function App() {
 
   const [assessments, setAssessments] = useState([])
 
-
-
   const [teacherState, setTeacherState] = useState({ fname: "Melinda", lname: "Devonshire" })
 
   //-----------------------------------------------------------------------------------------------------------------------
@@ -51,7 +49,12 @@ function App() {
     NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
   }, []);
 
-  //grades
+  //subjects
+  useEffect(() => {
+    NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
+  }, []);
+
+
 
 
 
@@ -80,7 +83,7 @@ function App() {
   const addAssessment = (assessment) => {
     const id = (assessments.length) + 1
     const newAssessment = { id, ...assessment }
-
+    console.log(newAssessment)
     setAssessments([...assessments, newAssessment])
   }
 

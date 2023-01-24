@@ -28,6 +28,7 @@ import ScoringModal from './ScoringModal';
 function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete }) {
 
     const [moduleState, setModuleState] = useState('')
+    console.log(moduleState)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -67,7 +68,8 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                     onModule={setModuleState}
                     handleClose={handleClose}
                     show={show}
-                    onAssessment={onAssessment} />}
+                    onAssessment={onAssessment}
+                    subjects={subjects} />}
             </div>
 
             <div className="assessment-chart">

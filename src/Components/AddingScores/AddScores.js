@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import { Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,13 +25,14 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
         console.log(scores)
 
         const teacherId = teacher.id
+        console.log(module.id)
         const assessmentId = module.id
 
         APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        onModule('')
+
 
     }
 
@@ -43,6 +44,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
 
 
         <TableContainer component={Paper}>
+            <Typography> Scores for {module.name}</Typography>
 
             <Form action="" onSubmit={onSubmit} className="form">
                 <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
@@ -73,7 +75,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
                     </TableBody>
                 </Table>
 
-                <Button variant="primary" type="submit" onClick={onSubmit}>
+                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); }}>
                     Add All Scores
                 </Button>
 
