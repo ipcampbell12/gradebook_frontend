@@ -20,6 +20,7 @@ function ScoringModal({ students, module, onAdd, studentsAssessments, onAssessme
                     onAdd={onAdd}
                     onAssessment={onAssessment}
                     teacher={teacher}
+                    onHide={handleClose}
 
                 />
             </Modal.Body>

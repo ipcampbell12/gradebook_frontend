@@ -10,7 +10,7 @@ export default function AddAssessment({ subjects, onModule, onAssessment }) {
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
-    console.log(name)
+    //console.log(name)
     const [scored, setScored] = useState(false)
 
     const onSubmit = (e) => {
