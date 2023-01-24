@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -19,7 +19,7 @@ function TestMenu({ assessments, onModule, testDelete }) {
     //Make sure you ahve some kind of correcte default value in the value attribute for the select tag
 
     return (
-        <div>
+        <div className="test-menu">
             <Typography variant="h6" align="center"> Assessments </Typography>
             <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
@@ -35,7 +35,7 @@ function TestMenu({ assessments, onModule, testDelete }) {
 
                                 return assessment.scored === true && (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
                                     {assessment.name}
-                                    <Button className="btn-primary menu-1" onClick={(e) => onModule(e.target.value)}> Score </Button>
+
                                     <Button className="btn-danger menu-2" onClick={() => testDelete(assessment.id)}> Delete </Button>
 
                                 </MenuItem>)

@@ -5,16 +5,13 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-export default function AddAssessment({ onAdd, onModule, subjects }) {
+export default function AddAssessment({ onShow, subjects, onAdd, onModule, }) {
 
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
-    //const [date, setDate] = useState('')
-    const [subject_id, setSubjectId] = useState('')
 
     const [scored, setScored] = useState(false)
-
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -33,28 +30,26 @@ export default function AddAssessment({ onAdd, onModule, subjects }) {
         onAdd({ name, subject_id, scored })
         onModule(name)
 
-
         setName('')
-        setSubjectId('')
-        // setDate('')
+
     }
 
 
     return (
-        <Form action="" onSubmit={onSubmit} className="form">
+        <div>
+            <Form>
+                <Form.Group className="mb-3" onSubmit={onSubmit}>
+                    <Form.Label>Assessment Name</Form.Label>
+                    <Form.Control type="text" placeholder="Assessment Name" value={module.name} onChange={(e) => {
+                        setName(e.target.value)
+                    }} />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={onSubmit}>
+                    Create Assessment
+                </Button>
+            </Form>
 
-            <Form.Group className="mb-3">
-                <Form.Label>Assessment Name</Form.Label>
-                <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
-                    setName(e.target.value)
-                }} />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-                Add Assessment
-            </Button>
-
-        </Form>
+        </div>
     );
 }
 
@@ -66,3 +61,11 @@ export default function AddAssessment({ onAdd, onModule, subjects }) {
 //                     setDate(e.target.value)
 //                 }} />
 //             </Form.Group>
+
+
+// <Form.Group className="mb-3">
+// <Form.Label>Assessment Name</Form.Label>
+// <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
+//     setName(e.target.value)
+// }} />
+// </Form.Group>

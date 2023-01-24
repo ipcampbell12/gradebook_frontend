@@ -7,11 +7,13 @@ import { Typography } from "@mui/material"
 // import TableHead from '@mui/material/TableHead';
 // import TableRow from '@mui/material/TableRow';
 // import Paper from '@mui/material/Paper';
-import AddAssessment from './AddAssessment';
-import AddScores from './AddScores'
+// import AddAssessment from './AddAssessment';
+
 import TestMenu from './TestMenu'
 import APIServce from '../../APIService';
 import ScoredChart from './ScoredChart';
+import Button from 'react-bootstrap/Button';
+import ScoringModal from './ScoringModal';
 
 
 
@@ -26,6 +28,10 @@ import ScoredChart from './ScoredChart';
 function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete }) {
 
     const [moduleState, setModuleState] = useState('')
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const deleteAssessment = (assessment_id) => {
 
@@ -49,11 +55,23 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
             <div className="menu" >
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} />
-
+                <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
+                    Add Assessment
+                </Button>
+                {show && <ScoringModal
+                    students={students}
+                    module={moduleState}
+                    teacher={teacher}
+                    onAdd={onAdd}
+                    studentsAssessments={studentsAssessments}
+                    onModule={setModuleState}
+                    handleClose={handleClose}
+                    show={show}
+                    onAssessment={onAssessment} />}
             </div>
 
             <div className="assessment-chart">
-                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} />
+                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} />
             </div>
 
         </div>

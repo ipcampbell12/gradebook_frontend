@@ -95,7 +95,21 @@
 
 
     .menu {
-        width: 30%;
+        width: 75%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .test-menu {
+            width: 20%;
+
+        }
+
+        .add-assessment {
+            width: 35%;
+
+        }
+
     }
 
 
