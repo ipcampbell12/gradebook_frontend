@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import APIServce from '../../APIService';
 
 
-export default function AddAssessment({ subjects, onModule, onAssessment }) {
+export default function AddAssessment({ subjects, onAssessment }) {
 
     //Add default values
     //New assessment Form
@@ -29,7 +29,7 @@ export default function AddAssessment({ subjects, onModule, onAssessment }) {
 
         //send data to UI
         onAssessment({ name, subject_id, scored })
-        onModule(name)
+
 
         setName('')
 

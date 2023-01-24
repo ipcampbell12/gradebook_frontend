@@ -13,7 +13,7 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ module, onAdd, teacher, studentsAssessments, students, onModule, show, onHide, handleClose }) {
+function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
@@ -22,11 +22,11 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
     const onSubmit = (e) => {
         e.preventDefault()
 
-        console.log(scores)
+        //console.log(scores)
 
         const teacherId = teacher.id
-        console.log(module.id)
-        const assessmentId = module.id
+        //console.log(`The module id is ${newModuleState.id}`)
+        const assessmentId = moduleState.id
 
         APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
@@ -36,7 +36,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
 
     }
 
-    console.log(scores)
+    // console.log(scores)
 
     return (
 
@@ -44,7 +44,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
 
 
         <TableContainer component={Paper}>
-            <Typography> Scores for {module.name}</Typography>
+            <Typography> Scores for {moduleState.name}</Typography>
 
             <Form action="" onSubmit={onSubmit} className="form">
                 <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
@@ -75,7 +75,7 @@ function AddScores({ module, onAdd, teacher, studentsAssessments, students, onMo
                     </TableBody>
                 </Table>
 
-                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); }}>
+                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); setModuleState(''); onHide(); }}>
                     Add All Scores
                 </Button>
 

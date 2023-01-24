@@ -42,12 +42,12 @@ function App() {
   // assessments
   useEffect(() => {
     NetworkCalls.fetchAssessments().then(data => setAssessments(data))
-  }, []);
+  }, [assessments]);
 
   //studentsAssessments
   useEffect(() => {
     NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
-  }, []);
+  }, [studentsAssessments]);
 
   //subjects
   useEffect(() => {
@@ -56,7 +56,7 @@ function App() {
 
 
 
-
+  // console.log(Math.max(...assessments.map(o => o.id)))
 
   //move to dashboard
 
@@ -83,7 +83,7 @@ function App() {
   const addAssessment = (assessment) => {
     const id = (assessments.length) + 1
     const newAssessment = { id, ...assessment }
-    console.log(newAssessment)
+    console.log(`The assessment ${newAssessment.id} was just created`)
     setAssessments([...assessments, newAssessment])
   }
 

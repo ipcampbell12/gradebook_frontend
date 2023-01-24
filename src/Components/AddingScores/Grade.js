@@ -25,10 +25,11 @@ import ScoringModal from './ScoringModal';
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete }) {
+function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState }) {
 
+    //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
-    console.log(moduleState)
+    //console.log(moduleState)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -61,15 +62,15 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                 </Button>
                 {show && <ScoringModal
                     students={students}
-                    module={moduleState}
                     teacher={teacher}
                     onAdd={onAdd}
                     studentsAssessments={studentsAssessments}
-                    onModule={setModuleState}
                     handleClose={handleClose}
                     show={show}
+                    assessments={assessments}
                     onAssessment={onAssessment}
-                    subjects={subjects} />}
+                    subjects={subjects}
+                    newModuleState={newModuleState} />}
             </div>
 
             <div className="assessment-chart">

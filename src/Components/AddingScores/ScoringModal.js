@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AddScores from './AddScores'
 import AddAssessment from './AddAssessment';
 import Modal from 'react-bootstrap/Modal';
+//import NetworkCalls from '../../networkCalls';
 
-function ScoringModal({ students, module, onAdd, studentsAssessments, onAssessment, onModule, subjects, handleClose, show, teacher }) {
+function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, assessments, subjects, handleClose, show, teacher }) {
 
-    console.log(module)
+    //module state for assessment that was just created
+    const [moduleState, setModuleState] = useState('')
+
+    useEffect(() => {
+        setModuleState(assessments.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
+    }, [assessments])
+
+    console.log(moduleState)
+
+
     return (
         <Modal show={show} onHide={handleClose} className="student-chart" size="lg">
             <Modal.Body>
                 <AddAssessment
-                    module={module}
                     subjects={subjects}
-                    onModule={onModule} />
+                    onAssessment={onAssessment}
+                />
                 <AddScores
-                    module={module}
+                    moduleState={moduleState}
                     students={students}
                     studentsAssessments={studentsAssessments}
                     onAdd={onAdd}
-                    onAssessment={onAssessment}
                     teacher={teacher}
                     onHide={handleClose}
+                    setModuleState={setModuleState}
 
                 />
             </Modal.Body>
