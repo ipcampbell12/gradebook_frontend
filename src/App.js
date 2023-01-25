@@ -83,7 +83,7 @@ function App() {
   }
 
   const addAssessment = (assessment) => {
-    const id = (assessments.length) + 1
+    const id = Math.max(...assessments.map(o => o.id)) + 1
     const newAssessment = { id, ...assessment }
     console.log(`The assessment ${newAssessment.id} was just created`)
     setAssessments([...assessments, newAssessment])
@@ -93,6 +93,20 @@ function App() {
   const addStudentsAssessments = (studentAssessment) => {
 
     setStudentsAssessments(...studentsAssessments, studentAssessment)
+  }
+
+  const updateStudentAssessment = (data, id) => {
+
+    console.log(id)
+    const updatedItem = studentsAssessments.find(sa => sa.id === id)
+    //console.log(updatedItem)
+    deleteAssessment(id)
+
+    //console.log(updatedItem)
+
+    updatedItem.score = data["score"]
+    setStudentsAssessments([...studentsAssessments, updatedItem])
+
   }
 
   const deleteAssessment = (id) => {
@@ -135,6 +149,7 @@ function App() {
             onAdd={addStudentsAssessments}
             subjects={subjectListState}
             onDelete={deleteAssessment}
+            updateStudentAssessment={updateStudentAssessment}
           />} />
         </Routes>
 

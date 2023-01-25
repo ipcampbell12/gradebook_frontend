@@ -26,7 +26,7 @@ import Alert from 'react-bootstrap/Alert';
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState }) {
+function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment }) {
 
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
@@ -83,7 +83,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
             </div>
 
             <div className="assessment-chart">
-                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} />
+                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} updateStudentAssessment={updateStudentAssessment} />
             </div>
 
             {deleteShow === true && <Alert key={'danger'} variant={'danger'}>

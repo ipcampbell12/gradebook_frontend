@@ -14,6 +14,8 @@ function DTestMenu({ assessments, onModule }) {
 
     }
 
+    //    console.log(assessments[0].name)
+
     return (
         <div>
             <Typography variant="h6" align="center"> Scored Assessments </Typography>
@@ -24,6 +26,7 @@ function DTestMenu({ assessments, onModule }) {
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
+
 
                     >
                         {

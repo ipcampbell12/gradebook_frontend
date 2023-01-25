@@ -8,10 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import UpdatingScores from './UpdatingScores';
 
 
-function ScoredChart({ moduleState, studentsAssessments }) {
+
+function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment }) {
+
+
+
     return (
         <div className="student-chart">
             <Typography variant="h5" align="center" id={moduleState.id}> Scores for {moduleState.name} </Typography>
@@ -34,15 +38,12 @@ function ScoredChart({ moduleState, studentsAssessments }) {
                                 (<TableRow key={studentsAssessment.id}>
                                     <TableCell align="center">{studentsAssessment.student.fname}</TableCell>
                                     <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
-                                    <TableCell align="center">
-                                        <Form.Group className="mb-1" >
-                                            <Form.Control type="number" placeholder="0" id={studentsAssessment.student.id} name="score" value={studentsAssessment.score} />
-                                        </Form.Group>
+                                    <TableCell align="center" id={studentsAssessment.student.id}> {studentsAssessment.score}  </TableCell>
+                                    <TableCell>
+                                        <UpdatingScores studentsAssessment={studentsAssessment} updateStudentAssessment={updateStudentAssessment} />
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="primary" type="submit">
-                                            Edit
-                                        </Button>
+
                                     </TableCell>
 
 

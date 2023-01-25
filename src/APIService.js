@@ -35,8 +35,8 @@ export default class APIServce {
     }
 
     //update student scores individually
-    static updateStudentScore(studentId, body) {
-        return fetch(`http://127.0.0.1:5001/student_assessment/${studentId}`, {
+    static updateStudentScore(saId, body) {
+        return fetch(`http://127.0.0.1:5001/student_assessment/${saId}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
