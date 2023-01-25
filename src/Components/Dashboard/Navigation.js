@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import SchoolIcon from '@mui/icons-material/School';
 
 
-const pages = ['Home', 'Edit Students', 'Grades'];
+const pages = ['Dashboard', 'Edit Students', 'Grades'];
 const links = ['/', '/student', '/grade'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 

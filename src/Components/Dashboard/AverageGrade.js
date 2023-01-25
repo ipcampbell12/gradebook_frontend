@@ -8,15 +8,15 @@ function AverageGrade({ moduleState }) {
 
     useEffect(() => {
         NetworkCalls.fetchAverageGrade(1).then(data => setAverageGrade(data));
-        console.log("This network call was run _______")
+        //  console.log("This network call was run _______")
     }, []);
 
     useEffect(() => {
         NetworkCalls.fetchAverageModuleScore(moduleState.id).then(data => setAverageModuleScore(data))
-        console.log(moduleState.id)
+        // console.log(moduleState.id)
     }, [moduleState.id]);
 
-    console.log('average garde is', averageGrade);
+    //console.log('average garde is', averageGrade);
 
     return (
         <div className="averages">

@@ -65,8 +65,10 @@ function App() {
 
   //ADD DATA FUNCTIONALITY
   const addStudent = (student) => {
-    const id = studentListState.length + 1
+    const id = Math.max(...studentListState.map(o => o.id)) + 1
     const newStudent = { id, ...student }
+
+    // console.log(`SA student_id is ${newStudent.id}`)
 
     setStudentListState([...studentListState, newStudent])
 
