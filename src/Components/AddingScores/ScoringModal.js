@@ -4,7 +4,7 @@ import AddAssessment from './AddAssessment';
 import Modal from 'react-bootstrap/Modal';
 //import NetworkCalls from '../../networkCalls';
 
-function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, assessments, subjects, handleClose, show, teacher }) {
+function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, assessments, subjects, handleClose, show, teacher, setAddShow }) {
 
     //module state for assessment that was just created
     const [moduleState, setModuleState] = useState('')
@@ -23,7 +23,6 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     subjects={subjects}
                     onAssessment={onAssessment}
                     moduleState={moduleState}
-                    setModuleState={setModuleState}
                 />
                 <AddScores
                     moduleState={moduleState}
@@ -32,6 +31,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     onAdd={onAdd}
                     teacher={teacher}
                     onHide={handleClose}
+                    setAddShow={setAddShow}
 
                 />
             </Modal.Body>

@@ -13,11 +13,14 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
+function AddScores({ teacher, students, onHide, moduleState, setModuleState, setAddShow }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
     const [scores, setScores] = useState([])
+
+    //might need to do an assessment update call
+    // const [scored, setScored] = useState(true)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -27,6 +30,8 @@ function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
         const teacherId = teacher.id
         //console.log(`The module id is ${newModuleState.id}`)
         const assessmentId = moduleState.id
+
+        // setScored(false)
 
         APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
@@ -72,7 +77,7 @@ function AddScores({ teacher, students, onHide, moduleState, setModuleState }) {
                     </TableBody>
                 </Table>
 
-                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); }}>
+                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); setAddShow(true) }}>
                     Add All Scores
                 </Button>
 

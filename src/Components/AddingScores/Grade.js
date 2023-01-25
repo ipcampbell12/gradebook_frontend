@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from "@mui/material"
 // import Table from '@mui/material/Table';
 // import TableBody from '@mui/material/TableBody';
@@ -14,6 +14,7 @@ import APIServce from '../../APIService';
 import ScoredChart from './ScoredChart';
 import Button from 'react-bootstrap/Button';
 import ScoringModal from './ScoringModal';
+import Alert from 'react-bootstrap/Alert';
 
 
 
@@ -31,9 +32,15 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
     const [moduleState, setModuleState] = useState('')
     //console.log(moduleState)
     const [show, setShow] = useState(false);
+    const [deleteShow, setDeleteShow] = useState(false);
+    const [addShow, setAddShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        setTimeout(() => setDeleteShow(false), 4000)
+    });
 
     const deleteAssessment = (assessment_id) => {
 
@@ -46,6 +53,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
         onDelete({ assessment_id })
 
+        setDeleteShow(true)
         setModuleState('')
 
     }
@@ -70,12 +78,21 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                     assessments={assessments}
                     onAssessment={onAssessment}
                     subjects={subjects}
-                    newModuleState={newModuleState} />}
+                    newModuleState={newModuleState}
+                    setAddShow={setAddShow} />}
             </div>
 
             <div className="assessment-chart">
                 <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} />
             </div>
+
+            {deleteShow === true && <Alert key={'danger'} variant={'danger'}>
+                You just removed {moduleState.name} from the database.
+            </Alert>}
+
+            {addShow === true && <Alert key={'success'} variant={'success'}>
+                Scores have been added to the database.
+            </Alert>}
 
         </div>
 
