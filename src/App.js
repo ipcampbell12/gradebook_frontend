@@ -97,15 +97,15 @@ function App() {
 
   const updateStudentAssessment = (data, id) => {
 
-    console.log(id)
+    console.log(`Id sent from scoredcharts :${id}`)
     const updatedItem = studentsAssessments.find(sa => sa.id === id)
     //console.log(updatedItem)
     deleteAssessment(id)
 
-    //console.log(updatedItem)
+    console.log(`Id from updated item: ${updatedItem.id}`)
 
     updatedItem.score = data["score"]
-    setStudentsAssessments([...studentsAssessments, updatedItem])
+    //setStudentsAssessments([...studentsAssessments, updatedItem])
 
   }
 

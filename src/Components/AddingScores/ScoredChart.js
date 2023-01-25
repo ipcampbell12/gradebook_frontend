@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from 'react-bootstrap/Button';
 import UpdatingScores from './UpdatingScores';
 
 
@@ -38,7 +37,7 @@ function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment
                                 (<TableRow key={studentsAssessment.id}>
                                     <TableCell align="center">{studentsAssessment.student.fname}</TableCell>
                                     <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
-                                    <TableCell align="center" id={studentsAssessment.student.id}> {studentsAssessment.score}  </TableCell>
+                                    <TableCell align="center" id={studentsAssessment.id}> {studentsAssessment.score}  </TableCell>
                                     <TableCell>
                                         <UpdatingScores studentsAssessment={studentsAssessment} updateStudentAssessment={updateStudentAssessment} />
                                     </TableCell>

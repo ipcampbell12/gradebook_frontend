@@ -13,7 +13,7 @@ function UpdatingScores({ studentsAssessment, updateStudentAssessment }) {
         e.preventDefault()
 
         const saId = studentsAssessment.id
-        console.log(saId)
+        console.log(`Id from child :${saId}`)
 
         APIServce.updateStudentScore(saId, score)
             .then(response => console.log(response))
