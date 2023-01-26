@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from 'react-bootstrap/Button';
 import APIServce from '../../APIService'
+import UpdateStudents from './UpdateStudents';
 // import Form from 'react-bootstrap/Form';
 
 
@@ -19,9 +20,11 @@ import APIServce from '../../APIService'
 //     { field: 'lname', headerName: 'Last Name', width: 130 },
 // ];
 
-function Student({ teacher, students, onAdd, onDelete }) {
+function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
     const [deleteShow, setDeleteShow] = useState(false);
+
+    const [updateModal, setUpdateModal] =useState(false)
 
     const deleteStudent = (student_id) => {
 
@@ -63,7 +66,7 @@ function Student({ teacher, students, onAdd, onDelete }) {
                                 <TableCell align="center">{student.fname}</TableCell>
                                 <TableCell align="center" >{student.lname}</TableCell>
                                 <TableCell align="center"> 
-                                    <Button variant="primary" type="submit">
+                                    <Button variant="primary" onClick={()=>setUpdateModal(true)}>
                                         Edit
                                     </Button>
                                 </TableCell>
@@ -82,6 +85,8 @@ function Student({ teacher, students, onAdd, onDelete }) {
             <div className="form">
                 <AddStudent onAdd={onAdd} teacher={teacher} />
             </div>
+
+            { updateModal && <UpdateStudents onUpdate={onUpdate}/>}
             </div>
             
 

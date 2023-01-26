@@ -110,6 +110,7 @@ function App() {
 
   }
 
+
   const deleteAssessment = (id) => {
     // console.log(id)
     setAssessments(assessments.filter((item) => item.id !== id))
@@ -118,6 +119,18 @@ function App() {
     // console.log(id)
     setStudentListState(studentListState.filter((item) => item.id !== id))
   }
+
+  const updateStudent = (data, id) => {
+
+    const updatedStudent = studentListState.find(student => student.id === id)
+    deleteStudent(id)
+
+    updatedStudent.fname = data["fname"]
+    updatedStudent.lname = data["lname"]
+
+
+  }
+
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -144,7 +157,7 @@ function App() {
             />
           } />
           <Route path="/student" element={<EditStudent students={studentListState}
-            teacher={teacherState} onAdd={addStudent} onDelete={deleteStudent}
+            teacher={teacherState} onAdd={addStudent} onDelete={deleteStudent} onUpdate={updateStudent}
           />} />
           <Route path="/grade" exact element={<Grade
             students={studentListState}
