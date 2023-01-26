@@ -34,6 +34,7 @@ function App() {
     NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
   }, []);
 
+
   //students
   useEffect(() => {
     NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
@@ -113,6 +114,10 @@ function App() {
     // console.log(id)
     setAssessments(assessments.filter((item) => item.id !== id))
   }
+  const deleteStudent = (id) => {
+    // console.log(id)
+    setStudentListState(studentListState.filter((item) => item.id !== id))
+  }
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -127,6 +132,7 @@ function App() {
             <Dashboard
               onSubject={addSubject}
               onStudent={addStudent}
+
               assessments={assessments}
               students={studentListState}
               teacher={teacherState}
@@ -138,7 +144,7 @@ function App() {
             />
           } />
           <Route path="/student" element={<EditStudent students={studentListState}
-            teacher={teacherState} onAdd={addStudent}
+            teacher={teacherState} onAdd={addStudent} onDelete={deleteStudent}
           />} />
           <Route path="/grade" exact element={<Grade
             students={studentListState}
