@@ -11,7 +11,6 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
-<<<<<<< HEAD
     static updateStudent(id, body) {
         return fetch(`http://127.0.0.1:5001/student/${id}`, {
             'method': 'PUT',
@@ -33,8 +32,6 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
-=======
->>>>>>> parent of 926803d (add delete and update student ApI calls)
     static addAssessment(body) {
         return fetch('http://127.0.0.1:5001/assessment', {
             'method': 'POST',
