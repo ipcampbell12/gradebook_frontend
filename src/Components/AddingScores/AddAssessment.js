@@ -37,7 +37,6 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
 
     }
 
-    //This mostly works but assessments are not added to dropdown menu right away
 
     return (
         <div>
