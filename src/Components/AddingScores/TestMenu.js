@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 function TestMenu({ assessments, onModule, testDelete }) {
 
-    // console.log(assessments)
+
 
 
     const onClick = (e) => {

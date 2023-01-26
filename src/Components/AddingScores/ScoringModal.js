@@ -4,14 +4,14 @@ import AddAssessment from './AddAssessment';
 import Modal from 'react-bootstrap/Modal';
 //import NetworkCalls from '../../networkCalls';
 
-function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, assessments, subjects, handleClose, show, teacher, setAddShow, getAssessments }) {
+function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, assessments, subjects, handleClose, show, teacher, setAddShow }) {
 
     //module state for assessment that was just created
     const [moduleState, setModuleState] = useState('')
 
-    // useEffect(() => {
-    //     setModuleState(assessments?.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
-    // }, [assessments])
+    useEffect(() => {
+        setModuleState(assessments?.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
+    }, [assessments])
 
     console.log(moduleState)
 
@@ -22,8 +22,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                 <AddAssessment
                     subjects={subjects}
                     onAssessment={onAssessment}
-                    setModuleState={setModuleState}
-                    getAssessments={getAssessments}
+                    moduleState={moduleState}
                 />
                 <AddScores
                     moduleState={moduleState}
