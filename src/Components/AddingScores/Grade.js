@@ -26,10 +26,13 @@ import Alert from 'react-bootstrap/Alert';
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment }) {
+function Grade({ teacher, students, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment }) {
 
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
+
+    const [assessments, setAssessments] = useState([])
+
     //console.log(moduleState)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
