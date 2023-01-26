@@ -13,7 +13,7 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ teacher, students, onHide, moduleState, setModuleState, setAddShow }) {
+function AddScores({ teacher, students, onHide, moduleState, setAddShow }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])

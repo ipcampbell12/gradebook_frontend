@@ -23,7 +23,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
 
         const subject_id = subject.id
 
-        setScored(false)
+        // setScored(false)
         //send data to API
         APIServce.addAssessment({ name, subject_id, scored })
             .then(response => console.log(response))

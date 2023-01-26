@@ -39,9 +39,12 @@ function App() {
     NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
   }, []);
 
+  const getAssessments = () => {
+    NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+  }
   // assessments
   useEffect(() => {
-    NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+    getAssessments()
   }, []);
 
   //studentsAssessments
@@ -113,6 +116,10 @@ function App() {
     // console.log(id)
     setAssessments(assessments.filter((item) => item.id !== id))
   }
+  const deleteStudent = (id) => {
+    // console.log(id)
+    setStudentListState(studentListState.filter((item) => item.id !== id))
+  }
 
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -138,7 +145,7 @@ function App() {
             />
           } />
           <Route path="/student" element={<EditStudent students={studentListState}
-            teacher={teacherState} onAdd={addStudent}
+            teacher={teacherState} onAdd={addStudent} onDelete={deleteStudent}
           />} />
           <Route path="/grade" exact element={<Grade
             students={studentListState}
@@ -150,6 +157,7 @@ function App() {
             subjects={subjectListState}
             onDelete={deleteAssessment}
             updateStudentAssessment={updateStudentAssessment}
+            getAssessments={getAssessments}
           />} />
         </Routes>
 
