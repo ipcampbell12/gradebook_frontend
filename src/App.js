@@ -147,7 +147,7 @@ function App() {
             <Dashboard
               onSubject={addSubject}
               onStudent={addStudent}
-
+              subjects={subjectListState}
               assessments={assessments}
               students={studentListState}
               teacher={teacherState}

@@ -53,7 +53,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
             <Form>
                 <FormGroup className="mb-3" onSubmit={onSubmit}>
                     <Form.Label>Assessment Name</Form.Label>
-                    <Form.Control type="text" placeholder="Assessment Name" value={module.name} onChange={(e) => {
+                    <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
                         setName(e.target.value)
                     }} />
                 </FormGroup>
@@ -63,7 +63,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
-                        value={"Choose an assessment"}
+                        value={subjects.find(subject => subject.id === subjectId)}
                     >
                         {
                             subjects.map(subject => {

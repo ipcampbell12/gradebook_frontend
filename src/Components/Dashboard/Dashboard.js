@@ -7,11 +7,12 @@ import AverageGrade from './AverageGrade';
 //import OverallChart from "../Visualizations/OverallChart"
 //import ScoresChart from "../Visualizations/ScoresChart"
 import NetworkCalls from '../../networkCalls';
+import SubjectMenu from './SubjectMenu';
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, studentsAssessments, assessments }) {
+function Dashboard({ students, teacher, studentsAssessments, assessments, subjects }) {
     // dummy code, organize later
     //const [averageGrade, setAverageGrade] = useState();
     // const [students, setStudents] = useState();
@@ -24,6 +25,21 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
         NetworkCalls.fetchGrades(1).then(data => setGrades(data))
     }, []);
 
+
+
+    //SUBJECTS// ------------------------------------------------------------------
+
+
+    const [currentSubject, setCurrentSubject] = useState('')
+
+
+
+
+    //const [selectedSubject, setSelectedSubject] = useState('')
+
+
+    // ------------------------------------------------------------------
+
     //console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
         <div className="dashboard">
@@ -32,11 +48,12 @@ function Dashboard({ students, teacher, studentsAssessments, assessments }) {
             <div className="container">
 
                 <div className="students">
-                    <Typography variant="h6" align="center"> Overall Grades</Typography>
+                    <Typography variant="h6" align="center"> Overall Grades for {currentSubject.name} </Typography>
                     <StudentList students={students} grades={grades} />
                 </div>
                 <div className="charts">
                     <div className="menus">
+                        <SubjectMenu subjects={subjects} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} />
                         <DTestMenu assessments={assessments} onModule={setModuleState} />
                     </div>
                     <div className="averages">
