@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import Button from 'react-bootstrap/Button';
 import APIServce from '../../APIService'
 import UpdateStudents from './UpdateStudents';
+import Modal from 'react-bootstrap/Modal';
 // import Form from 'react-bootstrap/Form';
 
 
@@ -24,7 +25,15 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
     const [deleteShow, setDeleteShow] = useState(false);
 
+    const handleDeleteOpen = () => setDeleteShow(true)
+    const handleDeleteClose = () => setDeleteShow(false)
+
     const [updateModal, setUpdateModal] =useState(false)
+
+    const [id, setId] =useState('');
+
+    const handleClose = () => setUpdateModal(false);
+    const handleShow = () => setUpdateModal(true);
 
     const deleteStudent = (student_id) => {
 
@@ -66,12 +75,13 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
                                 <TableCell align="center">{student.fname}</TableCell>
                                 <TableCell align="center" >{student.lname}</TableCell>
                                 <TableCell align="center"> 
-                                    <Button variant="primary" onClick={()=>setUpdateModal(true)}>
-                                        Edit
+                                    <Button variant="primary" type="submit" onClick={(e)=>{handleShow(); setId(student.id)} }>
+                                    Edit 
+                                   
                                     </Button>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Button variant="danger" onClick={() => deleteStudent(student.id)}>
+                                    <Button variant="danger" type="submit" onClick={(e)=>{handleDeleteOpen(); setId(student.id)}}>
                                         Delete
                                     </Button>
                                 
@@ -83,10 +93,26 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
                 </Table>
             </TableContainer>
             <div className="form">
-                <AddStudent onAdd={onAdd} teacher={teacher} />
+                <AddStudent onAdd={onAdd} teacher={teacher}/>
             </div>
+            { updateModal && <UpdateStudents onUpdate={onUpdate} teacher={teacher} handleClose={handleClose} show={updateModal} id={id}/>}
+            
+            <Modal show={deleteShow} onHide={handleDeleteClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Are you sure you want to delete this student?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body> This action cannot be undone.</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleDeleteClose}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={() => {deleteStudent(id); handleDeleteClose()}}>
+                Delete
+              </Button>
+            </Modal.Footer>∂
+          </Modal>
 
-            { updateModal && <UpdateStudents onUpdate={onUpdate}/>}
+
             </div>
             
 

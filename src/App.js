@@ -128,6 +128,7 @@ function App() {
     updatedStudent.fname = data["fname"]
     updatedStudent.lname = data["lname"]
 
+    //setStudentListState([...studentListState, updatedStudent])
 
   }
 

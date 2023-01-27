@@ -6,7 +6,7 @@ import APIServce from '../../APIService';
 import Modal from 'react-bootstrap/Modal';
 
 
-export default function UpdateStudents({ onAdd, teacher, show, handleClose, onUpdate }) {
+export default function UpdateStudents({ teacher, show, handleClose, onUpdate, id }) {
 
     //New Student Form
     const [fname, setFirstName] = useState('')
@@ -17,11 +17,11 @@ export default function UpdateStudents({ onAdd, teacher, show, handleClose, onUp
 
         const teacher_id = teacher.id
 
-        APIServce.updateStudent({ fname, lname, teacher_id })
+        APIServce.updateStudent(id, { fname, lname, teacher_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        onUpdate({ fname, lname, teacher_id })
+        onUpdate({ fname, lname }, id)
 
         handleClose()
 
@@ -30,29 +30,31 @@ export default function UpdateStudents({ onAdd, teacher, show, handleClose, onUp
 
     return (
         <Modal show={show} onHide={handleClose} className="student-chart" size="lg">
-            <Form action="" onSubmit={onSubmit} className="form">
+            <Modal.Body>
+                <Form action="" onSubmit={onSubmit} className="form">
 
-                <Form.Group className="mb-3">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control type="text" placeholder="First Name" value={fname} onChange={(e) => {
-                        setFirstName(e.target.value)
-                    }} />
-                </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control type="text" placeholder="First Name" onChange={(e) => {
+                            setFirstName(e.target.value)
+                        }} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="text" placeholder="Last Name" value={lname} onChange={(e) => {
-                        setLastName(e.target.value)
-                    }} />
-                </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control type="text" placeholder="Last Name" onChange={(e) => {
+                            setLastName(e.target.value)
+                        }} />
+                    </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Add Student
-                </Button>
+                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); }}>
+                        Update Student
+                    </Button>
 
 
 
-            </Form>
+                </Form>
+            </Modal.Body>
         </Modal>
     );
 }
