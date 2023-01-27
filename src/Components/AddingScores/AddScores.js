@@ -13,7 +13,7 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ teacher, students, onHide, moduleState, setModuleState, setAddShow }) {
+function AddScores({ teacher, students, onHide, moduleState, setAddShow, titleShow }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
@@ -46,7 +46,7 @@ function AddScores({ teacher, students, onHide, moduleState, setModuleState, set
     return (
 
         <TableContainer component={Paper}>
-            <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}</Typography>
+            {titleShow && <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}</Typography>}
 
             <Form action="" onSubmit={onSubmit} className="form">
                 <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">

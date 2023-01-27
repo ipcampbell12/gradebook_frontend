@@ -6,7 +6,7 @@ import APIServce from '../../APIService';
 import Alert from 'react-bootstrap/Alert';
 
 
-export default function AddAssessment({ subjects, onAssessment, moduleState }) {
+export default function AddAssessment({ subjects, onAssessment, handleTitleShow }) {
 
     //Add default values
     //New assessment Form
@@ -47,7 +47,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
                         setName(e.target.value)
                     }} />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={onSubmit}>
+                <Button variant="primary" type="submit" onClick={() => { onSubmit(); handleTitleShow(); }}>
                     Create Assessment
                 </Button>
                 {show === true && <Alert key={'success'} variant={'success'}>
