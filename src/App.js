@@ -153,9 +153,6 @@ function App() {
               teacher={teacherState}
               studentsAssessments={studentsAssessments}
 
-
-
-
             />
           } />
           <Route path="/student" element={<EditStudent students={studentListState}
@@ -174,8 +171,6 @@ function App() {
             updateStudentAssessment={updateStudentAssessment}
           />} />
         </Routes>
-
-
       </div>
     </Router>
   );

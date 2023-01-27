@@ -47,7 +47,7 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, subjec
                         <DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} />
                     </div>
                     <div className="averages">
-                        <AverageGrade moduleState={moduleState} />
+                        <AverageGrade moduleState={moduleState} teacher={teacher} currentSubject={currentSubject} />
                     </div>
                     <div className="tables">
 
