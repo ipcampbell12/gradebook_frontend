@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 import Button from 'react-bootstrap/Button';
 
-function TestMenu({ assessments, onModule, testDelete }) {
+function TestMenu({ assessments, onModule, setAId, handleDeleteOpen }) {
 
 
 
@@ -37,7 +37,7 @@ function TestMenu({ assessments, onModule, testDelete }) {
                                 return assessment.scored === true && (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
                                     {assessment.name}
 
-                                    <Button className="btn-danger menu-2" onClick={() => testDelete(assessment.id)}> Delete </Button>
+                                    <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>
                                     <Button className="btn-primary menu-2"> View/Update </Button>
 
                                 </MenuItem>)

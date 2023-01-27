@@ -44,11 +44,11 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
     const [deleteAlert, setDeleteAlert] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setDeleteAlert(false), 6000)
+        setTimeout(() => setDeleteAlert(false), 5000)
     });
 
     useEffect(() => {
-        setTimeout(() => setUpdateAlert(false), 6000)
+        setTimeout(() => setUpdateAlert(false), 5000)
     });
 
     //------------------------------------------------------------------
@@ -142,7 +142,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
               <Button variant="primary" onClick={() => {deleteStudent(id); handleDeleteClose(); setDeleteAlert(true);} }>
                 Delete
               </Button>
-            </Modal.Footer>∂
+            </Modal.Footer>
           </Modal>
 
 
