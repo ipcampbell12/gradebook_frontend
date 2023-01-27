@@ -8,11 +8,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
 
     //module state for assessment that was just created
     const [moduleState, setModuleState] = useState('')
-    const [titleShow, setTitleShow] = useState(false)
 
-    const handleTitleShow = () => setTitleShow(true)
-
-    //Set module state to most recenlty added assessment
     useEffect(() => {
         setModuleState(assessments?.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
     }, [assessments])
@@ -27,7 +23,6 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     subjects={subjects}
                     onAssessment={onAssessment}
                     moduleState={moduleState}
-                    handleTitleShow={handleTitleShow}
                 />
                 <AddScores
                     moduleState={moduleState}
@@ -37,8 +32,6 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     teacher={teacher}
                     onHide={handleClose}
                     setAddShow={setAddShow}
-
-
 
                 />
             </Modal.Body>

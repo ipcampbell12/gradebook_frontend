@@ -46,42 +46,42 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow }) {
     return (
 
         <TableContainer component={Paper}>
-            <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}
+            <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}</Typography>
 
-                <Form action="" onSubmit={onSubmit} className="form">
-                    <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>First Name</TableCell>
-                                <TableCell>Last Name</TableCell>
-                                <TableCell>Score</TableCell>
+            <Form action="" onSubmit={onSubmit} className="form">
+                <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>First Name</TableCell>
+                            <TableCell>Last Name</TableCell>
+                            <TableCell>Score</TableCell>
 
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+
+                        {students.map((student) => {
+                            return <TableRow key={student.id}>
+                                <TableCell align="center">{student.fname}</TableCell>
+                                <TableCell align="center" >{student.lname}</TableCell>
+                                <TableCell align="center">
+                                    <Form.Group className="mb-1" >
+                                        <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
+                                            setScores([...scores, { "score": +e.target.value }]);
+                                        }} />
+                                    </Form.Group>
+                                </TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
+                        })}
 
-                            {students.map((student) => {
-                                return <TableRow key={student.id}>
-                                    <TableCell align="center">{student.fname}</TableCell>
-                                    <TableCell align="center" >{student.lname}</TableCell>
-                                    <TableCell align="center">
-                                        <Form.Group className="mb-1" >
-                                            <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
-                                                setScores([...scores, { "score": +e.target.value }]);
-                                            }} />
-                                        </Form.Group>
-                                    </TableCell>
-                                </TableRow>
-                            })}
+                    </TableBody>
+                </Table>
 
-                        </TableBody>
-                    </Table>
+                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); setAddShow(true) }}>
+                    Add All Scores
+                </Button>
 
-                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); setAddShow(true) }}>
-                        Add All Scores
-                    </Button>
-
-                </Form>
+            </Form>
         </TableContainer>
 
 
