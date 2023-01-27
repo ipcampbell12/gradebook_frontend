@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function BasicTable({ onStudent, assessments, students, grades }) {
+export default function BasicTable({ currentSubject, grades }) {
   return (
     <TableContainer component={Paper}>
 

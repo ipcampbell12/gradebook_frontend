@@ -10,7 +10,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
     const [moduleState, setModuleState] = useState('')
 
     useEffect(() => {
-        setModuleState(assessments?.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
+        setModuleState(assessments.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
     }, [assessments])
 
     console.log(moduleState)

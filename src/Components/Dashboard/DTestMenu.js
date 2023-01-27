@@ -6,7 +6,8 @@ import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 
 
-function DTestMenu({ assessments, onModule }) {
+function DTestMenu({ assessments, onModule, currentSubject }) {
+
 
     const onClick = (e) => {
         const value = e.target.value
@@ -14,7 +15,8 @@ function DTestMenu({ assessments, onModule }) {
 
     }
 
-    //    console.log(assessments[0].name)
+    // console.log(`Test menu subject state is ${currentSubject.name}`)
+    // console.log(assessments)
 
     return (
         <div>
@@ -32,7 +34,7 @@ function DTestMenu({ assessments, onModule }) {
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === true && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
+                                return assessment.subject.id === currentSubject.id && (<MenuItem id={`assessment-${assessment.id}`} key={assessment.id} value={assessment} onChange={onClick}>{assessment.name}</MenuItem>)
 
 
                             })

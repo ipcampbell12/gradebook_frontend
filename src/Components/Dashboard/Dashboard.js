@@ -19,26 +19,16 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, subjec
 
     const [moduleState, setModuleState] = useState('')
     const [grades, setGrades] = useState([])
-    console.log(moduleState)
+    const [currentSubject, setCurrentSubject] = useState('')
+    //console.log(moduleState)
 
     useEffect(() => {
-        NetworkCalls.fetchGrades(1).then(data => setGrades(data))
-    }, []);
-
-
-
-    //SUBJECTS// ------------------------------------------------------------------
-
-
-    const [currentSubject, setCurrentSubject] = useState('')
+        NetworkCalls.fetchGrades(teacher.id, currentSubject.id).then(data => setGrades(data))
+    }, [teacher.id, currentSubject.id]);
 
 
 
 
-    //const [selectedSubject, setSelectedSubject] = useState('')
-
-
-    // ------------------------------------------------------------------
 
     //console.log(`SA state in Dashboard is ${studentsAssessments.map(x => x.score)}`)
     return (
@@ -49,12 +39,12 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, subjec
 
                 <div className="students">
                     <Typography variant="h6" align="center"> Overall Grades for {currentSubject.name} </Typography>
-                    <StudentList students={students} grades={grades} />
+                    <StudentList students={students} grades={grades} currentSubject={currentSubject} />
                 </div>
                 <div className="charts">
                     <div className="menus">
                         <SubjectMenu subjects={subjects} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} />
-                        <DTestMenu assessments={assessments} onModule={setModuleState} />
+                        <DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} />
                     </div>
                     <div className="averages">
                         <AverageGrade moduleState={moduleState} />
