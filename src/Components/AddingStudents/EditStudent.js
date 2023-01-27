@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from "@mui/material"
 //import { DataGrid } from '@mui/x-data-grid';
 import AddStudent from './AddStudent';
@@ -13,6 +13,7 @@ import Button from 'react-bootstrap/Button';
 import APIServce from '../../APIService'
 import UpdateStudents from './UpdateStudents';
 import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 // import Form from 'react-bootstrap/Form';
 
 
@@ -23,6 +24,7 @@ import Modal from 'react-bootstrap/Modal';
 
 function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
+    //MODALS -----------------------------------------------------------
     const [deleteShow, setDeleteShow] = useState(false);
 
     const handleDeleteOpen = () => setDeleteShow(true)
@@ -34,6 +36,23 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
     const handleClose = () => setUpdateModal(false);
     const handleShow = () => setUpdateModal(true);
+    //------------------------------------------------------------------
+
+    //ALERTS -----------------------------------------------------------
+
+    const [updateAlert, setUpdateAlert] = useState(false);
+    const [deleteAlert, setDeleteAlert] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => setDeleteAlert(false), 6000)
+    });
+
+    useEffect(() => {
+        setTimeout(() => setUpdateAlert(false), 6000)
+    });
+
+    //------------------------------------------------------------------
+
 
     const deleteStudent = (student_id) => {
 
@@ -92,10 +111,24 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+
+           
+
+
             <div className="form">
                 <AddStudent onAdd={onAdd} teacher={teacher}/>
+
+                {deleteAlert === true && <Alert key={'danger'} variant={'danger'}>
+                You just removed a student from the database.
+                </Alert>}
+
+                {updateAlert === true && <Alert key={'success'} variant={'success'}>
+                You have just updated a student in the database.
+                </Alert>}
+                
             </div>
-            { updateModal && <UpdateStudents onUpdate={onUpdate} teacher={teacher} handleClose={handleClose} show={updateModal} id={id}/>}
+            { updateModal && <UpdateStudents onUpdate={onUpdate} teacher={teacher} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert}/>}
             
             <Modal show={deleteShow} onHide={handleDeleteClose}>
             <Modal.Header closeButton>
@@ -106,7 +139,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
               <Button variant="secondary" onClick={handleDeleteClose}>
                 Cancel
               </Button>
-              <Button variant="primary" onClick={() => {deleteStudent(id); handleDeleteClose()}}>
+              <Button variant="primary" onClick={() => {deleteStudent(id); handleDeleteClose(); setDeleteAlert(true);} }>
                 Delete
               </Button>
             </Modal.Footer>∂

@@ -6,7 +6,7 @@ import APIServce from '../../APIService';
 import Modal from 'react-bootstrap/Modal';
 
 
-export default function UpdateStudents({ teacher, show, handleClose, onUpdate, id }) {
+export default function UpdateStudents({ teacher, show, handleClose, onUpdate, id, setUpdateAlert }) {
 
     //New Student Form
     const [fname, setFirstName] = useState('')
@@ -47,7 +47,7 @@ export default function UpdateStudents({ teacher, show, handleClose, onUpdate, i
                         }} />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); }}>
+                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); setUpdateAlert(true) }}>
                         Update Student
                     </Button>
 
