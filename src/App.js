@@ -75,8 +75,9 @@ function App() {
 
   }
 
+
   const addSubject = (subject) => {
-    const id = subjectListState.length + 1
+    const id = Math.max(...subjectListState.map(o => o.id)) + 1
     const newSubject = { id, ...subject }
 
     setSubjectListState([...subjectListState, newSubject])
@@ -168,6 +169,7 @@ function App() {
             studentsAssessments={studentsAssessments}
             onAdd={addStudentsAssessments}
             subjects={subjectListState}
+            onSubject={addSubject}
             onDelete={deleteAssessment}
             updateStudentAssessment={updateStudentAssessment}
           />} />

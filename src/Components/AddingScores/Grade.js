@@ -16,6 +16,7 @@ import Button from 'react-bootstrap/Button';
 import ScoringModal from './ScoringModal';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
+import AddSubject from './AddSubject';
 
 
 
@@ -27,7 +28,7 @@ import Modal from 'react-bootstrap/Modal';
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment }) {
+function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment, onSubject }) {
 
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
@@ -50,6 +51,15 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
     const handleDeleteOpen = () => setDeleteModalShow(true)
     const handleDeleteClose = () => setDeleteModalShow(false)
+
+    // ------------------------------------------------------------------
+
+    //SUBJECT MODAL -----------------------------------------------------
+    const [showAddSubject, setShowAddSubject] = useState(false)
+
+    const handleSubjectOpen = () => setShowAddSubject(true)
+    const handleSubjectClose = () => setShowAddSubject(false)
+
 
     // ------------------------------------------------------------------
 
@@ -77,9 +87,17 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
             <div className="menu" >
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} />
-                <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
-                    Add Assessment
-                </Button>
+                <div className="buttons">
+                    <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
+                        Add Assessment
+                    </Button>
+                    <Button variant="primary" type="submit" onClick={handleSubjectOpen} className="btn btn-primary">
+                        Add Subject
+                    </Button>
+                </div>
+
+                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={onSubject} showAddSubject={showAddSubject} />}
+
                 {show && <ScoringModal
                     students={students}
                     teacher={teacher}

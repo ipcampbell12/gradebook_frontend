@@ -59,19 +59,3 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
     );
 }
 
-
-
-// <Form.Group className="mb-3">
-//                 <Form.Label>Assessment Date</Form.Label>
-//                 <Form.Control type="date" placeholder="Assessment Date" value={date} onChange={(e) => {
-//                     setDate(e.target.value)
-//                 }} />
-//             </Form.Group>
-
-
-// <Form.Group className="mb-3">
-// <Form.Label>Assessment Name</Form.Label>
-// <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
-//     setName(e.target.value)
-// }} />
-// </Form.Group>
