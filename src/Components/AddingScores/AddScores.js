@@ -13,7 +13,7 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ teacher, students, onHide, moduleState, setAddShow, titleShow }) {
+function AddScores({ teacher, students, onHide, moduleState, setAddShow }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
@@ -46,42 +46,42 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow, titleSh
     return (
 
         <TableContainer component={Paper}>
-            {titleShow && <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}</Typography>}
+            <Typography> Scores for {moduleState === undefined ? "No assessments have been added yet" : moduleState.name}
 
-            <Form action="" onSubmit={onSubmit} className="form">
-                <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>First Name</TableCell>
-                            <TableCell>Last Name</TableCell>
-                            <TableCell>Score</TableCell>
+                <Form action="" onSubmit={onSubmit} className="form">
+                    <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>First Name</TableCell>
+                                <TableCell>Last Name</TableCell>
+                                <TableCell>Score</TableCell>
 
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                        {students.map((student) => {
-                            return <TableRow key={student.id}>
-                                <TableCell align="center">{student.fname}</TableCell>
-                                <TableCell align="center" >{student.lname}</TableCell>
-                                <TableCell align="center">
-                                    <Form.Group className="mb-1" >
-                                        <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
-                                            setScores([...scores, { "score": +e.target.value }]);
-                                        }} />
-                                    </Form.Group>
-                                </TableCell>
                             </TableRow>
-                        })}
+                        </TableHead>
+                        <TableBody>
 
-                    </TableBody>
-                </Table>
+                            {students.map((student) => {
+                                return <TableRow key={student.id}>
+                                    <TableCell align="center">{student.fname}</TableCell>
+                                    <TableCell align="center" >{student.lname}</TableCell>
+                                    <TableCell align="center">
+                                        <Form.Group className="mb-1" >
+                                            <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
+                                                setScores([...scores, { "score": +e.target.value }]);
+                                            }} />
+                                        </Form.Group>
+                                    </TableCell>
+                                </TableRow>
+                            })}
 
-                <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); setAddShow(true) }}>
-                    Add All Scores
-                </Button>
+                        </TableBody>
+                    </Table>
 
-            </Form>
+                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onHide(); setAddShow(true) }}>
+                        Add All Scores
+                    </Button>
+
+                </Form>
         </TableContainer>
 
 

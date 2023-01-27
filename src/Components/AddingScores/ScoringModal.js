@@ -37,7 +37,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     teacher={teacher}
                     onHide={handleClose}
                     setAddShow={setAddShow}
-                    titleShow={titleShow}
+
 
 
                 />
