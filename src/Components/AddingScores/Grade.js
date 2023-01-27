@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from "@mui/material"
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
-// import AddAssessment from './AddAssessment';
-
+import NetworkCalls from '../../networkCalls';
+// import UpdateState from '../../updateState';
 import TestMenu from './TestMenu'
 import APIServce from '../../APIService';
 import ScoredChart from './ScoredChart';
@@ -28,7 +21,7 @@ import AddSubject from './AddSubject';
 //1. Click on module, then set module state to that module's name 
 
 
-function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAssessments, subjects, onDelete, newModuleState, updateStudentAssessment, onSubject }) {
+function Grade(props) {
 
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
@@ -43,8 +36,52 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
     useEffect(() => {
         setTimeout(() => setDeleteShow(false), 4000)
     });
+    //TOPLEVEL STATE -----------------------------------------------------
 
-    //DELETE MODAL -----------------------------------------------------
+    const [studentListState, setStudentListState] = useState([])
+
+    const [studentsAssessments, setStudentsAssessments] = useState([])
+
+    const [subjectListState, setSubjectListState] = useState([])
+
+    const [assessments, setAssessments] = useState([])
+
+    const [teacherState, setTeacherState] = useState('')
+
+    // ------------------------------------------------------------------
+
+
+    //NETWORK CALLS -----------------------------------------------------------------
+
+    //teacher
+    useEffect(() => {
+        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    }, []);
+
+    useEffect(() => {
+        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+    }, []);
+
+    // assessments
+    useEffect(() => {
+        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+    }, []);
+
+    //studentsAssessments
+    useEffect(() => {
+        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+    }, []);
+
+    //subjects
+    useEffect(() => {
+        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
+    }, []);
+    // ------------------------------------------------------------------------------
+
+
+
+
+    //DELETE MODAL -----------------------------------------------------------------
     const [aId, setAId] = useState('');
 
     const [deleteModalShow, setDeleteModalShow] = useState(false);
@@ -52,21 +89,64 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
     const handleDeleteOpen = () => setDeleteModalShow(true)
     const handleDeleteClose = () => setDeleteModalShow(false)
 
-    // ------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
 
-    //SUBJECT MODAL -----------------------------------------------------
+    //SUBJECT MODAL -----------------------------------------------------------------
     const [showAddSubject, setShowAddSubject] = useState(false)
 
     const handleSubjectOpen = () => setShowAddSubject(true)
     const handleSubjectClose = () => setShowAddSubject(false)
 
 
-    // ------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
 
+
+    //UPDATE STATE -----------------------------------------------------------------
+    const addSubject = (subject) => {
+        const id = Math.max(...subjectListState.map(o => o.id)) + 1
+        const newSubject = { id, ...subject }
+
+        setSubjectListState([...subjectListState, newSubject])
+
+    }
+
+    const addAssessment = (assessment) => {
+        const id = Math.max(...assessments.map(o => o.id)) + 1
+        const newAssessment = { id, ...assessment }
+        console.log(`The assessment ${newAssessment.id} was just created`)
+        setAssessments([...assessments, newAssessment])
+    }
+
+
+    const addStudentsAssessments = (studentAssessment) => {
+
+        setStudentsAssessments(...studentsAssessments, studentAssessment)
+    }
+
+    const updateStudentAssessment = (data, id) => {
+
+        //console.log(`Id sent from scoredcharts :${id}`)
+        const updatedItem = studentsAssessments.find(sa => sa.id === id)
+        //console.log(updatedItem)
+        deleteAssessment(id)
+
+        //console.log(`Id from updated item: ${updatedItem.id}`)
+
+        updatedItem.score = data["score"]
+        //setStudentsAssessments([...studentsAssessments, updatedItem])
+
+    }
+
+    const onDelete = (id) => {
+        // console.log(id)
+        setAssessments(assessments.filter((item) => item.id !== id))
+    }
+
+    // --------------------------------------------------------------------------------
 
     const deleteAssessment = (assessment_id) => {
 
-        const teacher_id = teacher.id
+        const teacher_id = teacherState.id
 
         APIServce.deleteAssessment(teacher_id, assessment_id)
             .then(response => console.log(response))
@@ -83,7 +163,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
 
     return (
         <div className="student-page2" >
-            <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
+            <Typography variant="h4" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} />
@@ -96,19 +176,18 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                     </Button>
                 </div>
 
-                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={onSubject} showAddSubject={showAddSubject} />}
+                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} />}
 
                 {show && <ScoringModal
-                    students={students}
-                    teacher={teacher}
-                    onAdd={onAdd}
+                    students={studentListState}
+                    teacher={teacherState}
+                    onAdd={addStudentsAssessments}
                     studentsAssessments={studentsAssessments}
                     handleClose={handleClose}
                     show={show}
                     assessments={assessments}
-                    onAssessment={onAssessment}
-                    subjects={subjects}
-                    newModuleState={newModuleState}
+                    onAssessment={addAssessment}
+                    subjects={subjectListState}
                     setAddShow={setAddShow} />}
             </div>
 

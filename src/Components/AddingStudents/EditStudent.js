@@ -14,6 +14,7 @@ import APIServce from '../../APIService'
 import UpdateStudents from './UpdateStudents';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
+import NetworkCalls from '../../networkCalls';
 // import Form from 'react-bootstrap/Form';
 
 
@@ -22,8 +23,50 @@ import Alert from 'react-bootstrap/Alert';
 //     { field: 'lname', headerName: 'Last Name', width: 130 },
 // ];
 
-function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
+function Student(props) {
 
+
+    const [teacherState, setTeacherState] = useState('')
+    const [studentListState, setStudentListState] = useState([])
+
+     //students
+     useEffect(() => {
+        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+    }, []);
+
+     //teacher
+     useEffect(() => {
+        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    }, []);
+
+    const addStudent = (student) => {
+        const id = Math.max(...studentListState.map(o => o.id)) + 1
+        const newStudent = { id, ...student }
+    
+        // console.log(`SA student_id is ${newStudent.id}`)
+    
+        setStudentListState([...studentListState, newStudent])
+    
+      }
+
+      const onDelete = (id) => {
+        // console.log(id)
+        setStudentListState(studentListState.filter((item) => item.id !== id))
+      }
+
+
+      const updateStudent = (data, id) => {
+
+        const updatedStudent = studentListState.find(student => student.id === id)
+        deleteStudent(id)
+    
+        updatedStudent.fname = data["fname"]
+        updatedStudent.lname = data["lname"]
+    
+        //setStudentListState([...studentListState, updatedStudent])
+    
+      }
+ 
     //MODALS -----------------------------------------------------------
     const [deleteShow, setDeleteShow] = useState(false);
 
@@ -73,7 +116,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
     return (
         <div className="student-page1">
-            <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Students'}</Typography>
+            <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Students'}</Typography>
 
             <div className="student-chart">
             <TableContainer component={Paper} className="table">
@@ -89,7 +132,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
                     </TableHead>
                     <TableBody>
 
-                        {students.map((student) => {
+                        {studentListState.map((student) => {
                             return <TableRow key={student.id}>
                                 <TableCell align="center">{student.fname}</TableCell>
                                 <TableCell align="center" >{student.lname}</TableCell>
@@ -117,7 +160,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
 
 
             <div className="form">
-                <AddStudent onAdd={onAdd} teacher={teacher}/>
+                <AddStudent onAdd={addStudent} teacher={teacherState}/>
 
                 {deleteAlert === true && <Alert key={'danger'} variant={'danger'}>
                 You just removed a student from the database.
@@ -128,7 +171,7 @@ function Student({ teacher, students, onAdd, onDelete, onUpdate }) {
                 </Alert>}
                 
             </div>
-            { updateModal && <UpdateStudents onUpdate={onUpdate} teacher={teacher} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert}/>}
+            { updateModal && <UpdateStudents onUpdate={updateStudent} teacher={teacherState} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert}/>}
             
             <Modal show={deleteShow} onHide={handleDeleteClose}>
             <Modal.Header closeButton>

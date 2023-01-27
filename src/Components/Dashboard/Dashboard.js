@@ -12,7 +12,7 @@ import SubjectMenu from './SubjectMenu';
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
 
-function Dashboard({ students, teacher, studentsAssessments, assessments, subjects }) {
+function Dashboard(props) {
     // dummy code, organize later
     //const [averageGrade, setAverageGrade] = useState();
     // const [students, setStudents] = useState();
@@ -22,9 +22,53 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, subjec
     const [currentSubject, setCurrentSubject] = useState('')
     //console.log(moduleState)
 
+
+
+    //TOPLEVEL STATE -----------------------------------------------------
+
+    const [studentListState, setStudentListState] = useState([])
+
+    const [studentsAssessments, setStudentsAssessments] = useState([])
+
+    const [subjectListState, setSubjectListState] = useState([])
+
+    const [assessments, setAssessments] = useState([])
+
+    const [teacherState, setTeacherState] = useState('')
+
+    // ------------------------------------------------------------------
+
+
+    //NETWORK CALLS -----------------------------------------------------------------
+
     useEffect(() => {
-        NetworkCalls.fetchGrades(teacher.id, currentSubject.id).then(data => setGrades(data))
-    }, [teacher.id, currentSubject.id]);
+        NetworkCalls.fetchGrades(teacherState.id, currentSubject.id).then(data => setGrades(data))
+    }, [teacherState.id, currentSubject.id]);
+
+    //teacher
+    useEffect(() => {
+        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    }, []);
+
+    useEffect(() => {
+        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+    }, []);
+
+    // assessments
+    useEffect(() => {
+        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+    }, []);
+
+    //studentsAssessments
+    useEffect(() => {
+        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+    }, []);
+
+    //subjects
+    useEffect(() => {
+        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
+    }, []);
+    // ------------------------------------------------------------------------------
 
 
 
@@ -34,20 +78,20 @@ function Dashboard({ students, teacher, studentsAssessments, assessments, subjec
     return (
         <div className="dashboard">
 
-            <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Class'}</Typography>
+            <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Class'}</Typography>
             <div className="container">
 
                 <div className="students">
                     <Typography variant="h6" align="center"> Overall Grades for {currentSubject.name} </Typography>
-                    <StudentList students={students} grades={grades} currentSubject={currentSubject} />
+                    <StudentList students={studentListState} grades={grades} currentSubject={currentSubject} />
                 </div>
                 <div className="charts">
                     <div className="menus">
-                        <SubjectMenu subjects={subjects} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} />
+                        <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} />
                         <DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} />
                     </div>
                     <div className="averages">
-                        <AverageGrade moduleState={moduleState} teacher={teacher} currentSubject={currentSubject} />
+                        <AverageGrade moduleState={moduleState} teacher={teacherState} currentSubject={currentSubject} />
                     </div>
                     <div className="tables">
 
