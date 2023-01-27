@@ -15,7 +15,6 @@ import ScoredChart from './ScoredChart';
 import Button from 'react-bootstrap/Button';
 import ScoringModal from './ScoringModal';
 import Alert from 'react-bootstrap/Alert';
-import Modal from 'react-bootstrap/Modal';
 
 
 
@@ -43,17 +42,6 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
         setTimeout(() => setDeleteShow(false), 4000)
     });
 
-    //DELETE MODAL -----------------------------------------------------
-    const [aId, setAId] = useState('');
-
-    const [deleteModalShow, setDeleteModalShow] = useState(false);
-
-    const handleDeleteOpen = () => setDeleteModalShow(true)
-    const handleDeleteClose = () => setDeleteModalShow(false)
-
-    // ------------------------------------------------------------------
-
-
     const deleteAssessment = (assessment_id) => {
 
         const teacher_id = teacher.id
@@ -76,7 +64,7 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
-                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} />
+                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} />
                 <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
                     Add Assessment
                 </Button>
@@ -106,22 +94,6 @@ function Grade({ teacher, students, assessments, onAssessment, onAdd, studentsAs
                 Scores have been added to the database.
             </Alert>}
 
-
-
-            <Modal show={deleteModalShow} onHide={handleDeleteClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Are you sure you want to delete this assessment?</Modal.Title>
-                </Modal.Header>
-                <Modal.Body> This action cannot be undone.</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleDeleteClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={() => { deleteAssessment(aId); handleDeleteClose(); setDeleteShow(true); }}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div>
 
     );
