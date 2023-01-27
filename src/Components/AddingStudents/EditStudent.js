@@ -26,6 +26,7 @@ import NetworkCalls from '../../networkCalls';
 function Student(props) {
 
 
+    const [id, setId] =useState('');
     const [teacherState, setTeacherState] = useState('')
     const [studentListState, setStudentListState] = useState([])
 
@@ -58,7 +59,7 @@ function Student(props) {
       const updateStudent = (data, id) => {
 
         const updatedStudent = studentListState.find(student => student.id === id)
-        deleteStudent(id)
+        onDelete(id)
     
         updatedStudent.fname = data["fname"]
         updatedStudent.lname = data["lname"]
@@ -75,7 +76,6 @@ function Student(props) {
 
     const [updateModal, setUpdateModal] =useState(false)
 
-    const [id, setId] =useState('');
 
     const handleClose = () => setUpdateModal(false);
     const handleShow = () => setUpdateModal(true);
