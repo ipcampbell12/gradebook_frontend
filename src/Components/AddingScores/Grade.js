@@ -121,10 +121,10 @@ function Grade(props) {
         setAssessments([...assessments, newAssessment])
     }
 
-    console.log(assessments)
+    // console.log(assessments)
 
     const addStudentsAssessments = (studentAssessment) => {
-
+        console.log(studentAssessment)
         setStudentsAssessments(...studentsAssessments, studentAssessment)
     }
 
@@ -143,7 +143,7 @@ function Grade(props) {
     }
 
     const onDelete = (id) => {
-        // console.log(id)
+        console.log(`The assessment delted was ${id}`)
         setAssessments(assessments.filter((item) => item.id !== id))
     }
 
@@ -158,12 +158,14 @@ function Grade(props) {
             .catch(error => console.log(error))
 
 
-        onDelete({ assessment_id })
+        onDelete(assessment_id)
 
         setDeleteShow(true)
         setModuleState('')
 
     }
+
+    //console.log(`Module state from Grade is ${moduleState.name}`)
 
 
     return (

@@ -8,14 +8,13 @@ import Button from 'react-bootstrap/Button';
 
 function TestMenu({ assessments, onModule, setAId, handleDeleteOpen }) {
 
-    //Assessments is not getting updated at the same time as the assessemnts get deleted
-
     //This shows the updated state when I add a new assessment
-    console.log(assessments)
+    // console.log(assessments)
 
     const onClick = (e) => {
         const value = e.target.value
         onModule(value)
+        console.log(value)
 
     }
 

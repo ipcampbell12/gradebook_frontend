@@ -13,7 +13,7 @@ import APIServce from '../../APIService';
 
 
 
-function AddScores({ teacher, students, onHide, moduleState, setAddShow }) {
+function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }) {
 
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
@@ -37,7 +37,7 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow }) {
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-
+        //   onAdd({ teacherId, assessmentId, scores })
 
     }
 

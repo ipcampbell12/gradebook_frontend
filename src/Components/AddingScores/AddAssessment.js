@@ -46,7 +46,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
     }
 
 
-
+    //console.log(`Module state from AddAssessment is ${moduleState.name}`)
 
     return (
         <div>

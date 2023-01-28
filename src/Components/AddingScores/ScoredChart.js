@@ -13,7 +13,9 @@ import UpdatingScores from './UpdatingScores';
 
 function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment }) {
 
-
+    //These reflect most recent updates to the database
+    // console.log(`Module name from ScoredChart is ${moduleState.name}`)
+    // console.log(`Module id from ScoredChart is ${moduleState.id}`)
 
     return (
         <div className="student-chart">

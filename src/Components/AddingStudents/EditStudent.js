@@ -55,7 +55,7 @@ function Student(props) {
       //console.log(studentListState)
 
       const onDelete = (id) => {
-        // console.log(id)
+       
         setStudentListState(studentListState.filter((item) => item.id !== id))
       }
 
