@@ -44,11 +44,15 @@ function Student(props) {
         const id = Math.max(...studentListState.map(o => o.id)) + 1
         const newStudent = { id, ...student }
     
-        // console.log(`SA student_id is ${newStudent.id}`)
+        //console.log(`SA student_id is ${newStudent.id}`)
     
         setStudentListState([...studentListState, newStudent])
+
+        
     
       }
+
+      //console.log(studentListState)
 
       const onDelete = (id) => {
         // console.log(id)

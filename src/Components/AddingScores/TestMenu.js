@@ -8,8 +8,10 @@ import Button from 'react-bootstrap/Button';
 
 function TestMenu({ assessments, onModule, setAId, handleDeleteOpen }) {
 
+    //Assessments is not getting updated at the same time as the assessemnts get deleted
 
-
+    //This shows the updated state when I add a new assessment
+    console.log(assessments)
 
     const onClick = (e) => {
         const value = e.target.value
@@ -34,7 +36,7 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen }) {
                         {
                             assessments.map(assessment => {
 
-                                return assessment.scored === true && (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
+                                return (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
                                     {assessment.name}
 
                                     <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>

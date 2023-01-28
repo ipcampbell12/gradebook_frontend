@@ -36,6 +36,10 @@ function Grade(props) {
     useEffect(() => {
         setTimeout(() => setDeleteShow(false), 4000)
     });
+
+    useEffect(() => {
+        setTimeout(() => setAddShow(false), 3000)
+    });
     //TOPLEVEL STATE -----------------------------------------------------
 
     const [studentListState, setStudentListState] = useState([])
@@ -113,10 +117,11 @@ function Grade(props) {
     const addAssessment = (assessment) => {
         const id = Math.max(...assessments.map(o => o.id)) + 1
         const newAssessment = { id, ...assessment }
-        console.log(`The assessment ${newAssessment.id} was just created`)
+        //  console.log(`The assessment ${newAssessment.id} was just created`)
         setAssessments([...assessments, newAssessment])
     }
 
+    console.log(assessments)
 
     const addStudentsAssessments = (studentAssessment) => {
 

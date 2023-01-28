@@ -5,12 +5,8 @@ import Navigation from "./Components/Dashboard/Navigation"
 import EditStudent from "./Components/AddingStudents/EditStudent";
 import Grade from "./Components/AddingScores/Grade";
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import NetworkCalls from "./networkCalls";
-
-
 
 function App() {
-
 
   return (
     <Router>

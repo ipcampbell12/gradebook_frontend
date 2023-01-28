@@ -13,7 +13,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
         setModuleState(assessments.find(assessment => assessment.id === Math.max(...assessments.map(o => o.id))))
     }, [assessments])
 
-    console.log(moduleState)
+    //console.log(moduleState)
 
 
     return (
