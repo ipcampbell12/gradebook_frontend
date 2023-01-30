@@ -17,6 +17,8 @@ function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment
     // console.log(`Module name from ScoredChart is ${moduleState.name}`)
     // console.log(`Module id from ScoredChart is ${moduleState.id}`)
 
+    //console.log(studentsAssessments)
+
     return (
         <div className="student-chart">
             <Typography variant="h5" align="center" id={moduleState.id}> Scores for {moduleState.name} </Typography>

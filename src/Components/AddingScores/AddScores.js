@@ -36,8 +36,12 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }
         APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onAdd(response))
 
-        //   onAdd({ teacherId, assessmentId, scores })
+
+
+        //It doens't know what to do with this right now
+
 
     }
 

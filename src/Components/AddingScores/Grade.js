@@ -107,25 +107,35 @@ function Grade(props) {
 
     //UPDATE STATE -----------------------------------------------------------------
     const addSubject = (subject) => {
-        const id = Math.max(...subjectListState.map(o => o.id)) + 1
+
+        const id = subjectListState.length === 0 ? 1 : Math.max(...subjectListState.map(o => o.id)) + 1
         const newSubject = { id, ...subject }
 
         setSubjectListState([...subjectListState, newSubject])
 
     }
 
+
     const addAssessment = (assessment) => {
-        const id = Math.max(...assessments.map(o => o.id)) + 1
+        //This works except when there are no assessments 
+
+        const id = assessments.length === 0 ? 1 : Math.max(...assessments.map(o => o.id)) + 1
+        console.log(`The assessment id in Grade is ${id}`)
         const newAssessment = { id, ...assessment }
         //  console.log(`The assessment ${newAssessment.id} was just created`)
         setAssessments([...assessments, newAssessment])
     }
 
-    // console.log(assessments)
 
-    const addStudentsAssessments = (studentAssessment) => {
-        console.log(studentAssessment)
-        setStudentsAssessments(...studentsAssessments, studentAssessment)
+
+    const addStudentsAssessments = () => {
+
+
+        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+
+        console.log(studentsAssessments)
+
+        // setStudentsAssessments(...studentsAssessments, studentAssessmentArray)
     }
 
     const updateStudentAssessment = (data, id) => {

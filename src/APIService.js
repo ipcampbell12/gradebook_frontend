@@ -64,6 +64,7 @@ export default class APIServce {
             body: JSON.stringify(body)
         })
             .then(resp => resp.json())
+
     }
 
     //update student scores individually
