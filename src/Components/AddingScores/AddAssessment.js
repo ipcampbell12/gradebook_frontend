@@ -30,9 +30,10 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
         APIServce.addAssessment({ name, subject_id, scored })
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onAssessment(response))
 
         //send data to UI
-        onAssessment({ name, subjectId, scored })
+        //onAssessment({ name, subjectId, scored })
         setShow(true)
 
         setName('')

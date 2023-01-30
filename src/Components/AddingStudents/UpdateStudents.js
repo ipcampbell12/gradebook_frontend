@@ -20,8 +20,9 @@ export default function UpdateStudents({ teacher, show, handleClose, onUpdate, i
         APIServce.updateStudent(id, { fname, lname, teacher_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onUpdate(response))
 
-        onUpdate({ fname, lname }, id)
+        // onUpdate({ fname, lname }, id)
 
         handleClose()
 

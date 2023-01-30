@@ -18,8 +18,9 @@ function UpdatingScores({ studentsAssessment, updateStudentAssessment }) {
         APIServce.updateStudentScore(saId, score)
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => updateStudentAssessment(response))
 
-        updateStudentAssessment(score, saId)
+        //updateStudentAssessment(score, saId)
 
         setScore('')
     }

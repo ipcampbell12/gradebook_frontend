@@ -25,9 +25,10 @@ export default function AddSubject({ subjects, onClose, onSubject, showAddSubjec
         APIServce.addSubject({ name })
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onSubject(response))
 
         //send data to UI
-        onSubject({ name })
+        //onSubject({ name })
 
         setName('')
 

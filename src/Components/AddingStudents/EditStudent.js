@@ -54,20 +54,18 @@ function Student(props) {
 
       //console.log(studentListState)
 
-      const onDelete = (id) => {
+      const onDelete = () => {
+
+        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+
        
-        setStudentListState(studentListState.filter((item) => item.id !== id))
+        // setStudentListState(studentListState.filter((item) => item.id !== id))
       }
 
 
-      const updateStudent = (data, id) => {
+      const updateStudent = () => {
 
-        const updatedStudent = studentListState.find(student => student.id === id)
-        onDelete(id)
-    
-        updatedStudent.fname = data["fname"]
-        updatedStudent.lname = data["lname"]
-    
+        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
         //setStudentListState([...studentListState, updatedStudent])
     
       }
@@ -108,9 +106,10 @@ function Student(props) {
         APIServce.deleteStudent(student_id)
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onDelete(response))
 
 
-        onDelete({ student_id })
+        //onDelete({ student_id })
 
         setDeleteShow(true)
         

@@ -106,24 +106,25 @@ function Grade(props) {
 
 
     //UPDATE STATE -----------------------------------------------------------------
-    const addSubject = (subject) => {
+    const addSubject = () => {
 
-        const id = subjectListState.length === 0 ? 1 : Math.max(...subjectListState.map(o => o.id)) + 1
-        const newSubject = { id, ...subject }
-
-        setSubjectListState([...subjectListState, newSubject])
+        // const id = subjectListState.length === 0 ? 1 : Math.max(...subjectListState.map(o => o.id)) + 1
+        // const newSubject = { id, ...subject }
+        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
+        // setSubjectListState([...subjectListState, newSubject])
 
     }
 
 
-    const addAssessment = (assessment) => {
+    const addAssessment = () => {
         //This works except when there are no assessments 
 
-        const id = assessments.length === 0 ? 1 : Math.max(...assessments.map(o => o.id)) + 1
-        console.log(`The assessment id in Grade is ${id}`)
-        const newAssessment = { id, ...assessment }
-        //  console.log(`The assessment ${newAssessment.id} was just created`)
-        setAssessments([...assessments, newAssessment])
+        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+        // const id = assessments.length === 0 ? 1 : Math.max(...assessments.map(o => o.id)) + 1
+        // console.log(`The assessment id in Grade is ${id}`)
+        // const newAssessment = { id, ...assessment }
+        // //  console.log(`The assessment ${newAssessment.id} was just created`)
+        // setAssessments([...assessments, newAssessment])
     }
 
 
@@ -133,28 +134,33 @@ function Grade(props) {
 
         NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
 
-        console.log(studentsAssessments)
+        // console.log(studentsAssessments)
 
         // setStudentsAssessments(...studentsAssessments, studentAssessmentArray)
     }
 
     const updateStudentAssessment = (data, id) => {
 
+
+        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+
         //console.log(`Id sent from scoredcharts :${id}`)
-        const updatedItem = studentsAssessments.find(sa => sa.id === id)
-        //console.log(updatedItem)
-        deleteAssessment(id)
+        // const updatedItem = studentsAssessments.find(sa => sa.id === id)
+        // //console.log(updatedItem)
+        // deleteAssessment(id)
 
-        //console.log(`Id from updated item: ${updatedItem.id}`)
+        // //console.log(`Id from updated item: ${updatedItem.id}`)
 
-        updatedItem.score = data["score"]
+        // updatedItem.score = data["score"]
         //setStudentsAssessments([...studentsAssessments, updatedItem])
 
     }
 
-    const onDelete = (id) => {
-        console.log(`The assessment delted was ${id}`)
-        setAssessments(assessments.filter((item) => item.id !== id))
+    const onDelete = () => {
+
+        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+        // console.log(`The assessment delted was ${id}`)
+        // setAssessments(assessments.filter((item) => item.id !== id))
     }
 
     // --------------------------------------------------------------------------------
@@ -166,9 +172,10 @@ function Grade(props) {
         APIServce.deleteAssessment(teacher_id, assessment_id)
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            .then(response => onDelete(response))
 
 
-        onDelete(assessment_id)
+        // onDelete(assessment_id)
 
         setDeleteShow(true)
         setModuleState('')
