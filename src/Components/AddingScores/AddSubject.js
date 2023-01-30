@@ -48,7 +48,7 @@ export default function AddSubject({ subjects, onClose, onSubject, showAddSubjec
                             setName(e.target.value)
                         }} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={onSubmit}>
+                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onClose(); setShow(true) }}>
                         Create Subject
                     </Button>
                     <Button variant="secondary" type="submit" onClick={onClose}>

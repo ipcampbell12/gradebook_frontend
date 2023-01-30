@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from "@mui/material"
 //import { DataGrid } from '@mui/x-data-grid';
 import AddStudent from './AddStudent';
+import AddStudentButton from './AddStudentButton'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -81,12 +82,17 @@ function Student(props) {
 
     const handleClose = () => setUpdateModal(false);
     const handleShow = () => setUpdateModal(true);
+
+    const [addModalShow, setAddModalShow]=useState(false);
+    const handleAddOpen = () => setAddModalShow(true)
+    const handleAddClose = () => setAddModalShow(false)
     //------------------------------------------------------------------
 
     //ALERTS -----------------------------------------------------------
 
     const [updateAlert, setUpdateAlert] = useState(false);
     const [deleteAlert, setDeleteAlert] = useState(false);
+    const [addedAlert, setAddedAlert] = useState(false);
 
     useEffect(() => {
         setTimeout(() => setDeleteAlert(false), 5000)
@@ -94,6 +100,10 @@ function Student(props) {
 
     useEffect(() => {
         setTimeout(() => setUpdateAlert(false), 5000)
+    });
+
+    useEffect(() => {
+        setTimeout(() => setAddedAlert(false), 5000)
     });
 
     //------------------------------------------------------------------
@@ -163,7 +173,12 @@ function Student(props) {
 
 
             <div className="form">
-                <AddStudent onAdd={addStudent} teacher={teacherState}/>
+            <AddStudentButton handleAddOpen = {handleAddOpen} />
+               {addModalShow && <AddStudent onAdd={addStudent} teacher={teacherState} handleAddClose={handleAddClose} addModalShow= {addModalShow} setAddedAlert={setAddedAlert}/> }
+
+                {addedAlert === true && <Alert key={'success'} variant={'success'}>
+                You just added a student to the database. 
+                </Alert>}
 
                 {deleteAlert === true && <Alert key={'danger'} variant={'danger'}>
                 You just removed a student from the database.
