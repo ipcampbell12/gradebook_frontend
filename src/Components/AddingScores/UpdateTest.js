@@ -17,7 +17,7 @@ export default function UpdateTest({ subjects, onAssessment, handleTestClose, aI
     //New assessment Form
     const [name, setName] = useState('')
     //console.log(name)
-    const [scored, setScored] = useState(false)
+
     const [show, setShow] = useState(false)
     const [subjectId, setSubjectId] = useState('')
 
@@ -26,8 +26,8 @@ export default function UpdateTest({ subjects, onAssessment, handleTestClose, aI
 
         const subject_id = subjectId
         const assessment_id = aId
+        const scored = true;
 
-        setScored(true)
         //send data to API
         APIServce.updateAssessment(assessment_id, { name, subject_id, scored })
             .then(response => console.log(response))
