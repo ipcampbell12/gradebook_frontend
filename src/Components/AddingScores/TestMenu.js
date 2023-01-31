@@ -14,7 +14,7 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestO
     const onClick = (e) => {
         const value = e.target.value
         onModule(value)
-        console.log(value)
+        // console.log(value)
 
     }
 
