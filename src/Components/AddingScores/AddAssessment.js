@@ -12,9 +12,18 @@ import { FormGroup } from '@mui/material';
 
 export default function AddAssessment({ subjects, onAssessment, moduleState }) {
 
+    const possibleMin = 0;
+    const possibleMax = 10;
+
+    const passingMin = possibleMax - 3;
+    const passingMax = possibleMax
+
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
+    const [possible, setPossible] = useState('')
+    const [passing, setPassing] = useState('')
+
     //console.log(name)
     const [scored, setScored] = useState(false)
     const [show, setShow] = useState(false)
@@ -27,7 +36,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
 
         setScored(false)
         //send data to API
-        APIServce.addAssessment({ name, subject_id, scored })
+        APIServce.addAssessment({ name, subject_id, scored, possible, passing })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onAssessment(response))
@@ -56,6 +65,14 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
                     <Form.Label>Assessment Name</Form.Label>
                     <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
                         setName(e.target.value)
+                    }} />
+                    <Form.Label>Total Points</Form.Label>
+                    <Form.Control type="number" placeholder="0" value={possible} onChange={(e) => {
+                        setPossible(Math.max(possibleMin, Math.min([possibleMax], +e.target.value)));
+                    }} />
+                    <Form.Label>Passing Score</Form.Label>
+                    <Form.Control type="number" placeholder="0" value={passing} onChange={(e) => {
+                        setPassing(Math.max(passingMin, Math.min(passingMax, +e.target.value)));
                     }} />
                 </FormGroup>
                 <FormControl fullWidth>

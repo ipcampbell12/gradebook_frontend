@@ -9,6 +9,7 @@ function UpdatingScores({ studentsAssessment, updateStudentAssessment }) {
     const [score, setScore] = useState('')
 
 
+
     const onSubmit = (e) => {
         e.preventDefault()
 

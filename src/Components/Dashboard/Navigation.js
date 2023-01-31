@@ -17,7 +17,8 @@ import SchoolIcon from '@mui/icons-material/School';
 
 const pages = ['Dashboard', 'Edit Students', 'Grades'];
 const links = ['/', '/student', '/grade'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Select/Add Teacher'];
+const settingsLinks = ['/changeteacher']
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -168,6 +169,19 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              href={settingsLinks[0]}>
+              {settings[0]}
+            </Button>
+
+
+
           </Box>
         </Toolbar>
       </Container>

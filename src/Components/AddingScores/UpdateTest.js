@@ -16,6 +16,8 @@ export default function UpdateTest({ subjects, onAssessment, handleTestClose, aI
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
+    const [possible, setPossible] = useState('')
+    const [passing, setPassing] = useState('')
     //console.log(name)
 
     const [show, setShow] = useState(false)
@@ -62,6 +64,14 @@ export default function UpdateTest({ subjects, onAssessment, handleTestClose, aI
                         <Form.Label>Assessment Name</Form.Label>
                         <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
                             setName(e.target.value)
+                        }} />
+                        <Form.Label>Total Points</Form.Label>
+                        <Form.Control type="number" placeholder="0" value={possible} onChange={(e) => {
+                            setPossible(+e.target.value)
+                        }} />
+                        <Form.Label>Passing Score</Form.Label>
+                        <Form.Control type="number" placeholder="0" value={passing} onChange={(e) => {
+                            setPassing(+e.target.value)
                         }} />
                     </FormGroup>
                     <FormControl fullWidth>
