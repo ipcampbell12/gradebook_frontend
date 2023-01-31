@@ -11,6 +11,17 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
+    static addTeacher(body) {
+        return fetch('http://127.0.0.1:5001/teacher', {
+            'method': 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(resp => resp.json())
+    }
+
     static addSubject(body) {
         return fetch('http://127.0.0.1:5001/subject', {
             'method': 'POST',

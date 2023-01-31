@@ -1,110 +1,95 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import APIServce from '../../APIService';
+import Alert from 'react-bootstrap/Alert';
+import Modal from 'react-bootstrap/Modal';
+import NetworkCalls from '../../networkCalls';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Typography } from '@mui/material';
+import AddTeacherModal from './AddTeacherModal';
 
-function Copyright(props) {
+
+function LandingPage(props) {
+
+    const [teachers, setTeachers] = useState([])
+
+    const [teacherModalShow, setTeacherModalShow] = useState(false)
+    const handleClose = () => setTeacherModalShow(false)
+    const handleOpen = () => setTeacherModalShow(true)
+
+
+    const [addAlert, setAddAlert] = useState(false)
+    const handleOpenAlert = () => setAddAlert(true)
+    const handleCloseAlert = () => setAddAlert(false)
+
+    useEffect(() => {
+        NetworkCalls.fetchAllTeachers().then(response => setTeachers(response))
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => handleCloseAlert(), 4000)
+    })
+
+    const addTeacher = () => {
+        NetworkCalls.fetchAllTeachers().then(response => setTeachers(response))
+
+    }
+
+
     return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+        <div className="student-page2">
+            <Typography variant="h4" align="center"> Select or Create New Teacher </Typography>
+            <div className="menu" >
 
-const theme = createTheme();
+                <Box sx={{ minWidth: 120 }}>
+                    <Typography variant="h6" align="center"> Select a Teacher </Typography>
+                    <FormControl fullWidth>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Age"
 
-export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
-
-    return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            value={"Choose an assessment"}
                         >
-                            Sign In
-                        </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
+                            {
+                                teachers.map(teacher => {
+
+                                    return (<MenuItem className="menu" id={`assessment-${teacher.id}`} key={teacher.id} value={teacher}>
+                                        {teacher.fname + ' ' + teacher.lname}
+
+
+
+                                    </MenuItem>)
+
+
+                                })
+
+                            }
+
+
+                        </Select>
+                    </FormControl>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
-            </Container>
-        </ThemeProvider>
+                <div className="buttons">
+                    <Button variant="primary" onClick={handleOpen} className="btn btn-primary">
+                        Add Teacher
+                    </Button>
+                </div>
+
+                {teacherModalShow && <AddTeacherModal handleClose={handleClose}
+                    onTeacher={addTeacher} teacherModalShow={teacherModalShow} showAlert={handleOpenAlert} />}
+                {addAlert === true && <Alert key={'success'} variant={'success'}>
+                    You just added a new teacher to the database.
+                </Alert>}
+            </div>
+        </div>
     );
 }
+
+export default LandingPage;
+
+// <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>
+// <Button className="btn-primary menu-2" onClick={() => { setAId(assessment.id); handleTestOpen(); }}> View/Update </Button>

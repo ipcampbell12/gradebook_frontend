@@ -12,6 +12,11 @@ export default class NetworkCalls {
 
     }
 
+    static fetchAllTeachers() {
+        return fetch(`http://127.0.0.1:5001/teacher`).then(resp => resp.json());
+
+    }
+
     //working
     static fetchTeachersStudents(id) {
         return fetch(`http://127.0.0.1:5001/teacherstudents/${id}`).then(resp => resp.json());

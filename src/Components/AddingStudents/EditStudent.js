@@ -27,63 +27,63 @@ import NetworkCalls from '../../networkCalls';
 function Student(props) {
 
 
-    const [id, setId] =useState('');
+    const [id, setId] = useState('');
     const [teacherState, setTeacherState] = useState('')
     const [studentListState, setStudentListState] = useState([])
 
-     //students
-     useEffect(() => {
+    //students
+    useEffect(() => {
         NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
     }, []);
 
-     //teacher
-     useEffect(() => {
+    //teacher
+    useEffect(() => {
         NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
     }, []);
 
     const addStudent = (student) => {
         const id = Math.max(...studentListState.map(o => o.id)) + 1
         const newStudent = { id, ...student }
-    
+
         //console.log(`SA student_id is ${newStudent.id}`)
-    
+
         setStudentListState([...studentListState, newStudent])
 
-        
-    
-      }
 
-      //console.log(studentListState)
 
-      const onDelete = () => {
+    }
+
+    //console.log(studentListState)
+
+    const onDelete = () => {
 
         NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
 
-       
+
         // setStudentListState(studentListState.filter((item) => item.id !== id))
-      }
+    }
 
 
-      const updateStudent = () => {
+    const updateStudent = () => {
 
         NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
         //setStudentListState([...studentListState, updatedStudent])
-    
-      }
- 
+
+    }
+
     //MODALS -----------------------------------------------------------
     const [deleteShow, setDeleteShow] = useState(false);
 
     const handleDeleteOpen = () => setDeleteShow(true)
     const handleDeleteClose = () => setDeleteShow(false)
 
-    const [updateModal, setUpdateModal] =useState(false)
+    const [updateModal, setUpdateModal] = useState(false)
 
 
     const handleClose = () => setUpdateModal(false);
     const handleShow = () => setUpdateModal(true);
 
-    const [addModalShow, setAddModalShow]=useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);
     const handleAddOpen = () => setAddModalShow(true)
     const handleAddClose = () => setAddModalShow(false)
     //------------------------------------------------------------------
@@ -122,9 +122,9 @@ function Student(props) {
         //onDelete({ student_id })
 
         setDeleteShow(true)
-        
 
-        }
+
+    }
 
 
     return (
@@ -132,83 +132,83 @@ function Student(props) {
             <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Students'}</Typography>
 
             <div className="student-chart">
-            <TableContainer component={Paper} className="table">
-                <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>First Name</TableCell>
-                            <TableCell>Last Name</TableCell>
-                            <TableCell>Delete</TableCell>
-                            <TableCell>Edit</TableCell>
+                <TableContainer component={Paper} className="table">
+                    <Table sx={{ maxWidth: 400 }} size="small" aria-label="simple table" align="center">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>First Name</TableCell>
+                                <TableCell>Last Name</TableCell>
+                                <TableCell>Delete</TableCell>
+                                <TableCell>Edit</TableCell>
 
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                        {studentListState.map((student) => {
-                            return <TableRow key={student.id}>
-                                <TableCell align="center">{student.fname}</TableCell>
-                                <TableCell align="center" >{student.lname}</TableCell>
-                                <TableCell align="center"> 
-                                    <Button variant="primary" type="submit" onClick={(e)=>{handleShow(); setId(student.id)} }>
-                                    Edit 
-                                   
-                                    </Button>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Button variant="danger" type="submit" onClick={(e)=>{handleDeleteOpen(); setId(student.id)}}>
-                                        Delete
-                                    </Button>
-                                
-                                </TableCell>
                             </TableRow>
-                        })}
+                        </TableHead>
+                        <TableBody>
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                            {studentListState.map((student) => {
+                                return <TableRow key={student.id}>
+                                    <TableCell align="center">{student.fname}</TableCell>
+                                    <TableCell align="center" >{student.lname}</TableCell>
+                                    <TableCell align="center">
+                                        <Button variant="primary" type="submit" onClick={(e) => { handleShow(); setId(student.id) }}>
+                                            Edit
+
+                                        </Button>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Button variant="danger" type="submit" onClick={(e) => { handleDeleteOpen(); setId(student.id) }}>
+                                            Delete
+                                        </Button>
+
+                                    </TableCell>
+                                </TableRow>
+                            })}
+
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
 
-           
 
 
-            <div className="form">
-            <AddStudentButton handleAddOpen = {handleAddOpen} />
-               {addModalShow && <AddStudent onAdd={addStudent} teacher={teacherState} handleAddClose={handleAddClose} addModalShow= {addModalShow} setAddedAlert={setAddedAlert}/> }
 
-                {addedAlert === true && <Alert key={'success'} variant={'success'}>
-                You just added a student to the database. 
-                </Alert>}
+                <div className="form">
+                    <AddStudentButton handleAddOpen={handleAddOpen} />
+                    {addModalShow && <AddStudent onAdd={addStudent} teacher={teacherState} handleAddClose={handleAddClose} addModalShow={addModalShow} setAddedAlert={setAddedAlert} />}
 
-                {deleteAlert === true && <Alert key={'danger'} variant={'danger'}>
-                You just removed a student from the database.
-                </Alert>}
+                    {addedAlert === true && <Alert key={'success'} variant={'success'}>
+                        You just added a student to the database.
+                    </Alert>}
 
-                {updateAlert === true && <Alert key={'success'} variant={'success'}>
-                You have just updated a student in the database.
-                </Alert>}
-                
+                    {deleteAlert === true && <Alert key={'danger'} variant={'danger'}>
+                        You just removed a student from the database.
+                    </Alert>}
+
+                    {updateAlert === true && <Alert key={'success'} variant={'success'}>
+                        You have just updated a student in the database.
+                    </Alert>}
+
+                </div>
+                {updateModal && <UpdateStudents onUpdate={updateStudent} teacher={teacherState} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert} />}
+
+                <Modal show={deleteShow} onHide={handleDeleteClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Are you sure you want to delete this student?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body> This action cannot be undone.</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleDeleteClose}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={() => { deleteStudent(id); handleDeleteClose(); setDeleteAlert(true); }}>
+                            Delete
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
             </div>
-            { updateModal && <UpdateStudents onUpdate={updateStudent} teacher={teacherState} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert}/>}
-            
-            <Modal show={deleteShow} onHide={handleDeleteClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Are you sure you want to delete this student?</Modal.Title>
-            </Modal.Header>
-            <Modal.Body> This action cannot be undone.</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleDeleteClose}>
-                Cancel
-              </Button>
-              <Button variant="primary" onClick={() => {deleteStudent(id); handleDeleteClose(); setDeleteAlert(true);} }>
-                Delete
-              </Button>
-            </Modal.Footer>
-          </Modal>
 
-
-            </div>
-            
 
         </div>
     );
@@ -218,20 +218,7 @@ export default Student;
 
 
 
-// <div className="student-chart" style={{ height: 600, width: '100%' }}>
-//     <div className="students">
-//         <DataGrid
-//             rows={students}
-//             columns={columns}
-//             pageSize={8}
-//             rowsPerPageOptions={[8]}
-//             checkboxSelection
-//         />
-//     </div>
-    
 
-
-// </div>
 
 
 
