@@ -10,6 +10,7 @@ import ScoringModal from './ScoringModal';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import AddSubject from './AddSubject';
+import UpdateTest from './UpdateTest';
 
 
 
@@ -29,6 +30,7 @@ function Grade(props) {
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
     const [addShow, setAddShow] = useState(false);
+    const [updatedTestAlert, setUpdatedTestAlert] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,6 +41,10 @@ function Grade(props) {
 
     useEffect(() => {
         setTimeout(() => setAddShow(false), 3000)
+    });
+
+    useEffect(() => {
+        setTimeout(() => setUpdatedTestAlert(false), 3000)
     });
     //TOPLEVEL STATE -----------------------------------------------------
 
@@ -105,6 +111,17 @@ function Grade(props) {
     // --------------------------------------------------------------------------------
 
 
+    //UPDATE ASSESSMENT MODAL -----------------------------------------------------------------
+
+
+    const [updateAssessmentModal, setUpdateAssessmentModal] = useState(false)
+
+    const handleTestOpen = () => setUpdateAssessmentModal(true)
+    const handleTestClose = () => setUpdateAssessmentModal(false)
+
+    // --------------------------------------------------------------------------------
+
+
     //UPDATE STATE -----------------------------------------------------------------
     const addSubject = () => {
 
@@ -163,6 +180,11 @@ function Grade(props) {
         // setAssessments(assessments.filter((item) => item.id !== id))
     }
 
+    const updateAssessment = () => {
+        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+
+    }
+
     // --------------------------------------------------------------------------------
 
     const deleteAssessment = (assessment_id) => {
@@ -190,7 +212,7 @@ function Grade(props) {
             <Typography variant="h4" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
-                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} />
+                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} />
                 <div className="buttons">
                     <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
                         Add Assessment
@@ -227,7 +249,13 @@ function Grade(props) {
                 Scores have been added to the database.
             </Alert>}
 
+            {updatedTestAlert && <Alert key={'info'} variant={'info'}>
+                This assessment has been updated
+            </Alert>
+            }
 
+
+            {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} />}
 
             <Modal show={deleteModalShow} onHide={handleDeleteClose}>
                 <Modal.Header closeButton>
