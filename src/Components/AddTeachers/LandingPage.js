@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import APIServce from '../../APIService';
 import Alert from 'react-bootstrap/Alert';
@@ -10,11 +10,18 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 import AddTeacherModal from './AddTeacherModal';
+import { TeacherContext } from '../../Context/TeacherContext'
 
 
 function LandingPage(props) {
 
     const [teachers, setTeachers] = useState([])
+
+    const { selectTeacher } = useContext(TeacherContext)
+    const { teacher } = useContext(TeacherContext)
+
+    //const [teacherId, setTeacherId] = useState('')
+
 
     const [teacherModalShow, setTeacherModalShow] = useState(false)
     const handleClose = () => setTeacherModalShow(false)
@@ -38,6 +45,14 @@ function LandingPage(props) {
 
     }
 
+    const onClick = (e) => {
+        const value = e.target.value
+        //setTeacherId(value)
+        console.log(value)
+        selectTeacher(value)
+        // console.log(teacherId)
+    }
+
 
     return (
         <div className="student-page2">
@@ -51,13 +66,13 @@ function LandingPage(props) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Age"
-
-                            value={"Choose an assessment"}
+                            onChange={onClick}
+                            value={"Choose a teacher"}
                         >
                             {
                                 teachers.map(teacher => {
 
-                                    return (<MenuItem className="menu" id={`assessment-${teacher.id}`} key={teacher.id} value={teacher}>
+                                    return (<MenuItem className="menu" id={`teacher-${teacher.id}`} key={teacher.id} value={teacher.id} onChange={onClick}>
                                         {teacher.fname + ' ' + teacher.lname}
 
 
@@ -73,6 +88,7 @@ function LandingPage(props) {
                         </Select>
                     </FormControl>
                 </Box>
+                <Typography variant="h5" align="center"> {teacher && `Current Teacher: ${teacher.fname + ' ' + teacher.lname}`}</Typography>
                 <div className="buttons">
                     <Button variant="primary" onClick={handleOpen} className="btn btn-primary">
                         Add Teacher

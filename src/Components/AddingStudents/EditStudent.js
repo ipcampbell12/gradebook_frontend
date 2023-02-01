@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Typography } from "@mui/material"
 //import { DataGrid } from '@mui/x-data-grid';
 import AddStudent from './AddStudent';
@@ -16,6 +16,7 @@ import UpdateStudents from './UpdateStudents';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import NetworkCalls from '../../networkCalls';
+//import TeacherContextProvider from "../../Context/TeacherContext"
 // import Form from 'react-bootstrap/Form';
 
 
@@ -129,6 +130,7 @@ function Student(props) {
 
     return (
         <div className="student-page1">
+
             <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Students'}</Typography>
 
             <div className="student-chart">

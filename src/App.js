@@ -6,6 +6,9 @@ import EditStudent from "./Components/AddingStudents/EditStudent";
 import Grade from "./Components/AddingScores/Grade";
 import LandingPage from "./Components/AddTeachers/LandingPage"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import TeacherContextProvider from "./Context/TeacherContext";
+
+
 
 function App() {
 
@@ -13,14 +16,15 @@ function App() {
     <Router>
       <div className="App">
         <Navigation />
-
-        <Routes>
-          <Route path="/changeteacher" element={<LandingPage />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/student" element={<EditStudent />} />
-          <Route path="/grade" exact element={<Grade />} />
-        </Routes>
+        <TeacherContextProvider>
+          <Routes>
+            <Route path="/changeteacher" element={<LandingPage />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/student" element={<EditStudent />} />
+            <Route path="/grade" exact element={<Grade />} />
+          </Routes>
+        </TeacherContextProvider>
       </div>
     </Router>
   );

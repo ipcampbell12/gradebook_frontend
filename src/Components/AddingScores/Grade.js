@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Typography } from "@mui/material"
 import NetworkCalls from '../../networkCalls';
 // import UpdateState from '../../updateState';
@@ -11,6 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import AddSubject from './AddSubject';
 import UpdateTest from './UpdateTest';
+import { TeacherContext } from '../../Context/TeacherContext'
 
 
 
@@ -56,7 +57,9 @@ function Grade(props) {
 
     const [assessments, setAssessments] = useState([])
 
-    const [teacherState, setTeacherState] = useState('')
+    const { teacher } = useContext(TeacherContext)
+
+    console.log(teacher)
 
     // ------------------------------------------------------------------
 
@@ -64,13 +67,13 @@ function Grade(props) {
     //NETWORK CALLS -----------------------------------------------------------------
 
     //teacher
-    useEffect(() => {
-        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
-    }, []);
+    // useEffect(() => {
+    //     NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    // }, []);
 
     useEffect(() => {
-        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
-    }, []);
+        NetworkCalls.fetchTeachersStudents(teacher.id).then(data => setStudentListState(data))
+    }, [teacher.id]);
 
     // assessments
     useEffect(() => {
@@ -189,7 +192,7 @@ function Grade(props) {
 
     const deleteAssessment = (assessment_id) => {
 
-        const teacher_id = teacherState.id
+        const teacher_id = teacher.id
 
         APIServce.deleteAssessment(teacher_id, assessment_id)
             .then(response => console.log(response))
@@ -209,7 +212,8 @@ function Grade(props) {
 
     return (
         <div className="student-page2" >
-            <Typography variant="h4" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Grades'}</Typography>
+
+            <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} />
@@ -226,7 +230,7 @@ function Grade(props) {
 
                 {show && <ScoringModal
                     students={studentListState}
-                    teacher={teacherState}
+                    teacher={teacher}
                     onAdd={addStudentsAssessments}
                     studentsAssessments={studentsAssessments}
                     handleClose={handleClose}
@@ -271,6 +275,7 @@ function Grade(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
 
     );

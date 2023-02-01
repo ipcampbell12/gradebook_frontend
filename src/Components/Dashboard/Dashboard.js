@@ -1,5 +1,5 @@
 // import React, { useRef, useState } from "react"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import DTestMenu from './DTestMenu';
 import StudentList from "./StudentList"
 import ScoresByTest from "./ScoresByTest"
@@ -8,6 +8,7 @@ import AverageGrade from './AverageGrade';
 //import ScoresChart from "../Visualizations/ScoresChart"
 import NetworkCalls from '../../networkCalls';
 import SubjectMenu from './SubjectMenu';
+//import TeacherContextProvider from "../../Context/TeacherContext"
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
@@ -78,6 +79,7 @@ function Dashboard(props) {
     return (
         <div className="dashboard">
 
+
             <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Class'}</Typography>
             <div className="container">
 
@@ -111,6 +113,7 @@ function Dashboard(props) {
 
 
             </div>
+
         </div>
     );
 }
