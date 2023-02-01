@@ -59,7 +59,7 @@ function Grade(props) {
 
     const { teacher } = useContext(TeacherContext)
 
-    console.log(teacher)
+    //console.log(`The context in Grade is ${teacher}`)
 
     // ------------------------------------------------------------------
 

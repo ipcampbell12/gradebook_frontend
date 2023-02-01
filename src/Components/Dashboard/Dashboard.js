@@ -8,7 +8,7 @@ import AverageGrade from './AverageGrade';
 //import ScoresChart from "../Visualizations/ScoresChart"
 import NetworkCalls from '../../networkCalls';
 import SubjectMenu from './SubjectMenu';
-//import TeacherContextProvider from "../../Context/TeacherContext"
+import { TeacherContext } from '../../Context/TeacherContext'
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
@@ -35,21 +35,22 @@ function Dashboard(props) {
 
     const [assessments, setAssessments] = useState([])
 
-    const [teacherState, setTeacherState] = useState('')
+    const { teacher } = useContext(TeacherContext)
 
     // ------------------------------------------------------------------
 
 
     //NETWORK CALLS -----------------------------------------------------------------
 
+    //grades
     useEffect(() => {
-        NetworkCalls.fetchGrades(teacherState.id, currentSubject.id).then(data => setGrades(data))
-    }, [teacherState.id, currentSubject.id]);
+        NetworkCalls.fetchGrades(teacher.id, currentSubject.id).then(data => setGrades(data))
+    }, [teacher.id, currentSubject.id]);
 
     //teacher
-    useEffect(() => {
-        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
-    }, []);
+    // useEffect(() => {
+    //     NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    // }, []);
 
     useEffect(() => {
         NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
@@ -80,7 +81,7 @@ function Dashboard(props) {
         <div className="dashboard">
 
 
-            <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Class'}</Typography>
+            <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Class'}</Typography>
             <div className="container">
 
                 <div className="students">
@@ -93,7 +94,7 @@ function Dashboard(props) {
                         <DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} />
                     </div>
                     <div className="averages">
-                        <AverageGrade moduleState={moduleState} teacher={teacherState} currentSubject={currentSubject} />
+                        <AverageGrade moduleState={moduleState} teacher={teacher} currentSubject={currentSubject} />
                     </div>
                     <div className="tables">
 

@@ -13,10 +13,12 @@ import TeacherContextProvider from "./Context/TeacherContext";
 function App() {
 
   return (
-    <Router>
-      <div className="App">
-        <Navigation />
-        <TeacherContextProvider>
+    <div className="App">
+      <TeacherContextProvider>
+        <Router>
+
+          <Navigation />
+
           <Routes>
             <Route path="/changeteacher" element={<LandingPage />} />
             <Route path="/" element={<Dashboard />} />
@@ -24,9 +26,11 @@ function App() {
             <Route path="/student" element={<EditStudent />} />
             <Route path="/grade" exact element={<Grade />} />
           </Routes>
-        </TeacherContextProvider>
-      </div>
-    </Router>
+
+
+        </Router>
+      </TeacherContextProvider>
+    </div>
   );
 }
 

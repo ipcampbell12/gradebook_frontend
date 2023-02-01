@@ -16,7 +16,7 @@ import UpdateStudents from './UpdateStudents';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import NetworkCalls from '../../networkCalls';
-//import TeacherContextProvider from "../../Context/TeacherContext"
+import { TeacherContext } from '../../Context/TeacherContext'
 // import Form from 'react-bootstrap/Form';
 
 
@@ -29,7 +29,7 @@ function Student(props) {
 
 
     const [id, setId] = useState('');
-    const [teacherState, setTeacherState] = useState('')
+    const { teacher } = useContext(TeacherContext)
     const [studentListState, setStudentListState] = useState([])
 
     //students
@@ -38,9 +38,9 @@ function Student(props) {
     }, []);
 
     //teacher
-    useEffect(() => {
-        NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
-    }, []);
+    // useEffect(() => {
+    //     NetworkCalls.fetchTeacher(1).then(data => setTeacherState(data))
+    // }, []);
 
     const addStudent = (student) => {
         const id = Math.max(...studentListState.map(o => o.id)) + 1
@@ -131,7 +131,7 @@ function Student(props) {
     return (
         <div className="student-page1">
 
-            <Typography variant="h3" align="center"> {teacherState.fname + ' ' + teacherState.lname + '\'s Students'}</Typography>
+            <Typography variant="h3" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Students'}</Typography>
 
             <div className="student-chart">
                 <TableContainer component={Paper} className="table">
@@ -176,7 +176,7 @@ function Student(props) {
 
                 <div className="form">
                     <AddStudentButton handleAddOpen={handleAddOpen} />
-                    {addModalShow && <AddStudent onAdd={addStudent} teacher={teacherState} handleAddClose={handleAddClose} addModalShow={addModalShow} setAddedAlert={setAddedAlert} />}
+                    {addModalShow && <AddStudent onAdd={addStudent} teacher={teacher} handleAddClose={handleAddClose} addModalShow={addModalShow} setAddedAlert={setAddedAlert} />}
 
                     {addedAlert === true && <Alert key={'success'} variant={'success'}>
                         You just added a student to the database.
@@ -191,7 +191,7 @@ function Student(props) {
                     </Alert>}
 
                 </div>
-                {updateModal && <UpdateStudents onUpdate={updateStudent} teacher={teacherState} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert} />}
+                {updateModal && <UpdateStudents onUpdate={updateStudent} teacher={teacher} handleClose={handleClose} show={updateModal} id={id} setUpdateAlert={setUpdateAlert} />}
 
                 <Modal show={deleteShow} onHide={handleDeleteClose}>
                     <Modal.Header closeButton>
