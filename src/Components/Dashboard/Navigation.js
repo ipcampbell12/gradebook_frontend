@@ -16,9 +16,9 @@ import SchoolIcon from '@mui/icons-material/School';
 
 
 const pages = ['Dashboard', 'Edit Students', 'Grades'];
-const links = ['/', '/student', '/grade'];
+const links = ['/Dashboard', '/student', '/grade'];
 const settings = ['Create/Select Teacher'];
-const settingsLinks = ['/changeteacher']
+const settingsLinks = ['/']
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

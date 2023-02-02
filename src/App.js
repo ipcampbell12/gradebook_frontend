@@ -20,9 +20,9 @@ function App() {
           <Navigation />
 
           <Routes>
-            <Route path="/changeteacher" element={<LandingPage />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<LandingPage />} />
+
+            <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/student" element={<EditStudent />} />
             <Route path="/grade" exact element={<Grade />} />
           </Routes>

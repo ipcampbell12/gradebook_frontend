@@ -23,18 +23,18 @@ export default class NetworkCalls {
 
     }
 
-    static fetchAssessments() {
-        return fetch("http://127.0.0.1:5001/assessment").then(resp => resp.json());
+    static fetchAssessments(id) {
+        return fetch(`http://127.0.0.1:5001/assessment/${id}`).then(resp => resp.json());
 
     }
 
-    static fetchSubjects() {
-        return fetch("http://127.0.0.1:5001/subject").then(resp => resp.json());
+    static fetchSubjects(id) {
+        return fetch(`http://127.0.0.1:5001/subject/${id}`).then(resp => resp.json());
 
     }
 
-    static fetchStudentsAssessments() {
-        return fetch(`http://127.0.0.1:5001/student_assessment`).then(resp => resp.json());
+    static fetchStudentsAssessments(id) {
+        return fetch(`http://127.0.0.1:5001/student_assessment/${id}`).then(resp => resp.json());
 
     }
 

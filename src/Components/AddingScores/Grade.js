@@ -63,7 +63,7 @@ function Grade(props) {
 
     // ------------------------------------------------------------------
 
-
+    console.log(assessments)
     //NETWORK CALLS -----------------------------------------------------------------
 
     //teacher
@@ -77,18 +77,18 @@ function Grade(props) {
 
     // assessments
     useEffect(() => {
-        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
-    }, []);
+        NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
+    }, [teacher.id]);
 
     //studentsAssessments
     useEffect(() => {
-        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
-    }, []);
+        NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
+    }, [teacher.id]);
 
     //subjects
     useEffect(() => {
-        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
-    }, []);
+        NetworkCalls.fetchSubjects(teacher.id).then(data => setSubjectListState(data))
+    }, [teacher.id]);
     // ------------------------------------------------------------------------------
 
 
@@ -226,7 +226,7 @@ function Grade(props) {
                     </Button>
                 </div>
 
-                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} />}
+                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} teacher={teacher} />}
 
                 {show && <ScoringModal
                     students={studentListState}

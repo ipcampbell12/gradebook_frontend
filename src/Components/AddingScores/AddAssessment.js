@@ -10,22 +10,22 @@ import Select from '@mui/material/Select';
 import { FormGroup } from '@mui/material';
 
 
-export default function AddAssessment({ subjects, onAssessment, moduleState }) {
+export default function AddAssessment({ subjects, onAssessment, moduleState, teacher }) {
 
-    const possibleMin = 0;
-    const possibleMax = 10;
+    // const possibleMin = 0;
+    // const possibleMax = 10;
 
-    const passingMin = possibleMax - 3;
-    const passingMax = possibleMax
+    // const passingMin = possibleMax - 3;
+    // const passingMax = possibleMax
 
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
-    const [possible, setPossible] = useState('')
-    const [passing, setPassing] = useState('')
+    // const [possible, setPossible] = useState('')
+    // const [passing, setPassing] = useState('')
 
     //console.log(name)
-    const [scored, setScored] = useState(false)
+    //const [scored, setScored] = useState(false)
     const [show, setShow] = useState(false)
     const [subjectId, setSubjectId] = useState('')
 
@@ -33,10 +33,11 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
         e.preventDefault()
 
         const subject_id = subjectId
+        const teacher_id = teacher.id
 
-        setScored(false)
+        //setScored(false)
         //send data to API
-        APIServce.addAssessment({ name, subject_id, scored, possible, passing })
+        APIServce.addAssessment(teacher_id, { name, subject_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onAssessment(response))
@@ -66,14 +67,7 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
                     <Form.Control type="text" placeholder="Assessment Name" value={name} onChange={(e) => {
                         setName(e.target.value)
                     }} />
-                    <Form.Label>Total Points</Form.Label>
-                    <Form.Control type="number" placeholder="0" value={possible} onChange={(e) => {
-                        setPossible(Math.max(possibleMin, Math.min([possibleMax], +e.target.value)));
-                    }} />
-                    <Form.Label>Passing Score</Form.Label>
-                    <Form.Control type="number" placeholder="0" value={passing} onChange={(e) => {
-                        setPassing(Math.max(passingMin, Math.min(passingMax, +e.target.value)));
-                    }} />
+
                 </FormGroup>
                 <FormControl fullWidth>
                     <Select
@@ -109,3 +103,12 @@ export default function AddAssessment({ subjects, onAssessment, moduleState }) {
     );
 }
 
+
+// <Form.Label>Total Points</Form.Label>
+// <Form.Control type="number" placeholder="0" value={possible} onChange={(e) => {
+//     setPossible(Math.max(possibleMin, Math.min([possibleMax], +e.target.value)));
+// }} />
+// <Form.Label>Passing Score</Form.Label>
+// <Form.Control type="number" placeholder="0" value={passing} onChange={(e) => {
+//     setPassing(Math.max(passingMin, Math.min(passingMax, +e.target.value)));
+// }} />

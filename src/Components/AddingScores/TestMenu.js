@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestOpen }) {
 
     //This shows the updated state when I add a new assessment
-    // console.log(assessments)
+    console.log(assessments)
 
     const onClick = (e) => {
         const value = e.target.value

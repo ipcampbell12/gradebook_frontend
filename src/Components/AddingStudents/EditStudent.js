@@ -34,8 +34,8 @@ function Student(props) {
 
     //students
     useEffect(() => {
-        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
-    }, []);
+        NetworkCalls.fetchTeachersStudents(teacher.id).then(data => setStudentListState(data))
+    }, [teacher.id]);
 
     //teacher
     // useEffect(() => {
@@ -58,7 +58,7 @@ function Student(props) {
 
     const onDelete = () => {
 
-        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+        NetworkCalls.fetchTeachersStudents(teacher.id).then(data => setStudentListState(data))
 
 
         // setStudentListState(studentListState.filter((item) => item.id !== id))
@@ -67,7 +67,7 @@ function Student(props) {
 
     const updateStudent = () => {
 
-        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
+        NetworkCalls.fetchTeachersStudents(teacher.id).then(data => setStudentListState(data))
         //setStudentListState([...studentListState, updatedStudent])
 
     }

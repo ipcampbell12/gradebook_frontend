@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 
 
-export default function AddSubject({ subjects, onClose, onSubject, showAddSubject }) {
+export default function AddSubject({ subjects, onClose, onSubject, showAddSubject, teacher }) {
 
     //Add default values
     //New assessment Form
@@ -20,9 +20,9 @@ export default function AddSubject({ subjects, onClose, onSubject, showAddSubjec
     const onSubmit = (e) => {
         e.preventDefault()
 
-
+        const teacher_id = teacher.id
         //send data to API
-        APIServce.addSubject({ name })
+        APIServce.addSubject(teacher_id, { name })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onSubject(response))

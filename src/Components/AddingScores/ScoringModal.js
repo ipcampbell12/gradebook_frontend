@@ -23,6 +23,7 @@ function ScoringModal({ students, onAdd, studentsAssessments, onAssessment, asse
                     subjects={subjects}
                     onAssessment={onAssessment}
                     moduleState={moduleState}
+                    teacher={teacher}
                 />
                 <AddScores
                     moduleState={moduleState}

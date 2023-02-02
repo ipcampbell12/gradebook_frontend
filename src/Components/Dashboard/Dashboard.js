@@ -53,13 +53,13 @@ function Dashboard(props) {
     // }, []);
 
     useEffect(() => {
-        NetworkCalls.fetchTeachersStudents(1).then(data => setStudentListState(data))
-    }, []);
+        NetworkCalls.fetchTeachersStudents(teacher.id).then(data => setStudentListState(data))
+    }, [teacher.id]);
 
     // assessments
     useEffect(() => {
-        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
-    }, []);
+        NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
+    }, [teacher.id]);
 
     //studentsAssessments
     useEffect(() => {
@@ -68,8 +68,8 @@ function Dashboard(props) {
 
     //subjects
     useEffect(() => {
-        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
-    }, []);
+        NetworkCalls.fetchSubjects(teacher.id).then(data => setSubjectListState(data))
+    }, [teacher.id]);
     // ------------------------------------------------------------------------------
 
 
