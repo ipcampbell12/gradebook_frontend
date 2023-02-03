@@ -3,8 +3,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
+import Button from 'react-bootstrap/Button';
 
-function SubjectMenu({ subjects, currentSubject, setCurrentSubject }) {
+function SubjectMenu({ subjects, currentSubject, setCurrentSubject, handleSubjectUpdateOpen, setSubjectId }) {
 
     const onClick = (e) => {
         const value = e.target.value
@@ -14,8 +15,9 @@ function SubjectMenu({ subjects, currentSubject, setCurrentSubject }) {
     }
 
 
+
     return (
-        <div>
+        <div className="subject-menu">
             <Typography variant="h6" align="center"> Subjects </Typography>
             <FormControl fullWidth>
                 <Select
@@ -30,6 +32,10 @@ function SubjectMenu({ subjects, currentSubject, setCurrentSubject }) {
 
                             return (<MenuItem className="menu" id={`assessment-${subject.id}`} key={subject.id} value={subject} onChange={onClick}>
                                 {subject.name}
+
+                                <Button className="btn-danger menu-2" onClick={() => { setSubjectId(subject.id); handleSubjectUpdateOpen(); }}> Delete </Button>
+                                <Button className="btn-primary menu-2" onClick={() => { setSubjectId(subject.id); handleSubjectUpdateOpen(); }}> View/Update </Button>
+
 
                             </MenuItem>)
 

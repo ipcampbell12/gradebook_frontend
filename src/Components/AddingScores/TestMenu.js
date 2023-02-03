@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 import Button from 'react-bootstrap/Button';
 
-function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestOpen }) {
+function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestOpen, currentSubject, moduleState }) {
 
     //This shows the updated state when I add a new assessment
     // console.log(assessments)
@@ -32,11 +32,11 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestO
                         id="demo-simple-select"
                         label="Age"
                         onChange={onClick}
-                        value={"Choose an assessment"}
+                        value={assessments.find(assessment => assessment.id === moduleState.id)}
                     >
                         {assessments && assessments.map(assessment => {
 
-                            return (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
+                            return assessment.subject.id === currentSubject.id && (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
                                 {assessment.name}
 
                                 <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>
@@ -54,7 +54,7 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestO
                 </FormControl>
             </Box>
 
-        </div>
+        </div >
     );
 }
 

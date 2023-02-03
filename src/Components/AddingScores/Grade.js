@@ -12,6 +12,8 @@ import Modal from 'react-bootstrap/Modal';
 import AddSubject from './AddSubject';
 import UpdateTest from './UpdateTest';
 import { TeacherContext } from '../../Context/TeacherContext'
+import SubjectMenu from './GSubjectMenu';
+import UpdateSubject from './UpdateSubject';
 
 
 
@@ -27,6 +29,7 @@ function Grade(props) {
 
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
+    const [currentSubject, setCurrentSubject] = useState('')
     //console.log(moduleState)
     const [show, setShow] = useState(false);
     const [deleteShow, setDeleteShow] = useState(false);
@@ -113,6 +116,15 @@ function Grade(props) {
 
     // --------------------------------------------------------------------------------
 
+    //UPDATE SUBJECT MODAL -----------------------------------------------------------------
+    const [subjectId, setSubjectId] = useState('');
+
+    const [showUpdateSubject, setShowUpdateSubject] = useState(false)
+
+    const handleSubjectUpdateOpen = () => setShowUpdateSubject(true)
+    const handleSubjectUpdateClose = () => setShowUpdateSubject(false)
+
+    // --------------------------------------------------------------------------------
 
     //UPDATE ASSESSMENT MODAL -----------------------------------------------------------------
 
@@ -216,7 +228,9 @@ function Grade(props) {
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
-                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} />
+                <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} handleSubjectUpdateOpen={handleSubjectUpdateOpen} handleSubjectUpdateClose={handleSubjectUpdateClose} setSubjectId={setSubjectId} />
+
+                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} currentSubject={currentSubject} moduleState={moduleState} />
 
                 <div className="buttons">
                     <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
@@ -261,6 +275,8 @@ function Grade(props) {
 
 
             {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} teacher={teacher} />}
+
+            {showUpdateSubject && <UpdateSubject handleSubjectUpdateClose={handleSubjectUpdateClose} onSubject={addSubject} subjectId={subjectId} />}
 
             <Modal show={deleteModalShow} onHide={handleDeleteClose}>
                 <Modal.Header closeButton>
