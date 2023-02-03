@@ -35,19 +35,19 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
                 <Form>
                     <Form.Group className="mb-3" onSubmit={onSubmit}>
                         <Form.Label>Teacher First Name</Form.Label>
-                        <Form.Control type="text" placeholder="Subject Name" value={module.name} onChange={(e) => {
+                        <Form.Control type="text" placeholder="First name" value={module.name} onChange={(e) => {
                             setFname(e.target.value)
                         }} />
                         <Form.Label>Teacher Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Subject Name" value={module.name} onChange={(e) => {
+                        <Form.Control type="text" placeholder="Last name" value={module.name} onChange={(e) => {
                             setLname(e.target.value)
                         }} />
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Subject Name" value={module.name} onChange={(e) => {
+                        <Form.Control type="text" placeholder="Username" value={module.name} onChange={(e) => {
                             setUsername(e.target.value)
                         }} />
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="text" placeholder="Subject Name" value={module.name} onChange={(e) => {
+                        <Form.Control type="text" placeholder="Password" value={module.name} onChange={(e) => {
                             setPassword(e.target.value)
                         }} />
                     </Form.Group>

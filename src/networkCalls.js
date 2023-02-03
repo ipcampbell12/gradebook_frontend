@@ -17,19 +17,18 @@ export default class NetworkCalls {
 
     }
 
-    //working
     static fetchTeachersStudents(id) {
         return fetch(`http://127.0.0.1:5001/teacherstudents/${id}`).then(resp => resp.json());
 
     }
 
     static fetchAssessments(id) {
-        return fetch(`http://127.0.0.1:5001/assessment/${id}`).then(resp => resp.json());
+        return fetch(`http://127.0.0.1:5001/teacherassessments/${id}`).then(resp => resp.json());
 
     }
 
     static fetchSubjects(id) {
-        return fetch(`http://127.0.0.1:5001/subject/${id}`).then(resp => resp.json());
+        return fetch(`http://127.0.0.1:5001/teachersubjects/${id}`).then(resp => resp.json());
 
     }
 
@@ -46,8 +45,8 @@ export default class NetworkCalls {
         return fetch(`http://127.0.0.1:5001/teacherstudents/${teacher_id}/averagegrade/${subject_id}`).then(resp => resp.json());
 
     }
-    static fetchAverageModuleScore(id) {
-        return fetch(`http://127.0.0.1:5001/scoresbytest/${id}`).then(resp => resp.json());
+    static fetchAverageModuleScore(assessment_id, teacher_id) {
+        return fetch(`http://127.0.0.1:5001/scoresbytest/${assessment_id}/teacher/${teacher_id}`).then(resp => resp.json());
 
     }
 

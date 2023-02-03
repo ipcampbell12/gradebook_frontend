@@ -12,9 +12,9 @@ function AverageGrade({ moduleState, teacher, currentSubject }) {
     }, [teacher.id, currentSubject.id]);
 
     useEffect(() => {
-        NetworkCalls.fetchAverageModuleScore(moduleState.id).then(data => setAverageModuleScore(data))
+        NetworkCalls.fetchAverageModuleScore(moduleState.id, teacher.id).then(data => setAverageModuleScore(data))
         // console.log(moduleState.id)
-    }, [moduleState.id]);
+    }, [moduleState.id, teacher.id]);
 
     //console.log('average garde is', averageGrade);
 

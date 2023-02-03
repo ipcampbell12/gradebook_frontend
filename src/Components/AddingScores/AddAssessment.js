@@ -10,14 +10,14 @@ import Select from '@mui/material/Select';
 import { FormGroup } from '@mui/material';
 
 
-export default function AddAssessment({ subjects, onAssessment, moduleState, teacher }) {
+export default function AddAssessment({ subjects, onAssessment, teacher }) {
 
     // const possibleMin = 0;
     // const possibleMax = 10;
 
     // const passingMin = possibleMax - 3;
     // const passingMax = possibleMax
-
+    // console.log(subjects)
     //Add default values
     //New assessment Form
     const [name, setName] = useState('')
@@ -34,13 +34,16 @@ export default function AddAssessment({ subjects, onAssessment, moduleState, tea
 
         const subject_id = subjectId
         const teacher_id = teacher.id
-
+        console.log(`Tacher id ${teacher_id}`)
         //setScored(false)
         //send data to API
-        APIServce.addAssessment(teacher_id, { name, subject_id })
+        APIServce.addAssessment({ teacher_id, name, subject_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onAssessment(response))
+
+
+
 
         //send data to UI
         //onAssessment({ name, subjectId, scored })

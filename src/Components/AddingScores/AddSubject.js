@@ -22,7 +22,7 @@ export default function AddSubject({ subjects, onClose, onSubject, showAddSubjec
 
         const teacher_id = teacher.id
         //send data to API
-        APIServce.addSubject(teacher_id, { name })
+        APIServce.addSubject({ teacher_id, name })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onSubject(response))

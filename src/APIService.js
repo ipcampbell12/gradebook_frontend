@@ -22,8 +22,8 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
-    static addSubject(teacher_id, body) {
-        return fetch(`http://127.0.0.1:5001/subject/${teacher_id}`, {
+    static addSubject(body) {
+        return fetch(`http://127.0.0.1:5001/subject`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,8 +54,8 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
-    static addAssessment(teacher_id, body) {
-        return fetch(`http://127.0.0.1:5001/assessment/${teacher_id}`, {
+    static addAssessment(body) {
+        return fetch(`http://127.0.0.1:5001/assessment`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,8 +65,8 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
-    static updateAssessment(assessment_id, body) {
-        return fetch(`http://127.0.0.1:5001/assessment/${assessment_id}`, {
+    static updateAssessment(id, body) {
+        return fetch(`http://127.0.0.1:5001/assessment/${id}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -63,7 +63,7 @@ function Grade(props) {
 
     // ------------------------------------------------------------------
 
-    console.log(assessments)
+    //console.log(assessments)
     //NETWORK CALLS -----------------------------------------------------------------
 
     //teacher
@@ -130,7 +130,7 @@ function Grade(props) {
 
         // const id = subjectListState.length === 0 ? 1 : Math.max(...subjectListState.map(o => o.id)) + 1
         // const newSubject = { id, ...subject }
-        NetworkCalls.fetchSubjects().then(data => setSubjectListState(data))
+        NetworkCalls.fetchSubjects(teacher.id).then(data => setSubjectListState(data))
         // setSubjectListState([...subjectListState, newSubject])
 
     }
@@ -139,7 +139,7 @@ function Grade(props) {
     const addAssessment = () => {
         //This works except when there are no assessments 
 
-        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+        NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
         // const id = assessments.length === 0 ? 1 : Math.max(...assessments.map(o => o.id)) + 1
         // console.log(`The assessment id in Grade is ${id}`)
         // const newAssessment = { id, ...assessment }
@@ -152,17 +152,17 @@ function Grade(props) {
     const addStudentsAssessments = () => {
 
 
-        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+        NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
 
         // console.log(studentsAssessments)
 
         // setStudentsAssessments(...studentsAssessments, studentAssessmentArray)
     }
 
-    const updateStudentAssessment = (data, id) => {
+    const updateStudentAssessment = () => {
 
 
-        NetworkCalls.fetchStudentsAssessments().then(data => setStudentsAssessments(data))
+        NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
 
         //console.log(`Id sent from scoredcharts :${id}`)
         // const updatedItem = studentsAssessments.find(sa => sa.id === id)
@@ -178,13 +178,13 @@ function Grade(props) {
 
     const onDelete = () => {
 
-        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+        NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
         // console.log(`The assessment delted was ${id}`)
         // setAssessments(assessments.filter((item) => item.id !== id))
     }
 
     const updateAssessment = () => {
-        NetworkCalls.fetchAssessments().then(data => setAssessments(data))
+        NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
 
     }
 
@@ -228,7 +228,7 @@ function Grade(props) {
 
                 {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} teacher={teacher} />}
 
-                {show && <ScoringModal
+                {subjectListState ? (show && <ScoringModal
                     students={studentListState}
                     teacher={teacher}
                     onAdd={addStudentsAssessments}
@@ -238,11 +238,11 @@ function Grade(props) {
                     assessments={assessments}
                     onAssessment={addAssessment}
                     subjects={subjectListState}
-                    setAddShow={setAddShow} />}
+                    setAddShow={setAddShow} />) : <Alert key={'danger'} variant={'danger'}> You need to add a subject before you can add any assessments </Alert>}
             </div>
 
             <div className="assessment-chart">
-                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} updateStudentAssessment={updateStudentAssessment} />
+                <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} updateStudentAssessment={updateStudentAssessment} teacher={teacher} />
             </div>
 
             {deleteShow === true && <Alert key={'danger'} variant={'danger'}>
@@ -259,7 +259,7 @@ function Grade(props) {
             }
 
 
-            {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} />}
+            {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} teacher={teacher} />}
 
             <Modal show={deleteModalShow} onHide={handleDeleteClose}>
                 <Modal.Header closeButton>

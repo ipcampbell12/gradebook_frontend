@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestOpen }) {
 
     //This shows the updated state when I add a new assessment
-    console.log(assessments)
+    // console.log(assessments)
 
     const onClick = (e) => {
         const value = e.target.value
@@ -17,6 +17,8 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestO
         // console.log(value)
 
     }
+
+    // console.log(assessments)
 
     //Make sure you ahve some kind of correcte default value in the value attribute for the select tag
 
@@ -32,19 +34,18 @@ function TestMenu({ assessments, onModule, setAId, handleDeleteOpen, handleTestO
                         onChange={onClick}
                         value={"Choose an assessment"}
                     >
-                        {
-                            assessments.map(assessment => {
+                        {assessments && assessments.map(assessment => {
 
-                                return (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
-                                    {assessment.name}
+                            return (<MenuItem className="menu" id={`assessment-${assessment.id}`} key={assessment.id} value={assessment}>
+                                {assessment.name}
 
-                                    <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>
-                                    <Button className="btn-primary menu-2" onClick={() => { setAId(assessment.id); handleTestOpen(); }}> View/Update </Button>
+                                <Button className="btn-danger menu-2" onClick={() => { setAId(assessment.id); handleDeleteOpen(); }}> Delete </Button>
+                                <Button className="btn-primary menu-2" onClick={() => { setAId(assessment.id); handleTestOpen(); }}> View/Update </Button>
 
-                                </MenuItem>)
+                            </MenuItem>)
 
 
-                            })
+                        })
 
                         }
 

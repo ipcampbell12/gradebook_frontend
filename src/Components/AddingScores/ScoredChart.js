@@ -11,13 +11,13 @@ import UpdatingScores from './UpdatingScores';
 
 
 
-function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment }) {
+function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment, teacher }) {
 
     //These reflect most recent updates to the database
     // console.log(`Module name from ScoredChart is ${moduleState.name}`)
     // console.log(`Module id from ScoredChart is ${moduleState.id}`)
 
-    console.log(studentsAssessments)
+    //console.log(studentsAssessments)
 
     return (
         <div className="student-chart">
@@ -43,7 +43,7 @@ function ScoredChart({ moduleState, studentsAssessments, updateStudentAssessment
                                     <TableCell align="center" >{studentsAssessment.student.lname}</TableCell>
                                     <TableCell align="center" id={studentsAssessment.id}> {studentsAssessment.score}  </TableCell>
                                     <TableCell>
-                                        <UpdatingScores studentsAssessment={studentsAssessment} updateStudentAssessment={updateStudentAssessment} />
+                                        <UpdatingScores studentsAssessment={studentsAssessment} updateStudentAssessment={updateStudentAssessment} teacher={teacher} />
                                     </TableCell>
                                     <TableCell>
 
