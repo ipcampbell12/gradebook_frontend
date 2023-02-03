@@ -35,6 +35,7 @@ function Grade(props) {
     const [deleteShow, setDeleteShow] = useState(false);
     const [addShow, setAddShow] = useState(false);
     const [updatedTestAlert, setUpdatedTestAlert] = useState(false);
+    const [updatedSubjectAlert, setUpdatedSubjectAlert] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -49,6 +50,10 @@ function Grade(props) {
 
     useEffect(() => {
         setTimeout(() => setUpdatedTestAlert(false), 3000)
+    });
+
+    useEffect(() => {
+        setTimeout(() => setUpdatedSubjectAlert(false), 3000)
     });
     //TOPLEVEL STATE -----------------------------------------------------
 
@@ -273,10 +278,15 @@ function Grade(props) {
             </Alert>
             }
 
+            {updatedSubjectAlert && <Alert key={'info'} variant={'info'}>
+                This subject has been updated
+            </Alert>
+            }
+
 
             {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} teacher={teacher} />}
 
-            {showUpdateSubject && <UpdateSubject handleSubjectUpdateClose={handleSubjectUpdateClose} onSubject={addSubject} subjectId={subjectId} />}
+            {showUpdateSubject && <UpdateSubject handleClose={handleSubjectUpdateClose} onSubject={addSubject} subjectId={subjectId} showUpdateSubject={showUpdateSubject} setUpdatedSubjectAlert={setUpdatedSubjectAlert} />}
 
             <Modal show={deleteModalShow} onHide={handleDeleteClose}>
                 <Modal.Header closeButton>
