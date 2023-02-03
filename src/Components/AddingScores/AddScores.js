@@ -18,6 +18,7 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }
     //New Student Form
     //const [studentIds, setStudentIds] = useState([])
     const [scores, setScores] = useState([])
+    // const [score, setScore] = useState([])
 
     //might need to do an assessment update call
     // const [scored, setScored] = useState(true)
@@ -45,7 +46,7 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }
 
     }
 
-    // console.log(scores)
+    console.log(scores)
 
     return (
 
@@ -71,7 +72,7 @@ function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }
                                 <TableCell align="center">
                                     <Form.Group className="mb-1" >
                                         <Form.Control type="number" placeholder="0" id={student.id} name="score" onChange={(e) => {
-                                            setScores([...scores, { "score": +e.target.value }]);
+                                            setScores([...scores, { "score": +e.target.value }])
                                         }} />
                                     </Form.Group>
                                 </TableCell>

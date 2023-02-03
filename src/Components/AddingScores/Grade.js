@@ -217,6 +217,7 @@ function Grade(props) {
 
             <div className="menu" >
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} />
+
                 <div className="buttons">
                     <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
                         Add Assessment
