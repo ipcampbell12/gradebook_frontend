@@ -12,13 +12,14 @@ export default function UpdateStudents({ onSubject, subjectId, teacher, handleCl
     const [name, setName] = useState('')
 
 
+
     const onSubmit = (e) => {
         e.preventDefault()
 
         const teacher_id = teacher.id
-        const id = subjectId
+        const subject_id = subjectId
 
-        APIServce.updateStudent(id, { name, teacher_id })
+        APIServce.updateSubject(subject_id, { name, teacher_id })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onSubject(response))

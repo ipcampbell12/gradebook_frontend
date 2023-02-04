@@ -36,9 +36,12 @@ function Grade(props) {
     const [addShow, setAddShow] = useState(false);
     const [updatedTestAlert, setUpdatedTestAlert] = useState(false);
     const [updatedSubjectAlert, setUpdatedSubjectAlert] = useState(false);
+    const [deletedSubjectAlert, setDeletedSubjectAlert] = useState(false);
+    const [createdSubjectAlert, setCreatedSubjectAlert] = useState(false);
+    const [noSubjectAlert, setNoSubjectsAlert] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
 
     useEffect(() => {
         setTimeout(() => setDeleteShow(false), 4000)
@@ -55,6 +58,17 @@ function Grade(props) {
     useEffect(() => {
         setTimeout(() => setUpdatedSubjectAlert(false), 3000)
     });
+
+    useEffect(() => {
+        setTimeout(() => setDeletedSubjectAlert(false), 3000)
+    });
+
+    useEffect(() => {
+        setTimeout(() => setCreatedSubjectAlert(false), 3000)
+    });
+    useEffect(() => {
+        setTimeout(() => setNoSubjectsAlert(false), 3000)
+    });
     //TOPLEVEL STATE -----------------------------------------------------
 
     const [studentListState, setStudentListState] = useState([])
@@ -67,7 +81,7 @@ function Grade(props) {
 
     const { teacher } = useContext(TeacherContext)
 
-    //console.log(`The context in Grade is ${teacher}`)
+    const handleShow = () => subjectListState.length !== 0 ? setShow(true) : setNoSubjectsAlert(true);
 
     // ------------------------------------------------------------------
 
@@ -99,10 +113,10 @@ function Grade(props) {
     }, [teacher.id]);
     // ------------------------------------------------------------------------------
 
+    //console.log(subjectListState)
 
 
-
-    //DELETE MODAL -----------------------------------------------------------------
+    //DELETE ASSESSMENT MODAL -----------------------------------------------------------------
     const [aId, setAId] = useState('');
 
     const [deleteModalShow, setDeleteModalShow] = useState(false);
@@ -128,6 +142,16 @@ function Grade(props) {
 
     const handleSubjectUpdateOpen = () => setShowUpdateSubject(true)
     const handleSubjectUpdateClose = () => setShowUpdateSubject(false)
+
+    // --------------------------------------------------------------------------------
+
+    //DELETE SUBJECT MODAL -----------------------------------------------------------------
+
+
+    const [showDeleteSubject, setShowDeleteSubject] = useState(false)
+
+    const handleSubjectDeleteOpen = () => setShowDeleteSubject(true)
+    const handleSubjectDeleteClose = () => setShowDeleteSubject(false)
 
     // --------------------------------------------------------------------------------
 
@@ -193,6 +217,12 @@ function Grade(props) {
 
     }
 
+    const onDeleteSubject = () => {
+
+        NetworkCalls.fetchSubjects(teacher.id).then(data => setSubjectListState(data))
+
+    }
+
     const onDelete = () => {
 
         NetworkCalls.fetchAssessments(teacher.id).then(data => setAssessments(data))
@@ -224,6 +254,23 @@ function Grade(props) {
 
     }
 
+    const deleteSubject = (subject_id) => {
+
+        // const teacher_id = teacher.id
+
+        APIServce.deleteSubject(subject_id)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+            .then(response => onDeleteSubject(response))
+
+
+        // onDelete(assessment_id)
+
+        // setDeleteShow(true)
+        setCurrentSubject('')
+
+    }
+
     //console.log(`Module state from Grade is ${moduleState.name}`)
 
 
@@ -233,7 +280,7 @@ function Grade(props) {
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
-                <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} handleSubjectUpdateOpen={handleSubjectUpdateOpen} handleSubjectUpdateClose={handleSubjectUpdateClose} setSubjectId={setSubjectId} />
+                <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} handleSubjectUpdateOpen={handleSubjectUpdateOpen} handleSubjectUpdateClose={handleSubjectUpdateClose} setSubjectId={setSubjectId} handleSubjectDeleteOpen={handleSubjectDeleteOpen} setModuleState={setModuleState} moduleState={moduleState} />
 
                 <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} currentSubject={currentSubject} moduleState={moduleState} />
 
@@ -246,9 +293,9 @@ function Grade(props) {
                     </Button>
                 </div>
 
-                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} teacher={teacher} />}
+                {showAddSubject && <AddSubject onClose={handleSubjectClose} onSubject={addSubject} showAddSubject={showAddSubject} teacher={teacher} showAlert={setCreatedSubjectAlert} />}
 
-                {subjectListState ? (show && <ScoringModal
+                {show && <ScoringModal
                     students={studentListState}
                     teacher={teacher}
                     onAdd={addStudentsAssessments}
@@ -258,7 +305,7 @@ function Grade(props) {
                     assessments={assessments}
                     onAssessment={addAssessment}
                     subjects={subjectListState}
-                    setAddShow={setAddShow} />) : <Alert key={'danger'} variant={'danger'}> You need to add a subject before you can add any assessments </Alert>}
+                    setAddShow={setAddShow} />}
             </div>
 
             <div className="assessment-chart">
@@ -283,10 +330,22 @@ function Grade(props) {
             </Alert>
             }
 
+            {deletedSubjectAlert && <Alert key={'success'} variant={'success'}>
+                This subject has been deleted
+            </Alert>
+            }
+
+            {createdSubjectAlert && <Alert key={'success'} variant={'success'}>
+                A new subject has been created
+            </Alert>
+            }
+            {noSubjectAlert && <Alert key={'danger'} variant={'danger'}> You need to add a subject before you can add any assessments </Alert>
+            }
+
 
             {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} teacher={teacher} />}
 
-            {showUpdateSubject && <UpdateSubject handleClose={handleSubjectUpdateClose} onSubject={addSubject} subjectId={subjectId} showUpdateSubject={showUpdateSubject} setUpdatedSubjectAlert={setUpdatedSubjectAlert} />}
+            {showUpdateSubject && <UpdateSubject handleClose={handleSubjectUpdateClose} onSubject={addSubject} subjectId={subjectId} showUpdateSubject={showUpdateSubject} setUpdatedSubjectAlert={setUpdatedSubjectAlert} teacher={teacher} />}
 
             <Modal show={deleteModalShow} onHide={handleDeleteClose}>
                 <Modal.Header closeButton>
@@ -298,6 +357,21 @@ function Grade(props) {
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={() => { deleteAssessment(aId); handleDeleteClose(); setDeleteShow(true); }}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showDeleteSubject} onHide={handleSubjectDeleteClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Are you sure you want to delete this assessment?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body> This action cannot be undone.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={() => { deleteSubject(subjectId); handleSubjectDeleteClose(); setDeletedSubjectAlert(true); }}>
                         Delete
                     </Button>
                 </Modal.Footer>

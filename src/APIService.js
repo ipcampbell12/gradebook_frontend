@@ -33,6 +33,27 @@ export default class APIServce {
             .then(resp => resp.json())
     }
 
+    static updateSubject(id, body) {
+        return fetch(`http://127.0.0.1:5001/subject/${id}`, {
+            'method': 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(resp => resp.json())
+    }
+
+    static deleteSubject(id) {
+        return fetch(`http://127.0.0.1:5001/subject/${id}`, {
+            'method': 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(resp => resp.json())
+    }
+
     static updateStudent(id, body) {
         return fetch(`http://127.0.0.1:5001/student/${id}`, {
             'method': 'PUT',

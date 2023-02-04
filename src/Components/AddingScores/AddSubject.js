@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 
 
-export default function AddSubject({ subjects, onClose, onSubject, showAddSubject, teacher }) {
+export default function AddSubject({ subjects, onClose, onSubject, showAddSubject, teacher, showAlert }) {
 
     //Add default values
     //New assessment Form
@@ -48,7 +48,7 @@ export default function AddSubject({ subjects, onClose, onSubject, showAddSubjec
                             setName(e.target.value)
                         }} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onClose(); setShow(true) }}>
+                    <Button variant="primary" type="submit" onClick={e => { onSubmit(e); onClose(); setShow(true); showAlert(true) }}>
                         Create Subject
                     </Button>
                     <Button variant="secondary" type="submit" onClick={onClose}>
