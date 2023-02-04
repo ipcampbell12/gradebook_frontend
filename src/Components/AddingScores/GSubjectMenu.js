@@ -46,7 +46,7 @@ function SubjectMenu({ subjects, currentSubject, setCurrentSubject, handleSubjec
                     }
                 </Select>
             </FormControl>
-        </div>
+        </div >
     );
 }
 
