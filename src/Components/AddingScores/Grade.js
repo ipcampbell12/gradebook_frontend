@@ -27,6 +27,8 @@ import UpdateSubject from './UpdateSubject';
 
 function Grade(props) {
 
+
+
     //Module state for scored module that was just selected
     const [moduleState, setModuleState] = useState('')
     const [currentSubject, setCurrentSubject] = useState('')
@@ -192,7 +194,6 @@ function Grade(props) {
 
     const addStudentsAssessments = () => {
 
-
         NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
 
         // console.log(studentsAssessments)
@@ -309,6 +310,7 @@ function Grade(props) {
             </div>
 
             <div className="assessment-chart">
+
                 <ScoredChart studentsAssessments={studentsAssessments} moduleState={moduleState} show={show} updateStudentAssessment={updateStudentAssessment} teacher={teacher} />
             </div>
 

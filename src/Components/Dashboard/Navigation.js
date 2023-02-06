@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SchoolIcon from '@mui/icons-material/School';
+import Nav from 'react-bootstrap/Nav';
+
 
 
 const pages = ['Dashboard', 'Edit Students', 'Grades'];
@@ -39,8 +41,10 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" className='app-bar'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <SchoolIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -49,15 +53,7 @@ function ResponsiveAppBar() {
             noWrap
             component="a"
             href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+            className="click"
           >
             GRADEBOOK AE
           </Typography>
@@ -69,7 +65,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="white"
             >
               <MenuIcon />
             </IconButton>
@@ -111,7 +107,7 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'white',
               textDecoration: 'none',
             }}
           >
@@ -122,19 +118,22 @@ function ResponsiveAppBar() {
 
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+
+              className="click"
               href={links[0]}>
               {pages[0]}
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+
+              className="click"
               href={links[1]}>
               {pages[1]}
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+
+              className="click"
               href={links[2]}>
               {pages[2]}
             </Button>

@@ -6,7 +6,7 @@ import APIServce from '../../APIService';
 import Modal from 'react-bootstrap/Modal';
 
 
-function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }) {
+function UpdateTeacherModal({ handleClose, onTeacher, show, showAlert, teacher }) {
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [username, setUsername] = useState('')
@@ -17,9 +17,10 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
     const onSubmit = (e) => {
         e.preventDefault()
 
+        const teacher_id = teacher.id
 
         //send data to API
-        APIServce.addTeacher({ fname, lname, username, password })
+        APIServce.updateTeacher(teacher_id, { fname, lname, username, password })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onTeacher(response))
@@ -27,9 +28,9 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
     }
 
     return (
-        <Modal show={teacherModalShow} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
             <Modal.Header>
-                <Modal.Title>Add a new teacher</Modal.Title>
+                <Modal.Title>Update Teacher {teacher.fname + ' ' + teacher.lname}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -52,7 +53,7 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
                         }} />
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); showAlert(true) }}>
-                        Create Teacher
+                        Update teacher
                     </Button>
                     <Button variant="secondary" type="submit" onClick={handleClose}>
                         Close
@@ -65,4 +66,4 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
     );
 }
 
-export default AddTeacherModal;
+export default UpdateTeacherModal;
