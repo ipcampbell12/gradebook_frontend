@@ -40,9 +40,11 @@ function Grade(props) {
     const [updatedSubjectAlert, setUpdatedSubjectAlert] = useState(false);
     const [deletedSubjectAlert, setDeletedSubjectAlert] = useState(false);
     const [createdSubjectAlert, setCreatedSubjectAlert] = useState(false);
-    const [noSubjectAlert, setNoSubjectsAlert] = useState(false);
+
+    const [missingPiecesAlert, setMissingPiecesAlert] = useState(false);
 
     const handleClose = () => setShow(false);
+
 
 
     useEffect(() => {
@@ -69,8 +71,10 @@ function Grade(props) {
         setTimeout(() => setCreatedSubjectAlert(false), 3000)
     });
     useEffect(() => {
-        setTimeout(() => setNoSubjectsAlert(false), 3000)
+        setTimeout(() => setMissingPiecesAlert(false), 3000)
     });
+
+
     //TOPLEVEL STATE -----------------------------------------------------
 
     const [studentListState, setStudentListState] = useState([])
@@ -83,7 +87,22 @@ function Grade(props) {
 
     const { teacher } = useContext(TeacherContext)
 
-    const handleShow = () => subjectListState.length !== 0 ? setShow(true) : setNoSubjectsAlert(true);
+    // const handleShow = () => subjectListState.length !== 0 ? setShow(true) : setMissingPiecesAlert(true);
+
+
+    const handleShow = () => {
+        if (subjectListState.length === 0 || studentListState.length === 0) {
+            setMissingPiecesAlert(true)
+        } else {
+            setShow(true)
+        }
+
+    }
+
+    const reset = () => {
+        setModuleState('')
+        setCurrentSubject('')
+    }
 
     // ------------------------------------------------------------------
 
@@ -281,9 +300,12 @@ function Grade(props) {
             <Typography variant="h4" align="center"> {teacher.fname + ' ' + teacher.lname + '\'s Grades'}</Typography>
 
             <div className="menu" >
-                <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} handleSubjectUpdateOpen={handleSubjectUpdateOpen} handleSubjectUpdateClose={handleSubjectUpdateClose} setSubjectId={setSubjectId} handleSubjectDeleteOpen={handleSubjectDeleteOpen} setModuleState={setModuleState} moduleState={moduleState} />
 
-                <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} currentSubject={currentSubject} moduleState={moduleState} />
+                <div className="menus">
+                    <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} handleSubjectUpdateOpen={handleSubjectUpdateOpen} handleSubjectUpdateClose={handleSubjectUpdateClose} setSubjectId={setSubjectId} handleSubjectDeleteOpen={handleSubjectDeleteOpen} setModuleState={setModuleState} moduleState={moduleState} />
+
+                    <TestMenu assessments={assessments} onModule={setModuleState} testDelete={deleteAssessment} setAId={setAId} handleDeleteOpen={handleDeleteOpen} handleTestOpen={handleTestOpen} currentSubject={currentSubject} moduleState={moduleState} />
+                </div>
 
                 <div className="buttons">
                     <Button variant="primary" type="submit" onClick={handleShow} className="btn btn-primary">
@@ -291,6 +313,9 @@ function Grade(props) {
                     </Button>
                     <Button variant="primary" type="submit" onClick={handleSubjectOpen} className="btn btn-primary">
                         Add Subject
+                    </Button>
+                    <Button variant="primary" type="submit" onClick={reset} className="btn btn-primary">
+                        Reset
                     </Button>
                 </div>
 
@@ -341,8 +366,9 @@ function Grade(props) {
                 A new subject has been created
             </Alert>
             }
-            {noSubjectAlert && <Alert key={'danger'} variant={'danger'}> You need to add a subject before you can add any assessments </Alert>
+            {missingPiecesAlert && <Alert key={'danger'} variant={'danger'}> You need to add students and subjects before you can add any assessments </Alert>
             }
+
 
 
             {updateAssessmentModal && <UpdateTest aId={aId} handleTestClose={handleTestClose} handleTestOpen={handleTestOpen} onAssessment={updateAssessment} setUpdatedTestAlert={setUpdatedTestAlert} subjects={subjectListState} updateAssessmentModal={updateAssessmentModal} teacher={teacher} />}

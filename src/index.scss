@@ -100,6 +100,7 @@
 
 }
 
+
 .student-page2 {
 
 
@@ -121,25 +122,37 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 20%;
+            width: 30%;
             height: 35%;
         }
 
-        .subject-menu {
-            width: 30%;
+        .menus {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70%;
+
+            .subject-menu {
+                width: 80%;
+
+            }
+
+            .test-menu {
+                width: 80%;
+
+            }
 
         }
 
-        .test-menu {
-            width: 30%;
 
-        }
 
 
         .add-assessment {
             width: 35%;
 
         }
+
 
     }
 
