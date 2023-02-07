@@ -1,7 +1,9 @@
+import { API_URL } from "./config"
+
 
 export default class APIServce {
     static addStudent(body) {
-        return fetch('http://127.0.0.1:5001/student', {
+        return fetch(`${API_URL}/student`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -12,7 +14,7 @@ export default class APIServce {
     }
 
     static addTeacher(body) {
-        return fetch('http://127.0.0.1:5001/teacher', {
+        return fetch(`${API_URL}/teacher`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,7 +24,7 @@ export default class APIServce {
             .then(resp => resp.json())
     }
     static updateTeacher(id, body) {
-        return fetch(`http://127.0.0.1:5001/teacher/${id}`, {
+        return fetch(`${API_URL}/teacher/${id}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +35,7 @@ export default class APIServce {
     }
 
     static deleteTeacher(id) {
-        return fetch(`http://127.0.0.1:5001/teacher/${id}`, {
+        return fetch(`${API_URL}/teacher/${id}`, {
             'method': 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +46,7 @@ export default class APIServce {
     }
 
     static addSubject(body) {
-        return fetch(`http://127.0.0.1:5001/subject`, {
+        return fetch(`${API_URL}/subject`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +57,7 @@ export default class APIServce {
     }
 
     static updateSubject(id, body) {
-        return fetch(`http://127.0.0.1:5001/subject/${id}`, {
+        return fetch(`${API_URL}/subject/${id}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,7 +68,7 @@ export default class APIServce {
     }
 
     static deleteSubject(id) {
-        return fetch(`http://127.0.0.1:5001/subject/${id}`, {
+        return fetch(`${API_URL}/subject/${id}`, {
             'method': 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +78,7 @@ export default class APIServce {
     }
 
     static updateStudent(id, body) {
-        return fetch(`http://127.0.0.1:5001/student/${id}`, {
+        return fetch(`${API_URL}/student/${id}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,7 +89,7 @@ export default class APIServce {
     }
 
     static deleteStudent(id) {
-        return fetch(`http://127.0.0.1:5001/student/${id}`, {
+        return fetch(`${API_URL}/student/${id}`, {
             'method': 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,7 +99,7 @@ export default class APIServce {
     }
 
     static addAssessment(body) {
-        return fetch(`http://127.0.0.1:5001/assessment`, {
+        return fetch(`${API_URL}/assessment`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -108,7 +110,7 @@ export default class APIServce {
     }
 
     static updateAssessment(id, body) {
-        return fetch(`http://127.0.0.1:5001/assessment/${id}`, {
+        return fetch(`${API_URL}/assessment/${id}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +122,7 @@ export default class APIServce {
 
     //bulk score load
     static addClassScores(teacherId, assessmentId, body) {
-        return fetch(`http://127.0.0.1:5001/teacherstudents/${teacherId}/assessment/${assessmentId}`, {
+        return fetch(`${API_URL}/teacherstudents/${teacherId}/assessment/${assessmentId}`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -133,7 +135,7 @@ export default class APIServce {
 
     //update student scores individually
     static updateStudentScore(saId, body) {
-        return fetch(`http://127.0.0.1:5001/student_assessment/${saId}`, {
+        return fetch(`${API_URL}/student_assessment/${saId}`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -144,7 +146,7 @@ export default class APIServce {
     }
 
     static deleteAssessment(teacherId, assessmentId) {
-        return fetch(`http://127.0.0.1:5001/assessment/${assessmentId}/teacher/${teacherId}`, {
+        return fetch(`${API_URL}/assessment/${assessmentId}/teacher/${teacherId}`, {
             'method': 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
