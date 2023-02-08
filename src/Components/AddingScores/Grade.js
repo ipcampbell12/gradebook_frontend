@@ -198,7 +198,6 @@ function Grade(props) {
 
     }
 
-
     const addAssessment = () => {
         //This works except when there are no assessments 
 
@@ -210,8 +209,6 @@ function Grade(props) {
         // setAssessments([...assessments, newAssessment])
     }
 
-
-
     const addStudentsAssessments = () => {
 
         NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
@@ -222,7 +219,6 @@ function Grade(props) {
     }
 
     const updateStudentAssessment = () => {
-
 
         NetworkCalls.fetchStudentsAssessments(teacher.id).then(data => setStudentsAssessments(data))
 

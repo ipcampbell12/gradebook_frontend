@@ -9,8 +9,8 @@ import Modal from 'react-bootstrap/Modal';
 function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }) {
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    // const [username, setUsername] = useState('')
+    // const [password, setPassword] = useState('')
 
 
 
@@ -19,7 +19,7 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
 
 
         //send data to API
-        APIServce.addTeacher({ fname, lname, username, password })
+        APIServce.addTeacher({ fname, lname })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onTeacher(response))
@@ -42,14 +42,7 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
                         <Form.Control type="text" placeholder="Last name" value={lname} onChange={(e) => {
                             setLname(e.target.value)
                         }} />
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => {
-                            setUsername(e.target.value)
-                        }} />
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => {
-                            setPassword(e.target.value)
-                        }} />
+
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); showAlert(true) }}>
                         Create Teacher
@@ -66,3 +59,12 @@ function AddTeacherModal({ handleClose, onTeacher, teacherModalShow, showAlert }
 }
 
 export default AddTeacherModal;
+
+// <Form.Label>Username</Form.Label>
+// <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => {
+//     setUsername(e.target.value)
+// }} />
+// <Form.Label>Password</Form.Label>
+// <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => {
+//     setPassword(e.target.value)
+// }} />

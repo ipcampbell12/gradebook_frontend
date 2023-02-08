@@ -9,8 +9,8 @@ import Modal from 'react-bootstrap/Modal';
 function UpdateTeacherModal({ handleClose, onTeacher, show, showAlert, teacher }) {
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    // const [username, setUsername] = useState('')
+    // const [password, setPassword] = useState('')
 
 
 
@@ -20,7 +20,7 @@ function UpdateTeacherModal({ handleClose, onTeacher, show, showAlert, teacher }
         const teacher_id = teacher.id
 
         //send data to API
-        APIServce.updateTeacher(teacher_id, { fname, lname, username, password })
+        APIServce.updateTeacher(teacher_id, { fname, lname })
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onTeacher(response))
@@ -43,14 +43,7 @@ function UpdateTeacherModal({ handleClose, onTeacher, show, showAlert, teacher }
                         <Form.Control type="text" placeholder="Last name" value={lname} onChange={(e) => {
                             setLname(e.target.value)
                         }} />
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => {
-                            setUsername(e.target.value)
-                        }} />
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => {
-                            setPassword(e.target.value)
-                        }} />
+
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={e => { onSubmit(e); handleClose(); showAlert(true) }}>
                         Update teacher
@@ -67,3 +60,12 @@ function UpdateTeacherModal({ handleClose, onTeacher, show, showAlert, teacher }
 }
 
 export default UpdateTeacherModal;
+
+// <Form.Label>Username</Form.Label>
+// <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => {
+//     setUsername(e.target.value)
+// }} />
+// <Form.Label>Password</Form.Label>
+// <Form.Control type="text" placeholder="Password" value={password} onChange={(e) => {
+//     setPassword(e.target.value)
+// }} />

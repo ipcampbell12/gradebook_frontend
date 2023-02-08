@@ -15,34 +15,20 @@ import APIServce from '../../APIService';
 
 function AddScores({ teacher, students, onHide, moduleState, setAddShow, onAdd }) {
 
-    //New Student Form
-    //const [studentIds, setStudentIds] = useState([])
     const [scores, setScores] = useState([])
-    // const [score, setScore] = useState([])
 
-    //might need to do an assessment update call
-    // const [scored, setScored] = useState(true)
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        //console.log(scores)
-
         const teacherId = teacher.id
-        //console.log(`The module id is ${newModuleState.id}`)
-        const assessmentId = moduleState.id
 
-        // setScored(false)
+        const assessmentId = moduleState.id
 
         APIServce.addClassScores(teacherId, assessmentId, scores)
             .then(response => console.log(response))
             .catch(error => console.log(error))
             .then(response => onAdd(response))
-
-
-
-        //It doens't know what to do with this right now
-
 
     }
 
