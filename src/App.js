@@ -7,6 +7,8 @@ import Grade from "./Components/AddingScores/Grade";
 import LandingPage from "./Components/AddTeachers/LandingPage"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TeacherContextProvider from "./Context/TeacherContext";
+import { Helmet } from "react-helmet";
+
 
 
 
@@ -14,6 +16,10 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>Gradebook AE</title>
+        <meta name="description" content="Gradebook Application" />
+      </Helmet>
       <TeacherContextProvider>
         <Router>
 
@@ -30,7 +36,7 @@ function App() {
 
         </Router>
       </TeacherContextProvider>
-    </div>
+    </div >
   );
 }
 
