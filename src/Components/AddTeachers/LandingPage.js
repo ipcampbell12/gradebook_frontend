@@ -14,7 +14,7 @@ import { TeacherContext } from '../../Context/TeacherContext'
 import UpdateTeacherModal from './UpdateTeacherModal';
 import Modal from 'react-bootstrap/Modal';
 import APIServce from '../../APIService';
-
+import Spinner from './Spinner';
 
 function LandingPage(props) {
 
@@ -22,6 +22,8 @@ function LandingPage(props) {
 
     const { selectTeacher } = useContext(TeacherContext)
     const { teacher } = useContext(TeacherContext)
+
+    const [loading, setLoading] = useState(true);
 
     //const [teacherId, setTeacherId] = useState('')
 
@@ -56,7 +58,7 @@ function LandingPage(props) {
     const closeSelectedAlert = () => setSelectedAlert(false)
 
     useEffect(() => {
-        NetworkCalls.fetchAllTeachers().then(response => setTeachers(response))
+        NetworkCalls.fetchAllTeachers().then(response => { setTeachers(response); setLoading(false); })
     }, [])
 
     useEffect(() => {
@@ -109,91 +111,94 @@ function LandingPage(props) {
     return (
         <div className="student-page2">
             <Typography variant="h4" align="center"> Select or Create New Teacher </Typography>
-            <div className="menu" >
-                {teachers.length !== 0 ? (<Typography variant="h5" align="center"> {teacher && `Current Teacher: ${teacher.fname + ' ' + teacher.lname}`}</Typography>) : "No teacher to select"}
+
+            {loading ? <Spinner /> :
+                <div className="menu" >
+                    {teachers.length !== 0 ? (<Typography variant="h5" align="center"> {teacher && `Current Teacher: ${teacher.fname + ' ' + teacher.lname}`}</Typography>) : "No teacher to select"}
 
 
 
-                <Box sx={{ minWidth: 120 }} className="teacher-menu">
-                    <Typography variant="h6" align="center"> Select a Teacher </Typography>
-                    {teachers.length !== 0 ? (
-                        <FormControl fullWidth>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                label="Age"
-                                onChange={onClick}
-                                value={"Choose a teacher"}
-                            >
-                                {
-                                    teachers.map(teacher => {
+                    <Box sx={{ minWidth: 120 }} className="teacher-menu">
+                        <Typography variant="h6" align="center"> Select a Teacher </Typography>
+                        {teachers.length !== 0 ? (
+                            <FormControl fullWidth>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="Age"
+                                    onChange={onClick}
+                                    value={"Choose a teacher"}
+                                >
+                                    {
+                                        teachers.map(teacher => {
 
-                                        return (<MenuItem className="menu" id={`teacher-${teacher.id}`} key={teacher.id} value={teacher.id} onChange={onClick}>
-                                            {teacher.fname + ' ' + teacher.lname}
+                                            return (<MenuItem className="menu" id={`teacher-${teacher.id}`} key={teacher.id} value={teacher.id} onChange={onClick}>
+                                                {teacher.fname + ' ' + teacher.lname}
 
-                                            <Button className="btn-danger menu-2" onClick={openDeleteModal}> Delete </Button>
-                                            <Button className="btn-primary menu-2" onClick={openUpdateModal}> View/Update </Button>
+                                                <Button className="btn-danger menu-2" onClick={openDeleteModal}> Delete </Button>
+                                                <Button className="btn-primary menu-2" onClick={openUpdateModal}> View/Update </Button>
 
 
-                                        </MenuItem>)
+                                            </MenuItem>)
 
-                                    })
-                                }
+                                        })
+                                    }
 
-                            </Select>
-                        </FormControl>) : " There are no teachers in the database"
-                    }
-                </Box>
+                                </Select>
+                            </FormControl>) : " There are no teachers in the database"
+                        }
+                    </Box>
 
-                <div className="buttons">
-                    <Button variant="primary" onClick={handleOpen} className="btn btn-primary">
-                        Add Teacher
-                    </Button>
+                    <div className="buttons">
+                        <Button variant="primary" onClick={handleOpen} className="btn btn-primary">
+                            Add Teacher
+                        </Button>
+                    </div>
+
+
+
+                    {teacherModalShow && <AddTeacherModal handleClose={handleClose}
+                        onTeacher={addTeacher} teacherModalShow={teacherModalShow} showAlert={handleOpenAlert} />}
+                    {updateModalShow && <UpdateTeacherModal
+                        onTeacher={addTeacher} handleClose={closeUpdateModal} showAlert={openUpdateAlert} teacher={teacher}
+                        show={updateModalShow}
+                    />}
+
+
+                    {addAlert === true && <Alert key={'success'} variant={'success'} onClose={() => setAddAlert(false)} dismissible>
+                        You just added a new teacher to the database.
+                    </Alert>}
+                    {deleteAlert === true && <Alert key={'info'} variant={'info'}>
+                        You just deleted a new teacher
+                    </Alert>}
+                    {updateAlert === true && <Alert key={'info'} variant={'info'}>
+                        You just updated a new teacher
+                    </Alert>}
+                    {selectedAlert === true && <Alert key={'success'} variant={'success'}>
+                        You just selected {teacher.fname + ' ' + teacher.lname}
+                    </Alert>}
+
+
+
+
+
+                    <Modal show={deleteModalShow} onHide={closeDeleteModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Are you sure you want to delete {teacher.fname + ' ' + teacher.lname}?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body> This action cannot be undone.</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={closeDeleteModal}>
+                                Cancel
+                            </Button>
+                            <Button variant="primary" onClick={() => { deleteTeacher(teacher.id); closeDeleteModal(); openDeleteAlert(true); }}>
+                                Delete
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
                 </div>
-
-
-
-                {teacherModalShow && <AddTeacherModal handleClose={handleClose}
-                    onTeacher={addTeacher} teacherModalShow={teacherModalShow} showAlert={handleOpenAlert} />}
-                {updateModalShow && <UpdateTeacherModal
-                    onTeacher={addTeacher} handleClose={closeUpdateModal} showAlert={openUpdateAlert} teacher={teacher}
-                    show={updateModalShow}
-                />}
-
-
-                {addAlert === true && <Alert key={'success'} variant={'success'} onClose={() => setAddAlert(false)} dismissible>
-                    You just added a new teacher to the database.
-                </Alert>}
-                {deleteAlert === true && <Alert key={'info'} variant={'info'}>
-                    You just deleted a new teacher
-                </Alert>}
-                {updateAlert === true && <Alert key={'info'} variant={'info'}>
-                    You just updated a new teacher
-                </Alert>}
-                {selectedAlert === true && <Alert key={'success'} variant={'success'}>
-                    You just selected {teacher.fname + ' ' + teacher.lname}
-                </Alert>}
-
-
-
-
-
-                <Modal show={deleteModalShow} onHide={closeDeleteModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Are you sure you want to delete {teacher.fname + ' ' + teacher.lname}?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body> This action cannot be undone.</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={closeDeleteModal}>
-                            Cancel
-                        </Button>
-                        <Button variant="primary" onClick={() => { deleteTeacher(teacher.id); closeDeleteModal(); openDeleteAlert(true); }}>
-                            Delete
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-            </div>
+            }
         </div>
     );
 }
