@@ -110,10 +110,11 @@ function LandingPage(props) {
 
     return (
         <div className="student-page2">
-            <Typography variant="h4" align="center"> Select or Create New Teacher </Typography>
+
 
             {loading ? <Spinner /> :
                 <div className="menu" >
+                    <Typography variant="h4" align="center"> Select or Create New Teacher </Typography>
                     {teachers.length !== 0 ? (<Typography variant="h5" align="center"> {teacher && `Current Teacher: ${teacher.fname + ' ' + teacher.lname}`}</Typography>) : "No teacher to select"}
 
 
