@@ -1,17 +1,29 @@
 // import React, { useRef, useState } from "react"
-import React, { useState, useEffect, useContext } from 'react';
-import DTestMenu from './DTestMenu';
-import StudentList from "./StudentList"
-import ScoresByTest from "./ScoresByTest"
-import AverageGrade from './AverageGrade';
+import React, { useState, useEffect, useContext, lazy, Suspense } from 'react';
+//import DTestMenu from './DTestMenu';
+//import StudentList from "./StudentList"
+// import ScoresByTest from "./ScoresByTest"
+// import AverageGrade from './AverageGrade';
 //import OverallChart from "../Visualizations/OverallChart"
 //import ScoresChart from "../Visualizations/ScoresChart"
 import NetworkCalls from '../../networkCalls';
-import SubjectMenu from './SubjectMenu';
+// import SubjectMenu from './SubjectMenu';
 import { TeacherContext } from '../../Context/TeacherContext'
 
 import { Typography } from "@mui/material"
 // import AddStudentButton from "./AddStudentButton"
+
+
+const DTestMenu = lazy(() => import('./DTestMenu'))
+const StudentList = lazy(() => import('./StudentList'))
+const ScoresByTest = lazy(() => import('./ScoresByTest'))
+const AverageGrade = lazy(() => import('./AverageGrade'))
+const SubjectMenu = lazy(() => import('./SubjectMenu'))
+
+
+
+
+
 
 function Dashboard(props) {
     // dummy code, organize later
@@ -86,15 +98,15 @@ function Dashboard(props) {
 
                 <div className="students">
                     <Typography variant="h6" align="center"> Overall Grades for {currentSubject.name} </Typography>
-                    <StudentList students={studentListState} grades={grades} currentSubject={currentSubject} />
+                    <Suspense><StudentList students={studentListState} grades={grades} currentSubject={currentSubject} /></Suspense>
                 </div>
                 <div className="charts">
                     <div className="menus">
-                        <SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} />
-                        <DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} />
+                        <Suspense><SubjectMenu subjects={subjectListState} currentSubject={currentSubject} setCurrentSubject={setCurrentSubject} /></Suspense>
+                        <Suspense><DTestMenu assessments={assessments} onModule={setModuleState} currentSubject={currentSubject} /></Suspense>
                     </div>
                     <div className="averages">
-                        <AverageGrade moduleState={moduleState} teacher={teacher} currentSubject={currentSubject} />
+                        <Suspense><AverageGrade moduleState={moduleState} teacher={teacher} currentSubject={currentSubject} /></Suspense>
                     </div>
                     <div className="tables">
 
@@ -107,7 +119,7 @@ function Dashboard(props) {
                 </div>
                 <div className="scores">
                     <Typography variant="h6" align="center"> Scores By Assessment</Typography>
-                    <ScoresByTest studentsAssessments={studentsAssessments} module={moduleState} />
+                    <Suspense><ScoresByTest studentsAssessments={studentsAssessments} module={moduleState} /></Suspense>
 
                 </div>
 
